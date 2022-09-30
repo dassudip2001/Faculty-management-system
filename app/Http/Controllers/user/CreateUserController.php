@@ -196,46 +196,51 @@ class CreateUserController extends Controller
 //            ]);
 //            $faculty->save();
 //            if (!Auth::user()->id)
-            if (Auth::user()->id == $request->user->id ) {
-                $this->validate($request, [
-                    'name' => 'required|string|max:255',
-//                'email' => 'required|string|email|max:255|unique:users',
-                    'password' => 'required|string|confirmed|min:8',
-                    'fac_title' => 'required',
-                    'fac_designtion' => 'required',
-                    'fac_phone' => 'required',
-                    'fac_status' => 'required',
-                    'fac_description' => 'required',
-                ]);
-                $fields = $request->only(['name', 'password'
-                    , 'fac_title', 'fac_designtion', 'fac_phone', 'fac_status', 'fac_description',
-                ]);
-                $fc = CreateUser::find($id)->faculty_id;
-                $uc = CreateUser::find($id)->user_id;
-//            faculty Delete
-                $faculty = Faculty::find($fc);
-//            $faculty->fac_code=$fields->fac_code;
-                $faculty->fac_title = $fields['fac_title'];
-                $faculty->fac_designtion = $fields['fac_designtion'];
-                $faculty->fac_phone = $fields['fac_phone'];
-                $faculty->fac_status = $fields['fac_status'];
-                $faculty->fac_description = $fields['fac_description'];
-                $faculty->save();
-//            user delete
-                $user = User::find($uc);
-                $user->name = $fields['name'];
-                $user->password = bcrypt($fields['password']);
-                $user->save();
-                //            create user delete
-                CreateUser::find($id)->save();
-                return redirect(route('usercreate.index'))
-                    ->with('success', 'User Update Successfully');
-            }
-//        }catch (Exception $e){
-//            return ["message" => $e->getMessage(),
-//                "status" => $e->getCode()
-//            ];
-//        }
+            // if (Auth::user()->id == $id ) {
+                try {
+                    $this->validate($request, [
+                        'name' => 'required|string|max:255',
+    //                'email' => 'required|string|email|max:255|unique:users',
+                        'password' => 'required|string|confirmed|min:8',
+                        'fac_title' => 'required',
+                        'fac_designtion' => 'required',
+                        'fac_phone' => 'required',
+                        'fac_status' => 'required',
+                        'fac_description' => 'required',
+                    ]);
+                    $fields = $request->only(['name', 'password'
+                        , 'fac_title', 'fac_designtion', 'fac_phone', 'fac_status', 'fac_description',
+                    ]);
+                    $fc = CreateUser::find($id)->faculty_id;
+                    $uc = CreateUser::find($id)->user_id;
+    //            faculty Delete
+                    $faculty = Faculty::find($fc);
+    //            $faculty->fac_code=$fields->fac_code;
+                    $faculty->fac_title = $fields['fac_title'];
+                    $faculty->fac_designtion = $fields['fac_designtion'];
+                    $faculty->fac_phone = $fields['fac_phone'];
+                    $faculty->fac_status = $fields['fac_status'];
+                    $faculty->fac_description = $fields['fac_description'];
+                    $faculty->save();
+    //            user delete
+                    $user = User::find($uc);
+                    $user->name = $fields['name'];
+                    $user->password = bcrypt($fields['password']);
+                    $user->save();
+                    //            create user delete
+                    CreateUser::find($id)->save();
+                    return redirect(route('usercreate.index'))
+                        ->with('success', 'User Update Successfully');
+                    //code...
+                } catch (Exception $e){
+
+                    return ["message" => $e->getMessage(),
+                        "status" => $e->getCode()
+                    ];
+                }
+                
+            // }
+
     }
 
     /**

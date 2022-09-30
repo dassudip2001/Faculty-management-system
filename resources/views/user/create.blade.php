@@ -30,12 +30,9 @@
                            <select name="fac_title" class="form-select form-select-sm" aria-label=".form-select-sm example">
                              <option selected hidden>Faculty Title </option>
                              <option >Prf.</option>
-
-
                               <option >Dr.</option>
                               <option >Mr.</option>
                               <option >Mis.</option>
-
                             </select>
                            </div>
                          </div>
@@ -69,8 +66,8 @@
         <br>
         <select name="department_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
           <option selected hidden>Select Faculty Department </option>
-          @foreach ($data as $department)
-            <option value="{{$department->id}}">{{$department->dept_name}}
+         @foreach ($data as $department)
+           <option value="{{$department->id}}">{{$department->dept_name}}
                 </option>
             @endforeach
         </select>
@@ -86,11 +83,8 @@
                 <select name="fac_designtion" class="form-select form-select-sm" aria-label=".form-select-sm example">
                   <option selected hidden>Faculty Designation  </option>
                   <option >Professor </option>
-
-
                    <option >Associate Professor </option>
                    <option >Assistance Professor</option>
-
                </select>
               </div>
             </div>
@@ -127,10 +121,7 @@
                 <select name="fac_status" class="form-select form-select-sm" aria-label=".form-select-sm example">
                <option selected hidden>Faculty Status </option>
                <option >Active </option>
-
-
               <option >Dactive </option>
-
                </select>
               </div>
             </div>
@@ -142,7 +133,6 @@
               </div>
             </div>
          </div>
-
          <div class="row">
             <div class="col">
                 <!-- password -->
@@ -164,7 +154,6 @@
          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-end">Create User</button>
         </form>
         </div>
-
            </div>
             </div>
             </div>
@@ -172,7 +161,6 @@
               <a class="btn btn-primary float-end" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Create New User</a>
               @endrole
           </div>
-
         <div class="card-title  mx-3">
           <!-- success massage -->
           @if(session('success'))
@@ -189,19 +177,14 @@
             <tr>
               <th> Fac Code</th>
                 <th> Fac Title</th>
-
                 <th> Name</th>
               <th> Email</th>
               <th> Phone</th>
-
               <th> Join</th>
               <th> Retirement</th>
               <th> Department</th>
-
               <th> Designation</th>
               <th> Status</th>
-
-
               <th>Action </th>
             </tr>
            </thead>
@@ -213,38 +196,26 @@
                <td>{{$item->user->name}}</td>
                <td>{{$item->user->email}} </td>
              <td>{{$item->faculty->fac_phone}}</td>
-
              <td>{{$item->faculty->fac_join}}</td>
              <td>{{$item->faculty->fac_retirement}}</td>
              <td>{{$item->department->dept_name}}</td>
-
              <td>{{$item->faculty->fac_designtion}}</td>
              <td>{{$item->faculty->fac_status}}</td>
-
-
+             @can('edit_user')
              <th>
-
-                 @if (Auth::user()->id == $item->user->id   )
-
+             
              <a href=" {{ url('/createuser/edit',$item->id) }} ">
              <i class="fa-regular fa-pen-to-square"></i>
             </a>
-
-                 @endif
-
-
-                     @role('admin')
+            
             <a href=" {{ url('/createuser/delete',$item->id) }} ">
             <button type="submit">
               <i class="fa-solid fa-trash">
-
               </i>
             </button>
-             @endrole
-
                 </a>
-
             </th>
+            @endcan
           </tr>
          @endforeach
         </tbody>

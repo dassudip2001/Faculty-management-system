@@ -10,3 +10,5 @@
 * 1.user can edit his own  profile and change password and read other user details
 
 * budget name doesnot comesb in project page
+ <!-- @if (Auth::user()->id == $item->user->id   ) -->
+             <!-- @role('admin') -->
