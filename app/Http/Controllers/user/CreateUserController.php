@@ -46,7 +46,7 @@ class CreateUserController extends Controller
     {
 
        abort_unless(auth()->user()->can('create_user'),403,'you dont have required authorization to this resource');
-        try {
+//        try {
 //               dd($request->all());
             $this->validate($request, [
                 'name' => 'required|string|max:255',
@@ -89,12 +89,12 @@ class CreateUserController extends Controller
             $pivot->department_id=$fields['department_id'];
             $pivot->save();
             return redirect(route('usercreate.index'))->with('success','User Created Successfully');
-        }catch (Exception $e)
-        {
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
+//        }catch (Exception $e)
+//        {
+//            return ["message" => $e->getMessage(),
+//                "status" => $e->getCode()
+//            ];
+//        }
     }
 
     /**
@@ -238,7 +238,7 @@ class CreateUserController extends Controller
                         "status" => $e->getCode()
                     ];
                 }
-                
+
             // }
 
     }

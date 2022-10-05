@@ -14,6 +14,15 @@
                     <h6>Edit Project </h6>
                     <hr>
                 </div>
+                @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
                 <!-- card body -->
                 <div class="card-body">
                     <form action="" method="POST">

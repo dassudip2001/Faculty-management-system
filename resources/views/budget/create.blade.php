@@ -14,6 +14,15 @@
                   {{session('success')}}
               </div>
           @endif
+          @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
         <form action=" " method="POST">
           @csrf
             <div class="card-title mx-2 mt-2">
@@ -26,20 +35,26 @@
                  <!-- Budget Name -->
             <div class="mb-6">
                <label for="budget_title">Budget Title<span class="required" style="color: red;">*</span></label>
-               <input type="text" class="form-control form-control-sm" name="budget_title"  id="budget_name" aria-describedby="budget_name" placeholder="Enter Budget Title">
+               <input type="text" class="form-control form-control-sm @error('budget_title') is-invalid @enderror" name="budget_title"  id="budget_name" aria-describedby="budget_name" placeholder="Enter Budget Title">
              </div>
+             @error('budget_title')
+                 <div class="alert alert-danger">{{ $message }}</div>
+                 @enderror
                </div>
                <div class="col">
                   <!-- Budget code -->
                     <div class="mb-6">
                       <label for="budget_type">Budget Type<span class="required" style="color: red;">*</span></label>
                       <!-- <input type="text" class="form-control form-control-sm" name="budget_type"  id="budget_type" aria-describedby="budget_type" placeholder="Enter Budget Type"> -->
-                      <select name="budget_type" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                      <select name="budget_type" class="form-select form-select-sm @error('budget_type') is-invalid @enderror" aria-label=".form-select-sm example">
                        <option selected hidden>Budget Type</option>
                        <option >Recurring</option>
                      <option >Non-Recurring</option>
                </select>
                     </div>
+                    @error('budget_type')
+                 <div class="alert alert-danger">{{ $message }}</div>
+                 @enderror
                    </div>
                 </div>
              <!-- Button -->

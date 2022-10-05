@@ -76,7 +76,7 @@ require __DIR__.'/auth.php';
    Route::get('/createuser',[CreateUserController::class,'index'])->name('usercreate.index');
    Route::post('/createuser',[CreateUserController::class,'create'])->name('usercreate.create')->middleware(['auth','role:admin']);
    Route::get('/createuser/edit/{id}',[CreateUserController::class,'edit'])->name('usercreate.edit')->middleware('permission:edit_user');
-   Route::put('/createuser/edit/{id}',[CreateUserController::class,'update'])->name('usercreate.update');
+   Route::put('/createuser/edit/{id}',[CreateUserController::class,'update'])->name('usercreate.update')->middleware('permission:edit_user');
    Route::get('/createuser/delete/{id}',[CreateUserController::class,'destroy'])->name('usercreate.destroy');
 
 //   funding agency

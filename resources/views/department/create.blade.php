@@ -10,18 +10,21 @@
     <div class="col">
     @role('admin')
       <div class="card">
-          @if($errors->any())
-              <ul class="alert alert-warning">
-                  @foreach($errors->all() as $error)
-                      <li>{{$error}}</li>
-                  @endforeach
-              </ul>
-          @endif
+         
           @if(session('success'))
               <div class="alert alert-success">
                   {{session('success')}}
               </div>
               @endif
+              @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
         <form action="/department" method="POST">
           @csrf
             <div class="card-title mx-2 mt-2">
@@ -34,22 +37,31 @@
                  <!-- Department Name -->
             <div class="mb-6">
                <label for="department_name">Department Name<span class="required" style="color: red;">*</span></label>
-               <input type="text" class="form-control form-control-sm" name="dept_name"  id="department_name" aria-describedby="department_name" placeholder="Enter Department Name">
+               <input type="text" class="form-control form-control-sm  @error('dept_name') is-invalid @enderror" name="dept_name"  id="department_name" aria-describedby="department_name" placeholder="Enter Department Name" require>
              </div>
+             @error('dept_name')
+                 <div class="alert alert-danger">{{ $message }}</div>
+                 @enderror
                </div>
                <div class="col">
                   <!-- Department code -->
                     <div class="mb-6">
                       <label for="department_code">Department Code<span class="required" style="color: red;">*</span></label>
-                      <input type="text" class="form-control form-control-sm" name="dept_code"  id="department_code" aria-describedby="department_code" placeholder="Enter Department Code">
+                      <input type="text" class="form-control form-control-sm  @error('dept_code') is-invalid @enderror" name="dept_code"  id="department_code" aria-describedby="department_code" placeholder="Enter Department Code">
                     </div>
+                    @error('dept_code')
+                 <div class="alert alert-danger">{{ $message }}</div>
+                 @enderror
                    </div>
                 </div>
              <!-- Department Details -->
              <div class="mb-6">
                <label for="department_details">Department Details</label>
-               <input type="text" class="form-control form-control" name="description"  id="department_details" aria-describedby="department_details" placeholder="Enter Department Description">
+               <input type="text" class="form-control form-control  @error('description') is-invalid @enderror" name="description"  id="department_details" aria-describedby="department_details" placeholder="Enter Department Description">
              </div>
+             @error('description')
+                 <div class="alert alert-danger">{{ $message }}</div>
+                 @enderror
              <!-- Button -->
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
         </form>
