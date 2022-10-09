@@ -3,10 +3,9 @@
 - calender add ->done
 - success massage->done
 - error massage->done
-- form validation
+- form validation->done
 
 
-* show and update multiple table
+* show and update multiple table->done
 * 1.user can edit his own  profile and change password and read other user details
 
-* budget name doesnot comesb in project page

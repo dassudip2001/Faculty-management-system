@@ -11,6 +11,7 @@ use App\Models\Department;
 use App\Models\Faculty;
 use App\Models\User;
 use App\Models\CreateUser;
+use Database\Seeders\AdminSeeder;
 use Exception;
 
 
@@ -46,7 +47,7 @@ class CreateUserController extends Controller
     {
 
        abort_unless(auth()->user()->can('create_user'),403,'you dont have required authorization to this resource');
-        try {
+//        try {
 //               dd($request->all());
             $this->validate($request, [
                 'name' => 'required|string|max:255',
@@ -89,12 +90,12 @@ class CreateUserController extends Controller
             $pivot->department_id=$fields['department_id'];
             $pivot->save();
             return redirect(route('usercreate.index'))->with('success','User Created Successfully');
-        }catch (Exception $e)
-        {
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
+//        }catch (Exception $e)
+//        {
+//            return ["message" => $e->getMessage(),
+//                "status" => $e->getCode()
+//            ];
+//        }
     }
 
     /**
@@ -125,9 +126,14 @@ class CreateUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        $createUser= CreateUser::with(
+           // if (!Auth::user()->id)
+        // if (Auth::user()->id == $id ) {
+            // if(Auth::user()->id=='1'|| auth()->user()->id==$id)
+            if(Auth::user()->id=='1' || auth()->user()->id==$id+1)
+            {
+            $createUser= CreateUser::with(
             [
                 'user' => function ($q) {
                     $q->select(['id', 'name', 'email',]);
@@ -142,6 +148,19 @@ class CreateUserController extends Controller
             ]
         )->find( $id);
                   return view('user.edit',compact('createUser'));
+            }else {
+                return "You cannot edit details ";
+            }
+            // abort_unless(auth()->user()->can('edit_user'),403,'you dont have required authorization to this resource');
+
+           
+        // }
+           
+        // } 
+        // else{
+            // return "you don't have right permission to edit details";
+    }
+         
 
 
 //        try {
@@ -155,7 +174,7 @@ class CreateUserController extends Controller
 //            ];
 //        }
 
-    }
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -196,46 +215,52 @@ class CreateUserController extends Controller
 //            ]);
 //            $faculty->save();
 //            if (!Auth::user()->id)
-            if (Auth::user()->id == $request->user->id ) {
-                $this->validate($request, [
-                    'name' => 'required|string|max:255',
-//                'email' => 'required|string|email|max:255|unique:users',
-                    'password' => 'required|string|confirmed|min:8',
-                    'fac_title' => 'required',
-                    'fac_designtion' => 'required',
-                    'fac_phone' => 'required',
-                    'fac_status' => 'required',
-                    'fac_description' => 'required',
-                ]);
-                $fields = $request->only(['name', 'password'
-                    , 'fac_title', 'fac_designtion', 'fac_phone', 'fac_status', 'fac_description',
-                ]);
-                $fc = CreateUser::find($id)->faculty_id;
-                $uc = CreateUser::find($id)->user_id;
-//            faculty Delete
-                $faculty = Faculty::find($fc);
-//            $faculty->fac_code=$fields->fac_code;
-                $faculty->fac_title = $fields['fac_title'];
-                $faculty->fac_designtion = $fields['fac_designtion'];
-                $faculty->fac_phone = $fields['fac_phone'];
-                $faculty->fac_status = $fields['fac_status'];
-                $faculty->fac_description = $fields['fac_description'];
-                $faculty->save();
-//            user delete
-                $user = User::find($uc);
-                $user->name = $fields['name'];
-                $user->password = bcrypt($fields['password']);
-                $user->save();
-                //            create user delete
-                CreateUser::find($id)->save();
-                return redirect(route('usercreate.index'))
-                    ->with('success', 'User Update Successfully');
+            // if (Auth::user()->id == $id ) {
+                if(Auth::user()->id=='1'|| Auth::user()->id==$id+1){
+                try {
+                    $this->validate($request, [
+                        'name' => 'required|string|max:255',
+    //                'email' => 'required|string|email|max:255|unique:users',
+                        'password' => 'required|string|confirmed|min:8',
+                        'fac_title' => 'required',
+                        'fac_designtion' => 'required',
+                        'fac_phone' => 'required',
+                        'fac_status' => 'required',
+                        'fac_description' => 'required',
+                    ]);
+                    $fields = $request->only(['name', 'password'
+                        , 'fac_title', 'fac_designtion', 'fac_phone', 'fac_status', 'fac_description',
+                    ]);
+                    $fc = CreateUser::find($id)->faculty_id;
+                    $uc = CreateUser::find($id)->user_id;
+    //            faculty Delete
+                    $faculty = Faculty::find($fc);
+    //            $faculty->fac_code=$fields->fac_code;
+                    $faculty->fac_title = $fields['fac_title'];
+                    $faculty->fac_designtion = $fields['fac_designtion'];
+                    $faculty->fac_phone = $fields['fac_phone'];
+                    $faculty->fac_status = $fields['fac_status'];
+                    $faculty->fac_description = $fields['fac_description'];
+                    $faculty->save();
+    //            user delete
+                    $user = User::find($uc);
+                    $user->name = $fields['name'];
+                    $user->password = bcrypt($fields['password']);
+                    $user->save();
+                    //            create user delete
+                    CreateUser::find($id)->save();
+                    return redirect(route('usercreate.index'))
+                        ->with('success', 'User Update Successfully');
+                    //code...
+                } catch (Exception $e){
+
+                    return ["message" => $e->getMessage(),
+                        "status" => $e->getCode()
+                    ];
+                }
+
             }
-//        }catch (Exception $e){
-//            return ["message" => $e->getMessage(),
-//                "status" => $e->getCode()
-//            ];
-//        }
+
     }
 
     /**

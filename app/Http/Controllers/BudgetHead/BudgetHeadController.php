@@ -38,18 +38,24 @@ class BudgetHeadController extends Controller
     {
         abort_unless(auth()->user()->can('create_budget'),403,'you dont have required authorization to this resource');
 
-        try {
+//        try {
+            $request->validate([
+                'budget_title'=>'required',
+                'budget_type'=>'required',
+//            'description'=>'required'
+
+            ]);
             $budget=new BudgetHead;
             $budget->budget_title=$request->budget_title;
             $budget->budget_type=$request->budget_type;
             $budget->save();
             return redirect(route('budget.index'))->with('success','Budget Created Successfully');
-        }catch (Exception $e)
-        {
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
+//        }catch (Exception $e)
+//        {
+//            return ["message" => $e->getMessage(),
+//                "status" => $e->getCode()
+//            ];
+//        }
     }
 
     /**

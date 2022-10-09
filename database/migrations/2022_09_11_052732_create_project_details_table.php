@@ -14,15 +14,10 @@ class CreateProjectDetailsTable extends Migration
     public function up()
     {
         Schema::create('project_details', function (Blueprint $table) {
-            $table->id();
+//            $table->id();
             $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('funding_agency_id');
             $table->unsignedBigInteger('budget_id');
-            $table->unsignedBigInteger('create_user_id');
-            $table->string('budget_details_amount');
-
-            // $table->unsignedBigInteger('budgetdetails_id');
-
+            $table->bigInteger('budget_details_amount');
             $table->timestamps();
         });
     }

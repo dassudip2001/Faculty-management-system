@@ -14,6 +14,15 @@
                   {{session('success')}}
               </div>
       @endif
+          @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
         <form action=" " method="POST">
           @csrf
             <div class="card-title mx-2 mt-2">
@@ -24,7 +33,10 @@
              <!-- funding Name -->
              <div class="mb-6">
                <label for="funding_agency">Funding Agency Name<span class="required" style="color: red;">*</span></label>
-               <input type="text" class="form-control form-control" name="agency_name"  id="funding_agency" aria-describedby="funding_agency" placeholder="Enter Funding Agency Name">
+               <input type="text" class="form-control form-control  @error('agency_name') is-invalid @enderror" name="agency_name"  id="funding_agency" aria-describedby="funding_agency" placeholder="Enter Funding Agency Name">
+                 @error('agency_name')
+                 <div class="alert alert-danger">{{ $message }}</div>
+                 @enderror
              </div>
              <!-- Button -->
 
@@ -64,7 +76,7 @@
              <i class="fa-regular fa-pen-to-square"></i>
             </a>
             <a href=" {{ url('/funding/delete',$item->id) }} ">
-             <i class="fa-solid fa-trash" style=""></i>
+             <i class="fa-solid fa-trash" ></i>
              @endrole
              </th>
              <th>

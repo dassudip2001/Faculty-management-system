@@ -33,7 +33,13 @@ class DepartmentController extends Controller
     public function create(Request $request)
     {
         abort_unless(auth()->user()->can('create_department'),403,'you dont have required authorization to this resource');
-        try {
+//        try {
+        $request->validate([
+            'dept_name'=>'required|unique:departments',
+            'dept_code'=>'required|unique:departments',
+//            'description'=>'required'
+
+        ]);
             $department=new Department;
             $department->dept_name=$request->dept_name;
             $department->dept_code =$request->dept_code;
@@ -41,12 +47,12 @@ class DepartmentController extends Controller
             $department->description=$request->description;
             $department->save();
             return redirect(route('index'))->with('success','Department Created Successfully',array('timeout' => 3000),'error');
-        }catch (Exception $e){
-
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
+//        }catch (Exception $e){
+//
+//            return ["message" => $e->getMessage(),
+//                "status" => $e->getCode()
+//            ];
+//        }
 
     }
 

@@ -39,17 +39,20 @@ class FundingAgencyController extends Controller
         abort_unless(auth()->user()->can('create_funding'),403,'you dont have required authorization to this resource');
 
 
-        try {
+//        try {
+            $request->validate([
+           'agency_name'=>'required'
+        ]);
             $agency=new FundingAgency;
             $agency->agency_name=$request->agency_name;
             $agency->save();
             return redirect(route('funding.index'))->with('success','Funding Agency Created Successfully');
-        }catch (Exception $e)
-        {
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
+//        }catch (Exception $e)
+//        {
+//            return ["message" => $e->getMessage(),
+//                "status" => $e->getCode()
+//            ];
+//        }
 
     }
 

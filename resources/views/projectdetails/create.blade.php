@@ -22,6 +22,15 @@
                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                          </div>
+                         @if ($errors->any())
+                           <div class="alert alert-danger">
+                               <ul>
+                                   @foreach ($errors->all() as $error)
+                                       <li>{{ $error }}</li>
+                                   @endforeach
+                               </ul>
+                           </div>
+                       @endif
                          <div class="modal-body">
                             <!-- form Start -->
                         <form action="" method="POST" name="budgetForm">
@@ -173,12 +182,12 @@
                  <table class="table table-striped table-hover">
                      <thead class="table-dark">
                      <tr>
-                         <td>Project No</td>
-                         <td>Project Title</td>
-                         <td>Project Scheme</td>
-                         <td>Project Duration</td>
-                         <td>Project Total Cost</td>
-                         <td>FunAgency</td>
+{{--                         <td>Project No</td>--}}
+{{--                         <td>Project Title</td>--}}
+{{--                         <td>Project Scheme</td>--}}
+{{--                         <td>Project Duration</td>--}}
+{{--                         <td>Project Total Cost</td>--}}
+{{--                         <td>FunAgency</td>--}}
                          <td>Budget Name</td>
                          <td>Budget Details Cost</td>
                          <td>Action</td>
@@ -187,15 +196,15 @@
                      <tbody>
                      @foreach($projectDetail as $pro)
                          <tr>
-                             <td>{{$pro->project->project_no}}</td>
-                             <td>{{$pro->project->project_title}}</td>
-                             <td>{{$pro->project->project_scheme}}</td>
-                             <td>{{$pro->project->project_duration}}</td>
-                             <td>{{$pro->project->project_total_cost}}</td>
-                             <td>{{$pro->fundingagency->agency_name}}</td>
-                             <td>{{$pro->budget_id}}</td>
+{{--                             <td>{{$pro->project->project_no}}</td>--}}
+{{--                             <td>{{$pro->project->project_title}}</td>--}}
+{{--                             <td>{{$pro->project->project_scheme}}</td>--}}
+{{--                             <td>{{$pro->project->project_duration}}</td>--}}
+{{--                             <td>{{$pro->project->project_total_cost}}</td>--}}
 
+                             <td>{{$pro->budget_id}}</td>
                              <td>{{$pro->budget_details_amount}}</td>
+
                              <th>
                                 <a href=" {{ url('/projectdetail/edit',$pro->id) }} ">
                                     <i class="fa-regular fa-pen-to-square"></i>

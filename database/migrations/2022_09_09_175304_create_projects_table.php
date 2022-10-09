@@ -20,6 +20,8 @@ class CreateProjectsTable extends Migration
             $table->string('project_scheme');
             $table->string('project_duration');
             $table->bigInteger('project_total_cost');
+            $table->unsignedBigInteger('funding_agency_id');
+            $table->unsignedBigInteger('create_user_id');
             $table->timestamps();
         });
     }

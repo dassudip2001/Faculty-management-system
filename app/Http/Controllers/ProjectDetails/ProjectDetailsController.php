@@ -41,10 +41,12 @@ class ProjectDetailsController extends Controller
      *
      * @return array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function create(Request $request)
+    public function create(Request $request  )
     {
-         abort_unless(auth()->user()->can('create_project'),
-             403,'you dont have required authorization to this resource');
+
+    //    dd($request->all());
+//         abort_unless(auth()->user()->can('create_project'),
+//             403,'you dont have required authorization to this resource');
 
         try {
             $this->validate($request,[
@@ -57,31 +59,44 @@ class ProjectDetailsController extends Controller
             ]);
             $fields=$request->only(['project_no','project_title','project_scheme',
                 'project_duration','project_total_cost',
-              'funding_agency_id', 'create_user_id','budget_id','budget_details_amount',
+              'funding_agency_id', 'create_user_id','budget_id','budget_details_amount','project_id',
             ]);
+
             $project=new Project([
                 'project_no'=>$fields['project_no'],
                  'project_title'=>$fields['project_title'],
                 'project_scheme'=>$fields['project_scheme'],
                 'project_duration'=>$fields['project_duration'],
                 'project_total_cost'=>$fields['project_total_cost'],
-            ]);
-            $project->save();
-            $pivot=new ProjectDetails();
-            // project Save
-            $pivot->project_id=$project->id;
-            // Funding Agency Id References
-            $pivot->funding_agency_id=$fields['funding_agency_id'];
+                // Funding Agency Id References
+                'funding_agency_id'=>$fields['funding_agency_id'],
             // Create User Id References
-            $pivot->create_user_id=$fields['create_user_id'];
-            // Budget  id field
-            // $pivot->budget_id=implode(',',['budget_id']);
-            $pivot->budget_id=implode($fields['budget_id']);
-//             $pivot['budget_id']=implode(',',$pivot->budget_id);
-            // budget Amount Details
-            $pivot->budget_details_amount=$fields['budget_details_amount'];
-            $pivot['budget_details_amount']=implode(',',$pivot->budget_details_amount);
+               'create_user_id'=>$fields['create_user_id'],
+
+            ]);
+            $project->funding_agency_id=$fields['funding_agency_id'];
+            $project->create_user_id=$fields['create_user_id'];
+            $project->save();
+             //pivot table
+            // $budget_id = $fields['$budget_id'];
+            // $budget_details_amount = $fields['budget_details_amount'];
+            $pivot=new ProjectDetails();
+
+            $pivot->project_id=$project->id;
+            $pivot->budget_id = $fields['$budget_id'];
+            $pivot->budget_details_amount = $fields['budget_details_amount'];
+            // for ($i=0; $i < count($pivot->budget_id); $i++) {
+                // if ($pivot->budget_id[$i] != '') {
+                    $pivot->budget_id()->attach($pivot->budget_id[0], ['quantity' => $pivot->budget_details_amount[0]]);
+                // }
+                // $data=['budget_id'=> $budget_id[$i],'budget_details_amount' => $budget_details_amount[$i]];
+                // dd($data);
+
+            
+            // }
+            // dd($fields['budget_id'][0]);
             $pivot->save();
+
             return redirect(route('projectdetail.index'))
                 ->with('success','Project Created Successfully');
         }catch (Exception $e)
@@ -166,8 +181,8 @@ class ProjectDetailsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        abort_unless(auth()->user()->can('edit_project'),
-            403,'you dont have required authorization to this resource');
+        // abort_unless(auth()->user()->can('edit_project'),
+        //     403,'you dont have required authorization to this resource');
 
         try {
             $this->validate($request,[
@@ -211,8 +226,8 @@ class ProjectDetailsController extends Controller
      */
     public function destroy($id)
     {
-        abort_unless(auth()->user()->can('delete_project'),
-            403,'you dont have required authorization to this resource');
+//        abort_unless(auth()->user()->can('delete_project'),
+//            403,'you dont have required authorization to this resource');
 
         try {
             $pc=ProjectDetails::find($id)->project_id;

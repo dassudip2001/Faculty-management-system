@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <x-auth-card>
+    <x-auth-card >
         <x-slot name="logo">
             <a href="/">
                 <img src="{{ asset('/img/logo.png') }}" class="w-14 h-14 rounded">

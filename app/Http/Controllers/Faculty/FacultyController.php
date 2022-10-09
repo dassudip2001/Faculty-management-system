@@ -114,7 +114,7 @@ class FacultyController extends Controller
      */
     public function update(Request $request, $id)
     {
-         abort_unless(auth()->user()->can('edit_faculty'),403,'you dont have required authorization to this resource');
+//         abort_unless(auth()->user()->can('edit_faculty'),403,'you dont have required authorization to this resource');
         try {
               $faculty= Faculty::find($id);
 //        $faculty->fac_name=$request->fac_name;
