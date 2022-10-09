@@ -40,7 +40,17 @@ class ProjectController extends Controller
         abort_unless(auth()->user()->can('create_project'),403,'you dont have required authorization to this resource');
 
         try {
-            $project=new Project;
+//            $this->validate($request,[
+//                 'project_no'=>'required',
+//                 'project_title'=>'required',
+//                 'project_scheme'=>'required',
+//                 'project_duration'=>'required',
+//                 'project_total_cost'=>'required',
+//            ]);
+//            $fields=$request->only(['project_no','project_title','project_scheme',
+//                'project_duration','project_total_cost',]);
+
+                $project=new Project;
             $project->project_no=$request->project_no;
             $project->project_title=$request->project_title;
             $project->project_scheme=$request->project_scheme;

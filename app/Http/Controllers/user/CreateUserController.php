@@ -11,6 +11,7 @@ use App\Models\Department;
 use App\Models\Faculty;
 use App\Models\User;
 use App\Models\CreateUser;
+use Database\Seeders\AdminSeeder;
 use Exception;
 
 
@@ -125,9 +126,14 @@ class CreateUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        $createUser= CreateUser::with(
+           // if (!Auth::user()->id)
+        // if (Auth::user()->id == $id ) {
+            // if(Auth::user()->id=='1'|| auth()->user()->id==$id)
+            if(Auth::user()->id=='1' || auth()->user()->id==$id+1)
+            {
+            $createUser= CreateUser::with(
             [
                 'user' => function ($q) {
                     $q->select(['id', 'name', 'email',]);
@@ -142,6 +148,19 @@ class CreateUserController extends Controller
             ]
         )->find( $id);
                   return view('user.edit',compact('createUser'));
+            }else {
+                return "You cannot edit details ";
+            }
+            // abort_unless(auth()->user()->can('edit_user'),403,'you dont have required authorization to this resource');
+
+           
+        // }
+           
+        // } 
+        // else{
+            // return "you don't have right permission to edit details";
+    }
+         
 
 
 //        try {
@@ -155,7 +174,7 @@ class CreateUserController extends Controller
 //            ];
 //        }
 
-    }
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -197,6 +216,7 @@ class CreateUserController extends Controller
 //            $faculty->save();
 //            if (!Auth::user()->id)
             // if (Auth::user()->id == $id ) {
+                if(Auth::user()->id=='1'|| Auth::user()->id==$id+1){
                 try {
                     $this->validate($request, [
                         'name' => 'required|string|max:255',
@@ -239,7 +259,7 @@ class CreateUserController extends Controller
                     ];
                 }
 
-            // }
+            }
 
     }
 

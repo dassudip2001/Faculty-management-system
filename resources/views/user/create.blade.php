@@ -1,7 +1,7 @@
 <x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-{{--            {{ __('Create User') }}--}}
+           {{ __('Create User') }}
         </h2>
     </x-slot>
 <div class="container  mt-4">
@@ -68,7 +68,7 @@
                  <div class="alert alert-danger">{{ $message }}</div>
                  @enderror
                       </div>
-                      
+
                       </div>
                       <div class="row">
                          <div class="col">
@@ -224,6 +224,7 @@
           <table class="table table-striped table-hover ">
           <thead class="table-dark">
             <tr>
+
               <th> Fac Code</th>
                 <th> Fac Title</th>
                 <th> Name</th>
@@ -238,7 +239,9 @@
             </tr>
            </thead>
          <tbody>
-         @foreach($createUser as $item)
+         @foreach($createUser as $item) 
+          @if(Auth::user()->id=='1' || Auth::id()==$item->user->id)
+
            <tr>
              <td>{{$item->faculty->fac_code}}</td>
                <td>{{$item->faculty->fac_title}}</td>
@@ -250,11 +253,13 @@
              <td>{{$item->department->dept_name}}</td>
              <td>{{$item->faculty->fac_designtion}}</td>
              <td>{{$item->faculty->fac_status}}</td>
-             @can('edit_user')
+             {{-- @endif --}}
+            {{-- @can('edit_user') --}}
+            {{-- @if(Auth::user()->id=='1' || Auth::id()==$item->user->id) --}}
              <th>
              <a href=" {{ url('/createuser/edit',$item->id) }} ">
              <i class="fa-regular fa-pen-to-square"></i>
-            </a>            
+            </a>
             <a href=" {{ url('/createuser/delete',$item->id) }} ">
             <button type="submit">
               <i class="fa-solid fa-trash">
@@ -262,7 +267,9 @@
             </button>
                 </a>
             </th>
-            @endcan
+            
+           @endif
+           {{-- @endcan --}}
           </tr>
          @endforeach
         </tbody>

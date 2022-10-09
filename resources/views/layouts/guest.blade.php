@@ -15,10 +15,19 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+
+        {{-- <style>
+            *container-fluid{
+                background-color: red
+            }
+        </style> --}}
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
+            {{-- <div style="background-color: aqua"> --}}
+                {{ $slot }}
+            {{-- </div> --}}
+
         </div>
     </body>
 </html>

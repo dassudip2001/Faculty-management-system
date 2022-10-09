@@ -76,7 +76,7 @@
              <i class="fa-regular fa-pen-to-square"></i>
             </a>
             <a href=" {{ url('/funding/delete',$item->id) }} ">
-             <i class="fa-solid fa-trash" style=""></i>
+             <i class="fa-solid fa-trash" ></i>
              @endrole
              </th>
              <th>

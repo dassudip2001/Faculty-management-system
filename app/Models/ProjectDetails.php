@@ -21,15 +21,9 @@ class ProjectDetails extends Model
     public function project(){
         return $this->belongsTo(Project::class,'project_id','id');
     }
-    public function fundingagency(){
-        return $this->belongsTo(FundingAgency::class,'funding_agency_id','id');
 
-    }
-    public function createuser(){
-        return $this->belongsTo(CreateUser::class,'create_user_id','id');
-    }
     public function budgethead(){
-        return $this->belongsTo(BudgetHead::class,'budget_id','id');
+        return $this->belongsToMany(BudgetHead::class,'budget_id','id');
     }
 
 }
