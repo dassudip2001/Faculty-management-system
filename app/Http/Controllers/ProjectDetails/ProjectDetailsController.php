@@ -44,7 +44,7 @@ class ProjectDetailsController extends Controller
     public function create(Request $request  )
     {
 
-    //    dd($request->all());
+       dd($request->all());
 //         abort_unless(auth()->user()->can('create_project'),
 //             403,'you dont have required authorization to this resource');
 
@@ -83,7 +83,7 @@ class ProjectDetailsController extends Controller
             $pivot=new ProjectDetails();
 
             $pivot->project_id=$project->id;
-            $pivot->budget_id = $fields['$budget_id'];
+            $pivot->budget_id = $fields['budget_id'];
             $pivot->budget_details_amount = $fields['budget_details_amount'];
             // for ($i=0; $i < count($pivot->budget_id); $i++) {
                 // if ($pivot->budget_id[$i] != '') {
