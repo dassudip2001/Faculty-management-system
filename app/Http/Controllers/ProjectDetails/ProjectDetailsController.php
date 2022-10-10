@@ -44,7 +44,7 @@ class ProjectDetailsController extends Controller
     public function create(Request $request  )
     {
 
-       dd($request->all());
+//       dd($request->all());
 //         abort_unless(auth()->user()->can('create_project'),
 //             403,'you dont have required authorization to this resource');
 
@@ -78,24 +78,35 @@ class ProjectDetailsController extends Controller
             $project->create_user_id=$fields['create_user_id'];
             $project->save();
              //pivot table
-            // $budget_id = $fields['$budget_id'];
-            // $budget_details_amount = $fields['budget_details_amount'];
+//
+//
             $pivot=new ProjectDetails();
-
             $pivot->project_id=$project->id;
-            $pivot->budget_id = $fields['budget_id'];
-            $pivot->budget_details_amount = $fields['budget_details_amount'];
+            $pivot->budget_id = $fields('budget_id', []);
+            $pivot->budget_details_amount = $fields('budget_details_amount', []);
+            for ($product=0; $product < count($pivot->budget_id); $product++) {
+                if ($pivot->budget_id[$product] != '') {
+                    $pivot->products()->attach($pivot->budget_id[$product], ['quantity' => $pivot->budget_details_amount[$product]]);
+                }
+            }
+            $pivot->save();
+
+//            $pivot=new ProjectDetails();
+
+//            $pivot->project_id=$project->id;
+//            $pivot->budget_id = $fields['budget_id'];
+//            $pivot->budget_details_amount = $fields['budget_details_amount'];
             // for ($i=0; $i < count($pivot->budget_id); $i++) {
                 // if ($pivot->budget_id[$i] != '') {
-                    $pivot->budget_id()->attach($pivot->budget_id[0], ['quantity' => $pivot->budget_details_amount[0]]);
+//                    $pivot->budget_id()->attach($pivot->budget_id[0], ['quantity' => $pivot->budget_details_amount[0]]);
                 // }
                 // $data=['budget_id'=> $budget_id[$i],'budget_details_amount' => $budget_details_amount[$i]];
                 // dd($data);
 
-            
+
             // }
-            // dd($fields['budget_id'][0]);
-            $pivot->save();
+
+//            $pivot->save();
 
             return redirect(route('projectdetail.index'))
                 ->with('success','Project Created Successfully');

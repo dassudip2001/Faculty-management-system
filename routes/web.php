@@ -3,6 +3,8 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\show\ProjectViewController;
 use App\Http\Controllers\show\UserViewController;
+use App\Http\Controllers\ProjectBudgetAmount\ProjectBudgetAmountController;
+use App\Http\Controllers\InvoiceUpload\InvoiceUploadController;
 use App\Http\Controllers\ProjectDetails\ProjectDetailsController;
 use App\Http\Controllers\BudgetHead\BudgetHeadController;
 use App\Http\Controllers\Project\ProjectController;
@@ -106,4 +108,23 @@ require __DIR__.'/auth.php';
     Route::get('/projectdetail/edit/{id}',[ProjectDetailsController::class,'edit'])->name('projectdetail.edit')->middleware(['auth','role:admin']);
     Route::put('/projectdetail/edit/{id}',[ProjectDetailsController::class,'update'])->name('projectdetail.update')->middleware(['auth','role:admin']);
     Route::get('/projectdetail/delete/{id}',[ProjectDetailsController::class,'destroy'])->name('projectdetail.destroy')->middleware(['auth','role:admin']);
+
+
+    // budget amount calculation
+
+   Route::get('/projectbudgetamount',[ProjectBudgetAmountController::class,'index'])->name('projectbudgetamount.index');
+   Route::post('/projectbudgetamount',[ProjectBudgetAmountController::class,'create'])->name('projectbudgetamount.create')->middleware(['auth','role:admin']);
+   Route::get('/projectbudgetamount/edit/{id}',[ProjectBudgetAmountController::class,'edit'])->name('projectbudgetamount.edit');
+   Route::put('/projectbudgetamount/edit/{id}',[ProjectBudgetAmountController::class,'update'])->name('projectbudgetamount.update');
+   Route::get('/projectbudgetamount/delete/{id}',[ProjectBudgetAmountController::class,'destroy'])->name('projectbudgetamount.destroy');
+
+
+    // invoice upload
+
+    Route::get('/invoiceuoload',[InvoiceUploadController::class,'index'])->name('invoiceuoload.index');
+    Route::post('/invoiceuoload',[InvoiceUploadController::class,'create'])->name('invoiceuoload.create')->middleware(['auth','role:admin']);
+    Route::get('/invoiceuoload/edit/{id}',[InvoiceUploadController::class,'edit'])->name('invoiceuoload.edit');
+    Route::put('/invoiceuoload/edit/{id}',[InvoiceUploadController::class,'update'])->name('invoiceuoload.update');
+    Route::get('/invoiceuoload/delete/{id}',[InvoiceUploadController::class,'destroy'])->name('invoiceuoload.destroy');
+
 

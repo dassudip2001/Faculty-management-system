@@ -60,6 +60,15 @@
                         <li><a class="dropdown-item" href="{{ url('/project') }}">Projects</a></li>
                     </ul>
                 </div>
+                <div class="dropdown mt-4 mx-4">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       Budget Amount
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-light">
+                        <li><a class="dropdown-item" href=" {{url('/projectbudgetamount')}} ">Budget Amount Calculation </a></li>
+                        <li><a class="dropdown-item" href=" {{url('/invoiceuoload')}} ">Upload invoice</a></li>
+                    </ul>
+                </div>
 
 
 
