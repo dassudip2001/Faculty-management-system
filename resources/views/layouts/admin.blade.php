@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        {{-- printer --}}
+        <script type="text/javascript" src="js/jquery.printPage.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             </head>
     <body class="antialiased bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
@@ -95,6 +97,7 @@
         </div>
     </div>
     @yield('script')
+    
 
   </body>
 

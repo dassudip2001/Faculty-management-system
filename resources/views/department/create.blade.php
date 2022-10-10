@@ -4,7 +4,14 @@
             {{ __('Create Department') }}
         </h2>
     </x-slot>
-
+    {{-- <center>
+      <br><br>
+      <a  class="btnprn btn">Print Preview</a></center>
+      <script type="text/javascript">
+      $(document).ready(function(){
+      $('.btnprn').printPage();
+      });
+      </script> --}}
 <div class="container  mt-4">
   <div class="row">
     <div class="col">
@@ -119,5 +126,6 @@
     </div>
    </div>
 </div>
+
 </x-admin-layout>
 
