@@ -288,9 +288,12 @@ class ProjectDetailsController extends Controller
 //            403,'you dont have required authorization to this resource');
 
         try {
-            $pc=ProjectDetails::find($id)->project_id;
-            ProjectDetails::find($id)->delete();
-            Project::find($pc)->delete();
+            // $pc=ProjectDetails::find($id)->project_id;
+            // ProjectDetails::find($id)->delete();
+            Project::find($id)->delete();
+            
+            // ProjectDetails::find($pc)->project_id->delete();
+            //  ProjectDetails::find($pc)->delete();
             return redirect(route('projectdetail.index'))
                 ->with('success', 'Data Deleted Successfully');
         }catch (Exception $e){
