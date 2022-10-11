@@ -4,22 +4,21 @@
        {{ __('Create Project') }}
         </h2>
     </x-slot>
+     
     <div class="container  mt-4 ">
         <div class="row">
-
             <div class="col">
                 <div class="card ">
                     <div class="mt-2 mx-2">
                     <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Create New Project
                     </button>
-
                    <!-- Modal -->
                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                      <div class="modal-dialog modal-xl">
                        <div class="modal-content">
                          <div class="modal-header">
-                           <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                           <h5 class="modal-title" id="staticBackdropLabel">Project Form</h5>
                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                          </div>
                          @if ($errors->any())
@@ -106,58 +105,59 @@
                                 </div>
                             </div>
 
-                            <div class="card-title overflow-auto">
-                                <hr>
-                                <h6>Budget Details </h6>
-                                <hr>
-                            </div>
-                                <table name="budget" class="table table-bordered overflow-auto">
-                                    <thead>
-                                    <tr>
-                                        <th>Budget Title</th>
-                                        <th>Amount</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr name="allBudget">
-                                        <td>
-                                            <select name="budget_id[]" class="form-select form-select-sm"   aria-label=".form-select-sm example">
-                                                <option selected hidden>Budget Title </option>
-                                                @foreach($budget as $bgt)
-                                                    <option value="{{$bgt->id}}">{{$bgt->budget_title}}
-                                                    </option>
+                            <div class="card">
+                                <div class="card-header">
+                                    Budget Details 
+                                </div>
+                
+                                <div class="card-body">
+                                    <table class="table" id="products_table">
+                                        <thead>
+                                            <tr>
+                                                <th >Budget Name</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (old('budget_id', ['']) as $index => $oldProduct)
+                                                <tr id="product{{ $index }}">
+                                                    <td>
+                                                        <select name="budget_id[]" class="form-control">
+                                                            <option value="">-- choose Budget Name --</option>
+                                                            @foreach ($budget as $product)
+                                                                <option value="{{ $product->id }}">
+                                                                    {{ $product->budget_title }} 
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" />
+                                                    </td>
+                                                </tr>
                                             @endforeach
-                                        </td>
-
-                                        <td><input type="number" class="form-control form-control-sm" onblur="findTotal()" id="inst_amount" name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" ></td>
-                                        <td>
-                                            <button class="btn btn-success" name="addBudget" type="button" id="add_btn" >
-                                                Add
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-
-                                </table>
-
-                            <div class="row">
-                                <div class="col">
-                                    <!-- add options -->
+                                            <tr id="product{{ count(old('budget_id', [''])) }}"></tr>
+                                        </tbody>
+                                    </table>
+                
+                                    <div class="row">
+                                        <div class="col-sm-10">
+                                            <button  id="add_row" class="btn  btn-success pull-left">+ Add Row</button>
+                                            <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
+                                        </div>
+                                        
+                                         <div class="col-sm-2">
+                                        
+                                    <label for="total_amount">Total Amount</label>
+                                    <input type="number" class="form-control form-control" name="totalAmount"  id="grandTotal" aria-describedby="total_amount" placeholder="0" readonly>
                                 </div>
-                                <div class="col">
-                                    <!-- add options -->
-                                </div>
-                                <div class="col">
-                                    <div class="mb-6">
-                                        <label for="total_amount">Total Amount</label>
-                                        <input type="number" class="form-control form-control" name="totalAmount"  id="grandTotal" aria-describedby="total_amount" placeholder="0" readonly>
                                     </div>
-
                                 </div>
-                            </div>
                             <hr>
-                            <button id="submit" type="submit" disabled  class="btn btn-primary float-end">Create Project</button>
+                            <div class=" my-2 mx-2">
+                                <button id="submit" type="submit" disabled  class="btn btn-primary float-end" value="{{ trans('global.save') }}">Create Project</button>
+
+                            </div>
 
                          </form>
                          </div>
@@ -182,12 +182,12 @@
                  <table class="table table-striped table-hover">
                      <thead class="table-dark">
                      <tr>
-{{--                         <td>Project No</td>--}}
-{{--                         <td>Project Title</td>--}}
-{{--                         <td>Project Scheme</td>--}}
-{{--                         <td>Project Duration</td>--}}
-{{--                         <td>Project Total Cost</td>--}}
-{{--                         <td>FunAgency</td>--}}
+                        <td>Project No</td>
+                        <td>Project Title</td>
+                        <td>Project Scheme</td>
+                        <td>Project Duration</td>
+                        <td>Project Total Cost</td>
+                         <td>FunAgency</td>
                          <td>Budget Name</td>
                          <td>Budget Details Cost</td>
                          <td>Action</td>
@@ -196,13 +196,13 @@
                      <tbody>
                      @foreach($projectDetail as $pro)
                          <tr>
-{{--                             <td>{{$pro->project->project_no}}</td>--}}
-{{--                             <td>{{$pro->project->project_title}}</td>--}}
-{{--                             <td>{{$pro->project->project_scheme}}</td>--}}
-{{--                             <td>{{$pro->project->project_duration}}</td>--}}
-{{--                             <td>{{$pro->project->project_total_cost}}</td>--}}
-
-                             <td>{{$pro->budget_id}}</td>
+                            <td>{{$pro->project_no}}</td>
+                            <td>{{$pro->project_title}}</td>
+                            <td>{{$pro->project_scheme}}</td>
+                            <td>{{$pro->project_duration}}</td>
+                             <td>{{$pro->project_total_cost}}</td>
+                             <td>{{$pro->funding_agency_id}}</td>
+                             <td>{{$pro->budget_title}}</td>
                              <td>{{$pro->budget_details_amount}}</td>
 
                              <th>
@@ -223,22 +223,25 @@
             </div>
         </div>
         @section('script')
-            <!-- budget Details -->
-            <script type="text/javascript">
+        <script>
                 $(document).ready(function(){
-                    $('#add_btn').on('click',function(){
-                        var html='';
-                        html+='<tr>';
-                        html+='<td><select name="budget_id[]" class="form-select form-select-sm"  id="clear1" aria-label=".form-select-sm example"><option selected hidden>Budget Title </option>@foreach($budget as $bgt)<option value="{{$bgt->id}}">{{$bgt->budget_title}}</option>@endforeach</td>';
-                        html+='<td><input type="number" class="form-control form-control-sm" onblur="findTotal()" name="budget_details_amount[]" placeholder="Enter Budget Amount" ></td>';
-                        html+='<td><button type="button" onblur="findTotal()" id="remove" ><i class="fa-solid fa-trash"></i></button></td>';
-                        html+='</tr>';
-                        $('tbody').append(html);
-                    })
-                });
-                $(document).on('click','#remove',function(){
-                    $(this).closest('tr').remove();
-                });
+                    let row_number = {{ count(old('budget_id', [''])) }};
+                    $("#add_row").click(function(e){
+                      e.preventDefault();
+                      let new_row_number = row_number - 1;
+                      $('#product' + row_number).html($('#product' + new_row_number).html()).find('td:first-child');
+                      $('#products_table').append('<tr id="product' + (row_number + 1) + '"></tr>');
+                      row_number++;
+                    });
+                
+                    $("#delete_row").click(function(e){
+                      e.preventDefault();
+                      if(row_number > 1){
+                        $("#product" + (row_number - 1)).html('');
+                        row_number--;
+                      }
+                    });
+                  });
 
                 //calculation
                 function findTotal() {
@@ -259,7 +262,7 @@
                     console.log(tot);
                     if (tot==Amount){
                          alert('Equal To The Grand Total ');
-                        add_btn.disabled=true;
+                        add_row.disabled=true;
                         button.disabled = false;
                       $('#budgetForm').submit();
                     }

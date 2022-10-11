@@ -15,9 +15,11 @@
        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+        <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        {{-- printer --}}
+        <script type="text/javascript" src="js/jquery.printPage.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             </head>
     <body class="antialiased bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
@@ -60,6 +62,15 @@
                         <li><a class="dropdown-item" href="{{ url('/project') }}">Projects</a></li>
                     </ul>
                 </div>
+                <div class="dropdown mt-4 mx-4">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       Budget Amount
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-light">
+                        <li><a class="dropdown-item" href=" {{url('/projectbudgetamount')}} ">Budget Amount Calculation </a></li>
+                        <li><a class="dropdown-item" href=" {{url('/invoiceuoload')}} ">Upload invoice</a></li>
+                    </ul>
+                </div>
 
 
 
@@ -86,6 +97,7 @@
         </div>
     </div>
     @yield('script')
+    
 
   </body>
 

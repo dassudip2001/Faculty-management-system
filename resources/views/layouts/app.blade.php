@@ -67,6 +67,15 @@
                         <li><a class="dropdown-item" href="{{ url('/project') }}">Projects</a></li>
                     </ul>
                 </div>
+                <div class="dropdown mt-4 mx-4">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       Budget Amount
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-light">
+                        <li><a class="dropdown-item" href=" {{url('/projectbudgetamount')}} ">Budget Amount Calculation </a></li>
+                        <li><a class="dropdown-item" href=" {{url('/invoiceuoload')}} ">Upload invoice</a></li>
+                    </ul>
+                </div>
                 <form method="POST" action="{{ route('logout') }}">
                 @csrf
                     <a class="block px-4 py-2 mt-5 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"

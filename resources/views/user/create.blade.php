@@ -207,7 +207,7 @@
             </div>
             </div>
               @role('admin')
-              <a class="btn btn-primary float-end" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Create New User</a>
+              <a class="btn btn-primary float-end" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><i class="fa-solid fa-user-plus"></i> Add New User</a>
               @endrole
           </div>
         <div class="card-title  mx-3">

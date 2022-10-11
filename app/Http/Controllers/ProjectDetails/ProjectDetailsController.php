@@ -21,7 +21,13 @@ class ProjectDetailsController extends Controller
      */
     public function index()
     {
-        $projectDetail=ProjectDetails::all();
+        $projectDetail= DB::table('project_details')
+        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
+        ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+        ->join('projects','projects.id',"=",'project_details.project_id')
+        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+        ->get();
+        // $projectDetail=ProjectDetails::all();
        $data2=DB::table('create_users')
             ->join('faculties','faculties.id',"=",'create_users.faculty_id')
             ->join('users','users.id',"=",'create_users.user_id')
@@ -44,7 +50,7 @@ class ProjectDetailsController extends Controller
     public function create(Request $request  )
     {
 
-    //    dd($request->all());
+//       dd($request->all());
 //         abort_unless(auth()->user()->can('create_project'),
 //             403,'you dont have required authorization to this resource');
 
@@ -78,24 +84,43 @@ class ProjectDetailsController extends Controller
             $project->create_user_id=$fields['create_user_id'];
             $project->save();
              //pivot table
-            // $budget_id = $fields['$budget_id'];
-            // $budget_details_amount = $fields['budget_details_amount'];
-            $pivot=new ProjectDetails();
+//
+//
+        foreach($request->budget_id as $key=>$insert){
+            $saveRecord=[
+                'project_id'=>$project->id,
+                'budget_id'=>$request->budget_id[$key],
+                'budget_details_amount'=>$request->budget_details_amount[$key],
+            ];
+            DB::table('project_details')->insert($saveRecord);
+        }
+            // $pivot=new ProjectDetails();
+            // $pivot->project_id=$project->id;
+            // $pivot->budget_id = $fields('budget_id', []);
+            // $pivot->budget_details_amount = $fields('budget_details_amount', []);
+            // for ($product=0; $product < count($pivot->budget_id); $product++) {
+            //     if ($pivot->budget_id[$product] != '') {
+            //         $pivot->products()->attach($pivot->budget_id[$product], ['quantity' => $pivot->budget_details_amount[$product]]);
+            //     }
+            // }
+            // $pivot->save();
 
-            $pivot->project_id=$project->id;
-            $pivot->budget_id = $fields['$budget_id'];
-            $pivot->budget_details_amount = $fields['budget_details_amount'];
+//            $pivot=new ProjectDetails();
+
+//            $pivot->project_id=$project->id;
+//            $pivot->budget_id = $fields['budget_id'];
+//            $pivot->budget_details_amount = $fields['budget_details_amount'];
             // for ($i=0; $i < count($pivot->budget_id); $i++) {
                 // if ($pivot->budget_id[$i] != '') {
-                    $pivot->budget_id()->attach($pivot->budget_id[0], ['quantity' => $pivot->budget_details_amount[0]]);
+//                    $pivot->budget_id()->attach($pivot->budget_id[0], ['quantity' => $pivot->budget_details_amount[0]]);
                 // }
                 // $data=['budget_id'=> $budget_id[$i],'budget_details_amount' => $budget_details_amount[$i]];
                 // dd($data);
 
-            
+
             // }
-            // dd($fields['budget_id'][0]);
-            $pivot->save();
+
+//            $pivot->save();
 
             return redirect(route('projectdetail.index'))
                 ->with('success','Project Created Successfully');
@@ -135,41 +160,74 @@ class ProjectDetailsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-//     * @return array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    * @return array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
+
+        $projectDetail=Project::with([           
+             'fundingagency'=>function($q){
+                    $q->select(['id','agency_name']);
+                     },
+                'createuser'=>function($q){
+                $q->select(['id']);
+                 },           
+        ]
+
+        )->find($id);
+        
+        return view('projectdetails.edit',compact('projectDetail'))
+                ->with('success','Project Update Successfully');
+        // $projectDetail= DB::table('project_details')
+        // // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
+        // ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+        // ->join('projects','projects.id',"=",'project_details.project_id')
+        // // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+        // ->get();
+        // // $projectDetail= DB::table('project_details')->get();
+        // // $projectDetail= ProjectDetails::all();
+        // // $->load('projectDetail');
+        // $data2=DB::table('create_users')
+        // ->join('faculties','faculties.id',"=",'create_users.faculty_id')
+        // ->join('users','users.id',"=",'create_users.user_id')
+        // ->join('departments','departments.id','=','create_users.department_id')
+        // ->get();
+
+        // return DB::table('project_details')
+        // ->join('projects','projects.id',"=",'project_details.project_id')->get();
+        // ->find('project_id');
+
 
 //        abort_unless(auth()->user()->can('edit_project'), 403,'you dont have required authorization to this resource');
 
-        try {
-//            $projectDetail= ProjectDetails::with('project','fundingagency','createuser','budgethead')
+//         try {
+// //            $projectDetail= ProjectDetails::with('project','fundingagency','createuser','budgethead')
 
-//            ->get();
-            $projectDetail= ProjectDetails::with([
-                'project'=>function($q){
-                $q->select(['id','project_no','project_title','project_scheme',
-                    'project_duration','project_total_cost']);
-                },
-                'fundingagency'=>function($q){
+// //            ->get();
+//             // $projectDetail= ProjectDetails::with([
+//             //     'project'=>function($q){
+//             //     $q->select(['id','project_no','project_title','project_scheme',
+//             //         'project_duration','project_total_cost']);
+//             //     },
+//             //     // 'fundingagency'=>function($q){
 
-                    $q->select(['id','agency_name']);
-                },
-                'createuser'=>function($q){
-                    $q->select(['id']);
-                },
-                'budgethead'=>function($q){
-                    $q->select(['id','budget_title']);
-                }
-            ])->find($id);
-            return view('projectdetails.edit',compact('projectDetail'))
-                ->with('success','Project Update Successfully');
-        }catch (Exception $e){
+//             //     //     $q->select(['id','agency_name']);
+//             //     // },
+//             //     // 'createuser'=>function($q){
+//             //     //     $q->select(['id']);
+//             //     // },
+//             //     'budgethead'=>function($q){
+//             //         $q->select(['id','budget_title']);
+//             //     }
+//             // ])->get();
+//             // return view('projectdetails.edit',compact('projectDetail'))
+//             //     ->with('success','Project Update Successfully');
+//         }catch (Exception $e){
 
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
+//             return ["message" => $e->getMessage(),
+//                 "status" => $e->getCode()
+//             ];
+//         }
     }
 
     /**
@@ -230,9 +288,12 @@ class ProjectDetailsController extends Controller
 //            403,'you dont have required authorization to this resource');
 
         try {
-            $pc=ProjectDetails::find($id)->project_id;
-            ProjectDetails::find($id)->delete();
-            Project::find($pc)->delete();
+            // $pc=ProjectDetails::find($id)->project_id;
+            // ProjectDetails::find($id)->delete();
+            Project::find($id)->delete();
+            
+            // ProjectDetails::find($pc)->project_id->delete();
+            //  ProjectDetails::find($pc)->delete();
             return redirect(route('projectdetail.index'))
                 ->with('success', 'Data Deleted Successfully');
         }catch (Exception $e){

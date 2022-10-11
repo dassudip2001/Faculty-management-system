@@ -7,5 +7,20 @@
 
 
 * show and update multiple table->done
-* 1.user can edit his own  profile and change password and read other user details
+* 1.user can edit his own  profile and change password and read other user details->done
 
+------------------- project------------------
+* create-----done
+* edit 
+* delete
+-----------------------------------------
+
+---------------- project budget amount ---------
+* create 
+* show 
+* edit 
+* delete
+-------------------------------------------
+---------------- upload -------------------
+* upload 
+-------------------------------------------
