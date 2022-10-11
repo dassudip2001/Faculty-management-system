@@ -9,6 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class ProjectDetails extends Model
 {
+    public $table = "project_details";
     use HasFactory,Notifiable, HasRoles;
     protected $fillable=[
         'id',

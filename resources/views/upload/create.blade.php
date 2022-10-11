@@ -8,21 +8,32 @@
     <div class="card-title mx-2 mt-2">
         <!-- Button trigger modal -->
            <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               ADD New
+            <i class="fa-solid fa-plus"></i> Add New
              </button>
         <h6 >Budget Amount Calculation Details</h6>       
     </div><hr>
     <div class="card-body"> 
              <!-- Modal -->
              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-               <div class="modal-dialog modal-lg">
+               <div class="modal-dialog modal-xl">
                  <div class="modal-content">
                    <div class="modal-header">
                      <h5 class="modal-title" id="exampleModalLabel">Budget Amount Calculation</h5>
                      <button type="button" class="btn-close" data-bs-dismiss="modal-lg" aria-label="Close"></button>
                    </div>
                    <div class="modal-body">
-          ...
+                    {{-- main body --}}
+                    <div class="row">
+                        <div class="col">
+                          {{-- select  --}}
+                        </div>
+                        <div class="col">
+                          {{-- upload module --}}
+                          <div class="container" style="border 1px :dot" >
+
+                          </div>
+                        </div>
+                    </div>
                    </div>
                    <div class="modal-footer">
                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

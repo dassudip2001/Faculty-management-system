@@ -1,7 +1,7 @@
 <x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-       {{ __('Create Project') }}
+       {{ __('Edit Project') }}
         </h2>
     </x-slot>
      
@@ -19,7 +19,7 @@
                                 <div class="col-md">
                                     <div >
                                         <label for="name">Project No<span class="required" style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm" name="project_no" id="project_no" aria-describedby="project_no" placeholder="Enter Project No">
+                                        <input type="text" class="form-control form-control-sm" name="project_no" id="project_no" value=" { " aria-describedby="project_no" placeholder="Enter Project No">
                                     </div>
                                 </div>
                                 <div class="col-md">
@@ -37,10 +37,10 @@
                                         <br>
                                         <select name="funding_agency_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option selected hidden>Select</option>
-                                            @foreach ($data as $funding)
-                                                <option value="{{$funding->id}}">{{$funding->agency_name}}
+                                            {{-- @foreach (projectDetail as $funding) --}}
+                                                <option value="">
                                                 </option>
-                                            @endforeach
+                                            {{-- @endforeach --}}
                                         </select>
                                     </div>
                                 </div>
@@ -52,10 +52,10 @@
                                             <div class="col">
                                                 <select name="create_user_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                     <option selected hidden>Select</option>
-                                                    @foreach ($data2 as $funding)
-                                                        <option value="{{$funding->id}}">{{$funding->name}} - {{$funding->dept_name}}
+                                                    {{-- @foreach ($data2 as $funding) --}}
+                                                        {{-- <option value="{{$funding->id}}">{{$funding->name}} - {{$funding->dept_name}} --}}
                                                         </option>
-                                                    @endforeach
+                                                    {{-- @endforeach --}}
                                                 </select>
                                             </div>
                                         </div>
@@ -105,11 +105,11 @@
                                                         <td>
                                                             <select name="budget_id[]" class="form-control">
                                                                 <option value="">-- choose Budget Name --</option>
-                                                                @foreach ($budget as $product)
-                                                                    <option value="{{ $product->id }}">
-                                                                        {{ $product->budget_title }} 
+                                                                {{-- @foreach ($budget as $product) --}}
+                                                                    {{-- <option value="{{ $product->id }}"> --}}
+                                                                        {{-- {{ $product->budget_title }}  --}}
                                                                     </option>
-                                                                @endforeach
+                                                                {{-- @endforeach --}}
                                                             </select>
                                                         </td>
                                                         <td>

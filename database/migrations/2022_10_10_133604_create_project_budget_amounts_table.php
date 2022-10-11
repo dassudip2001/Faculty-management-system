@@ -15,6 +15,9 @@ class CreateProjectBudgetAmountsTable extends Migration
     {
         Schema::create('project_budget_amounts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('project_details_id');
+            $table->string('year');
+            $table->bigInteger('project_budge_amount');
             $table->timestamps();
         });
     }

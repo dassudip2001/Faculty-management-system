@@ -21,7 +21,13 @@ class ProjectDetailsController extends Controller
      */
     public function index()
     {
-        $projectDetail=ProjectDetails::all();
+        $projectDetail= DB::table('project_details')
+        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
+        ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+        ->join('projects','projects.id',"=",'project_details.project_id')
+        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+        ->get();
+        // $projectDetail=ProjectDetails::all();
        $data2=DB::table('create_users')
             ->join('faculties','faculties.id',"=",'create_users.faculty_id')
             ->join('users','users.id',"=",'create_users.user_id')
@@ -80,16 +86,24 @@ class ProjectDetailsController extends Controller
              //pivot table
 //
 //
-            $pivot=new ProjectDetails();
-            $pivot->project_id=$project->id;
-            $pivot->budget_id = $fields('budget_id', []);
-            $pivot->budget_details_amount = $fields('budget_details_amount', []);
-            for ($product=0; $product < count($pivot->budget_id); $product++) {
-                if ($pivot->budget_id[$product] != '') {
-                    $pivot->products()->attach($pivot->budget_id[$product], ['quantity' => $pivot->budget_details_amount[$product]]);
-                }
-            }
-            $pivot->save();
+        foreach($request->budget_id as $key=>$insert){
+            $saveRecord=[
+                'project_id'=>$project->id,
+                'budget_id'=>$request->budget_id[$key],
+                'budget_details_amount'=>$request->budget_details_amount[$key],
+            ];
+            DB::table('project_details')->insert($saveRecord);
+        }
+            // $pivot=new ProjectDetails();
+            // $pivot->project_id=$project->id;
+            // $pivot->budget_id = $fields('budget_id', []);
+            // $pivot->budget_details_amount = $fields('budget_details_amount', []);
+            // for ($product=0; $product < count($pivot->budget_id); $product++) {
+            //     if ($pivot->budget_id[$product] != '') {
+            //         $pivot->products()->attach($pivot->budget_id[$product], ['quantity' => $pivot->budget_details_amount[$product]]);
+            //     }
+            // }
+            // $pivot->save();
 
 //            $pivot=new ProjectDetails();
 
@@ -148,39 +162,72 @@ class ProjectDetailsController extends Controller
      * @param  int  $id
 //     * @return array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
+
+        $projectDetail=Project::with([           
+             'fundingagency'=>function($q){
+                    $q->select(['id','agency_name']);
+                     },
+                'createuser'=>function($q){
+                $q->select(['id']);
+                 },           
+        ]
+
+        )->find($id);
+        // $projectDetail= DB::table('project_details')
+        // // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
+        // ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+        // ->join('projects','projects.id',"=",'project_details.project_id')
+        // // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+        // ->get();
+        // // $projectDetail= DB::table('project_details')->get();
+        // // $projectDetail= ProjectDetails::all();
+        // // $->load('projectDetail');
+        return view('projectdetails.edit',compact('projectDetail'))
+                ->with('success','Project Update Successfully');
+        
+        // $data2=DB::table('create_users')
+        // ->join('faculties','faculties.id',"=",'create_users.faculty_id')
+        // ->join('users','users.id',"=",'create_users.user_id')
+        // ->join('departments','departments.id','=','create_users.department_id')
+        // ->get();
+
+        // return DB::table('project_details')
+        // ->join('projects','projects.id',"=",'project_details.project_id')->get();
+        // ->find('project_id');
+
 
 //        abort_unless(auth()->user()->can('edit_project'), 403,'you dont have required authorization to this resource');
 
-        try {
-//            $projectDetail= ProjectDetails::with('project','fundingagency','createuser','budgethead')
+//         try {
+// //            $projectDetail= ProjectDetails::with('project','fundingagency','createuser','budgethead')
 
-//            ->get();
-            $projectDetail= ProjectDetails::with([
-                'project'=>function($q){
-                $q->select(['id','project_no','project_title','project_scheme',
-                    'project_duration','project_total_cost']);
-                },
-                'fundingagency'=>function($q){
+// //            ->get();
+//             // $projectDetail= ProjectDetails::with([
+//             //     'project'=>function($q){
+//             //     $q->select(['id','project_no','project_title','project_scheme',
+//             //         'project_duration','project_total_cost']);
+//             //     },
+//             //     // 'fundingagency'=>function($q){
 
-                    $q->select(['id','agency_name']);
-                },
-                'createuser'=>function($q){
-                    $q->select(['id']);
-                },
-                'budgethead'=>function($q){
-                    $q->select(['id','budget_title']);
-                }
-            ])->find($id);
-            return view('projectdetails.edit',compact('projectDetail'))
-                ->with('success','Project Update Successfully');
-        }catch (Exception $e){
+//             //     //     $q->select(['id','agency_name']);
+//             //     // },
+//             //     // 'createuser'=>function($q){
+//             //     //     $q->select(['id']);
+//             //     // },
+//             //     'budgethead'=>function($q){
+//             //         $q->select(['id','budget_title']);
+//             //     }
+//             // ])->get();
+//             // return view('projectdetails.edit',compact('projectDetail'))
+//             //     ->with('success','Project Update Successfully');
+//         }catch (Exception $e){
 
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
+//             return ["message" => $e->getMessage(),
+//                 "status" => $e->getCode()
+//             ];
+//         }
     }
 
     /**

@@ -196,13 +196,13 @@
                      <tbody>
                      @foreach($projectDetail as $pro)
                          <tr>
-                            <td>{{$pro->project->project_no}}</td>
-                            <td>{{$pro->project->project_title}}</td>
-                            <td>{{$pro->project->project_scheme}}</td>
-                            <td>{{$pro->project->project_duration}}</td>
-                             <td>{{$pro->project->project_total_cost}}</td>
-
-                             <td>{{$pro->budget_id}}</td>
+                            <td>{{$pro->project_no}}</td>
+                            <td>{{$pro->project_title}}</td>
+                            <td>{{$pro->project_scheme}}</td>
+                            <td>{{$pro->project_duration}}</td>
+                             <td>{{$pro->project_total_cost}}</td>
+                             <td>{{$pro->funding_agency_id}}</td>
+                             <td>{{$pro->budget_title}}</td>
                              <td>{{$pro->budget_details_amount}}</td>
 
                              <th>
