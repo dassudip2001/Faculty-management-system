@@ -160,7 +160,7 @@ class ProjectDetailsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-//     * @return array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    * @return array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(int $id)
     {
@@ -175,6 +175,9 @@ class ProjectDetailsController extends Controller
         ]
 
         )->find($id);
+        
+        return view('projectdetails.edit',compact('projectDetail'))
+                ->with('success','Project Update Successfully');
         // $projectDetail= DB::table('project_details')
         // // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
         // ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
@@ -184,9 +187,6 @@ class ProjectDetailsController extends Controller
         // // $projectDetail= DB::table('project_details')->get();
         // // $projectDetail= ProjectDetails::all();
         // // $->load('projectDetail');
-        return view('projectdetails.edit',compact('projectDetail'))
-                ->with('success','Project Update Successfully');
-        
         // $data2=DB::table('create_users')
         // ->join('faculties','faculties.id',"=",'create_users.faculty_id')
         // ->join('users','users.id',"=",'create_users.user_id')

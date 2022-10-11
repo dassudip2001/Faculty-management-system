@@ -28,30 +28,19 @@
                    <h6 class="modal-title" >Project Details Form</h6>
                    <hr>
                    <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                       {{-- project name --}}
-                      <label for="project_name">Project Name<span class="required" style="color: red;">*</span></label>
+                      <label for="project_name">Project Details<span class="required" style="color: red;">*</span></label>
                       <br>
                       <select name="" class="form-select form-select-sm" aria-label=".form-select-sm example">
                           <option selected hidden>Select Project</option>
-                          {{-- @foreach ($data as $funding) --}}
-                              {{-- <option value="{{$funding->id}}">{{$funding->agency_name}} --}}
+                          @foreach ($amountCal as $funding)
+                              <option value="{{$funding->id}}">Project No-{{$funding->project_no}}-Project Title-{{$funding->project_title}}-Project Duration-{{$funding->project_duration}}--{{$funding->budget_title}}--{{$funding->budget_details_amount}}
                               </option>
-                          {{-- @endforeach --}}
+                          @endforeach
                       </select>
                     </div>
-                    <div class="col-sm-6">
-                      {{-- Project Duration --}}
-                      <label for="project_duration">Project Duration<span class="required" style="color: red;">*</span></label>
-                      <br>
-                      <select name="" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                          <option selected hidden>Select Project Duration</option>
-                          {{-- @foreach ($data as $funding) --}}
-                              {{-- <option value="{{$funding->id}}">{{$funding->agency_name}} --}}
-                              </option>
-                          {{-- @endforeach --}}
-                      </select>
-                    </div>
+                    
                    </div>
                    <div class="row">
                     <div class="col-sm-6">
@@ -82,7 +71,58 @@
                   
                    </div>
                    <hr>
-                   <h6 class="mx-3" >Project BUdget Amount Calculation Year Wish</h6>
+                   <div class="card">
+                    <div class="card-header">
+                        Budget Details Calculation year Wish
+                    </div>
+    
+                    <div class="card-body">
+                        <table class="table" id="products_table">
+                            <thead>
+                                <tr>
+                                    <th >Budget Name</th>
+                                    <th>Year</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (old('budget_id', ['']) as $index => $oldProduct)
+                                    <tr id="product{{ $index }}">
+                                        <td>
+                                            <select name="project_details_id[]" class="form-control">
+                                                <option value="">-- choose Budget Name --</option>
+                                                @foreach ($amountCal as $funding)
+                                                    <option value="{{$funding->id}}">
+                                                      {{$funding->budget_title}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="year[]" id="clear" placeholder="Enter Budget Amount" />
+                                        </td>
+                                        <td>
+                                          <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="project_budge_amount[]" id="clear" placeholder="Enter Budget Amount" />
+                                      </td>
+                                    </tr>
+                                @endforeach
+                                <tr id="product{{ count(old('budget_id', [''])) }}"></tr>
+                            </tbody>
+                        </table>
+    
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <button  id="add_row" class="btn  btn-success pull-left">+ Add Row</button>
+                                <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
+                            </div>
+                            
+                             <div class="col-sm-2">
+                            
+                        <label for="total_amount">Total Amount</label>
+                        <input type="number" class="form-control form-control" name="totalAmount"  id="grandTotal" aria-describedby="total_amount" placeholder="0" readonly>
+                    </div>
+                        </div>
+                    </div>
 
                    <div class="modal-footer">
                     <hr>
@@ -135,5 +175,28 @@
      </div>
 
 </div>
+@section('script')
+<script>
+  // Drop down code
+   $(document).ready(function(){
+                    let row_number = {{ count(old('budget_id', [''])) }};
+                    $("#add_row").click(function(e){
+                      e.preventDefault();
+                      let new_row_number = row_number - 1;
+                      $('#product' + row_number).html($('#product' + new_row_number).html()).find('td:first-child');
+                      $('#products_table').append('<tr id="product' + (row_number + 1) + '"></tr>');
+                      row_number++;
+                    });
+                
+                    $("#delete_row").click(function(e){
+                      e.preventDefault();
+                      if(row_number > 1){
+                        $("#product" + (row_number - 1)).html('');
+                        row_number--;
+                      }
+                    });
+                  });
+</script>
+@endsection
 
 </x-admin-layout>

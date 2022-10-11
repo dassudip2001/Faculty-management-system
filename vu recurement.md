@@ -10,7 +10,7 @@
 * 1.user can edit his own  profile and change password and read other user details->done
 
 ------------------- project------------------
-* create
+* create-----done
 * edit 
 * delete
 -----------------------------------------
