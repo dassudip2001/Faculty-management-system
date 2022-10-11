@@ -4,14 +4,7 @@
             {{ __('Create Department') }}
         </h2>
     </x-slot>
-    {{-- <center>
-      <br><br>
-      <a  class="btnprn btn">Print Preview</a></center>
-      <script type="text/javascript">
-      $(document).ready(function(){
-      $('.btnprn').printPage();
-      });
-      </script> --}}
+   
 <div class="container  mt-4">
   <div class="row">
     <div class="col">
@@ -19,7 +12,7 @@
       <div class="card">
          
           @if(session('success'))
-              <div class="alert alert-success">
+              <div class="alert alert-primary" role="alert">
                   {{session('success')}}
               </div>
               @endif
