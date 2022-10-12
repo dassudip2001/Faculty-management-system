@@ -122,9 +122,9 @@ require __DIR__.'/auth.php';
     // invoice upload
 
     Route::get('/invoiceuoload',[InvoiceUploadController::class,'index'])->name('invoiceuoload.index');
-    Route::post('/invoiceuoload',[InvoiceUploadController::class,'create'])->name('invoiceuoload.create')->middleware(['auth','role:admin']);
-    Route::get('/invoiceuoload/edit/{id}',[InvoiceUploadController::class,'edit'])->name('invoiceuoload.edit');
-    Route::put('/invoiceuoload/edit/{id}',[InvoiceUploadController::class,'update'])->name('invoiceuoload.update');
-    Route::get('/invoiceuoload/delete/{id}',[InvoiceUploadController::class,'destroy'])->name('invoiceuoload.destroy');
+    Route::post('/invoiceuoload',[InvoiceUploadController::class,'create'])->name('invoiceuoload.create');
+    Route::get('/download/{file}',[InvoiceUploadController::class,'download']);
+    Route::get('/view/{id}',[InvoiceUploadController::class,'view']);
+    Route::get('/delete/{id}',[InvoiceUploadController::class,'destroy']);
 
 

@@ -8,6 +8,8 @@
         <title>{{ config('app.name', 'Vidyasagar University') }}</title>
        <!--  Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+            {{-- font awesom --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -24,9 +26,11 @@
             </head>
     <body class="antialiased bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
     <div class="flex-col w-full md:flex md:flex-row md:min-h-screen">
+        
         <div @click.away="open = false" class="flex flex-col flex-shrink-0 w-full text-gray-700 bg-white md:w-64 dark:text-gray-200 dark:bg-gray-800" x-data="{ open: false }">
             <div class="flex flex-row items-center justify-between flex-shrink-0 px-8 py-4">
-                <a href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline"style=" text-decoration: none;"><i class="fa-solid fa-user"></i> {{ Auth::user()->name }}</a>
+
+                <a href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline mx-5"style=" text-decoration: none;"><i class="fa-solid fa-user"></i> {{ Auth::user()->name }}</a>
                 <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
                     <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
                         <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
@@ -38,33 +42,41 @@
                 <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline  " style=" text-decoration: none;" href="#">Vidyasagar University</a>
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle mt-4 mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                         Master Module
+                        <i class="fa-solid fa-person"></i>  Master Module
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
                         @role('admin')
                         <li><a class="dropdown-item" href="{{ route( 'admin.permissions.index' ) }} ">Permission </a></li>
                         <li><a class="dropdown-item" href=" {{route('admin.roles.index')}}">Roles </a></li>
                         @endrole
+                    </ul>
+                </div>
+                  {{-- crate module --}}
+                  <div class="dropdown mt-4 mx-3">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-sharp fa-solid fa-plus"></i> Cretae Module
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-light">
                         <li><a class="dropdown-item" href=" {{ url('/department') }}">Department </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/createuser') }}">Create User </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/funding') }}"> Funding Agency </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/budget') }}">Budget </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}">Create Project </a></li>
+
                     </ul>
                 </div>
-
-                <div class="dropdown mt-4 mx-4">
+                <div class="dropdown mt-4 mx-3">
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Edit Details
+                        <i class="fa-solid fa-user-pen"></i> Edit Details
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
                         <li><a class="dropdown-item" href=" {{ url('/faculty') }}">Faculty </a></li>
                         <li><a class="dropdown-item" href="{{ url('/project') }}">Projects</a></li>
                     </ul>
                 </div>
-                <div class="dropdown mt-4 mx-4">
+                <div class="dropdown mt-4 mx-3">
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                       Budget Amount
+                        <i class="fa-solid fa-arrow-up-short-wide"></i>  Budget Amount
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
                         <li><a class="dropdown-item" href=" {{url('/projectbudgetamount')}} ">Budget Amount Calculation </a></li>

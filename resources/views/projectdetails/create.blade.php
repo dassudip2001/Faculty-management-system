@@ -11,7 +11,7 @@
                 <div class="card ">
                     <div class="mt-2 mx-2">
                     <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Create New Project
+                        <i class="fa-solid fa-plus"></i> Create New Project
                     </button>
                    <!-- Modal -->
                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -175,8 +175,8 @@
                             {{session('success')}}
                         </div>
                     @endif
-                        <hr>
-                        <h6>Project Details</h6>
+                        
+                        <h6>Project Details</h6><hr>
                     </div>
                 <div class="card-body p-0">
                  <table class="table table-striped table-hover">

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\InvoiceUpload;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
+use App\Models\InvoiceUpload;
+use Exception;
 class InvoiceUploadController extends Controller
 {
     /**
@@ -14,7 +16,8 @@ class InvoiceUploadController extends Controller
      */
     public function index()
     {
-        return view('upload.create');
+        $invoice= InvoiceUpload::all();
+        return view('upload.create',compact('invoice'));
     }
 
     /**
@@ -22,9 +25,17 @@ class InvoiceUploadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $data=new InvoiceUpload;
+        $file=$request->file;
+        $filename=' ' .$file->getClientOriginalName();
+        $request->file->move('public/assets',$filename);
+        $data->file=$filename;
+        $data->name=$request->name;       
+        $data->save();
+        // return redirect()->back();
+        return redirect(route('invoiceuoload.index'))->with('success','Upload Successfully');
     }
 
     /**
@@ -33,9 +44,9 @@ class InvoiceUploadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function download(Request $request,$file)
     {
-        //
+        return response()->download(public_path('public/assets'.$file));
     }
 
     /**
@@ -44,9 +55,10 @@ class InvoiceUploadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function view($id)
     {
-        //
+        // return InvoiceUpload::find($id);
+        return view('upload.show');
     }
 
     /**
@@ -80,6 +92,14 @@ class InvoiceUploadController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // try {
+            InvoiceUpload::destroy($id);
+            return redirect(route('invoiceuoload.index'))->with('success',' delete Successfully');
+        // }catch (Exception $e)
+        // {
+        //     return ["message" => $e->getMessage(),
+        //         "status" => $e->getCode()
+        //     ];
+        // }
     }
 }

@@ -50,11 +50,25 @@
                         <li><a class="dropdown-item" href="{{ route( 'admin.permissions.index' ) }} ">Permission </a></li>
                         <li><a class="dropdown-item" href=" {{route('admin.roles.index')}}">Roles </a></li>
                         @endrole
+                        {{-- <li><a class="dropdown-item" href=" {{ url('/department') }}">Department </a></li> --}}
+                        {{-- <li><a class="dropdown-item" href=" {{ url('/createuser') }}">Create User </a></li> --}}
+                        {{-- <li><a class="dropdown-item" href=" {{ url('/funding') }}"> Funding Agency </a></li> --}}
+                        {{-- <li><a class="dropdown-item" href=" {{ url('/budget') }}">Budget </a></li> --}}
+                        {{-- <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}">Create Project </a></li> --}}
+                    </ul>
+                </div>
+                {{-- crate module --}}
+                <div class="dropdown mt-4 mx-3">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-sharp fa-solid fa-plus"></i> Cretae Module
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-light">
                         <li><a class="dropdown-item" href=" {{ url('/department') }}">Department </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/createuser') }}">Create User </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/funding') }}"> Funding Agency </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/budget') }}">Budget </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}">Create Project </a></li>
+
                     </ul>
                 </div>
 
