@@ -58,10 +58,10 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
                         <li><a class="dropdown-item" href=" {{ url('/department') }}">Department </a></li>
-                        <li><a class="dropdown-item" href=" {{ url('/createuser') }}">Create User </a></li>
+                        <li><a class="dropdown-item" href=" {{ url('/createuser') }}"> User </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/funding') }}"> Funding Agency </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/budget') }}">Budget </a></li>
-                        <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}">Create Project </a></li>
+                        <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}"> Project </a></li>
 
                     </ul>
                 </div>
@@ -74,13 +74,22 @@
                         <li><a class="dropdown-item" href="{{ url('/project') }}">Projects</a></li>
                     </ul>
                 </div>
+                 {{-- budget cal --}}
                 <div class="dropdown mt-4 mx-3">
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-arrow-up-short-wide"></i>  Budget Amount
+                        <i class="fa-solid fa-money-bill"></i>  Transtation
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
-                        <li><a class="dropdown-item" href=" {{url('/projectbudgetamount')}} ">Budget Amount Calculation </a></li>
-                        <li><a class="dropdown-item" href=" {{url('/invoiceuoload')}} ">Upload invoice</a></li>
+                        {{-- <li><a class="dropdown-item" href=" {{url('/invoiceuoload')}} "> Invoice Upload</a></li> --}}
+                    </ul>
+                </div>
+
+                <div class="dropdown mt-4 mx-3">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>  Invoice Upload
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-light">
+                        <li><a class="dropdown-item" href=" {{url('/invoiceuoload')}} "> Invoice Upload</a></li>
                     </ul>
                 </div>
 

@@ -40,16 +40,15 @@
 
 {{--                <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="{{ url('/department') }}">Department</a>--}}
 {{--                <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Facilty</a>--}}
-
+                @role('admin')
+                
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle mt-4 mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Master Module
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
-                        @role('admin')
                         <li><a class="dropdown-item" href="{{ route( 'admin.permissions.index' ) }} ">Permission </a></li>
                         <li><a class="dropdown-item" href=" {{route('admin.roles.index')}}">Roles </a></li>
-                        @endrole
                         {{-- <li><a class="dropdown-item" href=" {{ url('/department') }}">Department </a></li> --}}
                         {{-- <li><a class="dropdown-item" href=" {{ url('/createuser') }}">Create User </a></li> --}}
                         {{-- <li><a class="dropdown-item" href=" {{ url('/funding') }}"> Funding Agency </a></li> --}}
@@ -57,6 +56,8 @@
                         {{-- <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}">Create Project </a></li> --}}
                     </ul>
                 </div>
+                @endrole
+
                 {{-- crate module --}}
                 <div class="dropdown mt-4 mx-3">
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -64,17 +65,17 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
                         <li><a class="dropdown-item" href=" {{ url('/department') }}">Department </a></li>
-                        <li><a class="dropdown-item" href=" {{ url('/createuser') }}">Create User </a></li>
+                        <li><a class="dropdown-item" href=" {{ url('/createuser') }}"> User </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/funding') }}"> Funding Agency </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/budget') }}">Budget </a></li>
-                        <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}">Create Project </a></li>
+                        <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}"> Project </a></li>
 
                     </ul>
                 </div>
 
                 <div class="dropdown mt-4 mx-4">
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Edit Details
+                        <i class="fa-solid fa-user-pen"></i>  Edit Details
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
                         <li><a class="dropdown-item" href=" {{ url('/faculty') }}">Faculty </a></li>
@@ -83,11 +84,11 @@
                 </div>
                 <div class="dropdown mt-4 mx-4">
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                       Budget Amount
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        Invoice Upload
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
-                        <li><a class="dropdown-item" href=" {{url('/projectbudgetamount')}} ">Budget Amount Calculation </a></li>
-                        <li><a class="dropdown-item" href=" {{url('/invoiceuoload')}} ">Upload invoice</a></li>
+                        <li><a class="dropdown-item" href=" {{url('/invoiceuoload')}} "> Invoice Upload</a></li>
                     </ul>
                 </div>
                 <form method="POST" action="{{ route('logout') }}">

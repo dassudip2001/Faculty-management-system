@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Stroage;
+use Illuminate\Support\Facades\File;
 use App\Models\InvoiceUpload;
 use Exception;
-use File;
+// use File;
 class InvoiceUploadController extends Controller
 {
     /**
@@ -39,6 +39,24 @@ class InvoiceUploadController extends Controller
         $data->save();
         // return redirect()->back();
         return redirect(route('invoiceuoload.index'))->with('success','Upload Successfully');
+        // $image = $request->file('file');
+
+        // $imageName = time(). ".". $image->extension();
+
+        // $image->move(public_path('uploads'), $imageName);
+
+        // $imageStatus = InvoiceUpload::create([
+        //     "image_name" => $imageName
+        // ]);
+
+        // if(!is_null($imageStatus)) {
+
+        //     return back()->with("success", "Image uploaded successfully.");
+        // }
+
+        // else {
+        //     return back()->with("failed", "Failed to upload image.");
+        // }
     }
 
     /**
@@ -47,15 +65,16 @@ class InvoiceUploadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function download($id)
+    public function download(Request $request, $file)
     {
+        return response()->download(public_path('assets/'.$file));
     //    return DB::table('invoice_uploads')->where('id',$id)->first();
 
         // $filepath=public_path("public/assets/{$data->upload}");
         // return Response::download($filepath);
 //        return \response()->download($filepath);
         // dd($request);
-        return response()->download(public_path("assets/".$id));
+        // return response()->download(public_path('/assets'.$id));
     }
 
     /**
@@ -102,9 +121,33 @@ class InvoiceUploadController extends Controller
      */
     public function destroy($id)
     {
+        // DB::table('invoice_uploads')
+        // $data=InvoiceUpload::find($id);
+        // unlink('assets/'.$data->file);
+        // $data->delete();
+
+        // $file=InvoiceUpload::findOrFail($id);
+        // $image=$file->file;
+        //  dd($image);
+        // $file->delete();
+        // return redirect()->route('invoiceuoload.index');
+        // $filename=File::find($id);
+        $file=InvoiceUpload::find($id);
+        $filename=$file->file;
+        $file_path=public_path('assets/' .$filename);
+        unlink($file_path,);
+        echo $file->delete();
+        // return redirect()->route('invoiceuoload.index');
+        return redirect(route('invoiceuoload.index'))->with('success',' delete Successfully');
+
+
+        // $image_path = "/assets/Print view - phpMyAdmin 5.1.1.pdf";  // Value is not URL but directory file path
+        // if(File::exists($image_path)) {
+        // File::delete($image_path);
+// }
         // try {
-            // InvoiceUpload::destroy($id);
-            // return redirect(route('invoiceuoload.index'))->with('success',' delete Successfully');
+        //    return InvoiceUpload::destroy($id);
+
         // }catch (Exception $e)
         // {
         //     return ["message" => $e->getMessage(),
@@ -120,10 +163,23 @@ class InvoiceUploadController extends Controller
         //     unlink($image_path);
         // // }
         // $news->delete();
-        if (file_exists($id)) {
-            return unlink($id);
-        } else {
-            echo('File not found.');
-        }
+        // if (file_exists($id)) {
+        //     return unlink($id);
+        // } else {
+        //     echo('File not found.');
+        // }
+        // $file=public_path("assets",$id);
+        // $data=File::delete($file);
+        // dd($data);
+        // // dd($id);
+        // $image = InvoiceUpload::find($request->id);
+
+        // unlink("assets/".$image->image_name);
+
+        // InvoiceUpload::where("id", $id)->delete();
+
+        // return back()->with("success", "Image deleted successfully.");
+
+
     }
 }

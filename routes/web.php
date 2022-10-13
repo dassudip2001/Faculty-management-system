@@ -123,8 +123,8 @@ require __DIR__.'/auth.php';
 
     Route::get('/invoiceuoload',[InvoiceUploadController::class,'index'])->name('invoiceuoload.index');
     Route::post('/invoiceuoload',[InvoiceUploadController::class,'create'])->name('invoiceuoload.create');
-    Route::get('/download/{id}',[InvoiceUploadController::class,'download']);
+    Route::get('/download/{file}',[InvoiceUploadController::class,'download']);
     Route::get('/view/{id}',[InvoiceUploadController::class,'view']);
-    Route::delete('/delete/{id}',[InvoiceUploadController::class,'destroy']);
+    Route::get('invoiceuoload/delete/{$id}',[InvoiceUploadController::class,'destroy']);
 
 

@@ -12,9 +12,14 @@
             <i class="fa-solid fa-plus"></i> Add New
              </button>
         <h6 >Budget Amount Calculation Details</h6>       
-    </div><hr>
+    </div>
+    <hr>
     {{-- <div class="card-body">  --}}
-      
+      <div class="card-body">
+
+
+
+     
       <div class="table-responsive">
         <table class="table table-striped table-hover">
           <thead class="table-dark">
@@ -28,7 +33,7 @@
             <th>Action</th>
             {{-- @endrole --}}
           </tr>
-          </thead>
+          </thead >
           <div class="overflow-auto">
             @foreach($invoice as $inv)
             <tbody>
@@ -42,12 +47,12 @@
                  </a>
                 </td>
                 <td>
-                  <a href=" {{ url('/download/'.$inv->id) }}  ">
+                  <a href=" {{ url('/download',$inv->file) }}  ">
                     <button type="submit"><i class="fa-sharp fa-solid fa-download"></i></button>
                    </a>
                 </td>
                 <td>
-                 <a href=" ">
+                 <a href=" {{url('invoiceuoload/delete',$inv->id)}} ">
                   <button type="submit"><i class="fa-solid fa-trash"></i></button>
                  </a>
                 </td>
@@ -57,7 +62,8 @@
             @endforeach
           </div>
         </table>
-      </div>
+      {{-- </div> --}}
+    </div>
              <!-- Modal -->
              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                <div class="modal-dialog modal-xl">
@@ -128,7 +134,7 @@
                  </div>
                </div>
              </div>
-    {{-- </div> --}}
+    </div>
 </div>
 
 </x-admin-layout>
