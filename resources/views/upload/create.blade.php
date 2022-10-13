@@ -37,17 +37,17 @@
                 <td>{{$inv->name}}</td>
                 <td>{{$inv->file}}</td>
                 <td>
-                  <a href="{{url('view',$inv->id)}} ">
+                  <a href="{{ url('/view/'.$inv->id) }}   ">
                   <button type="submit"><i class="fa-solid fa-eye"></i></button>
                  </a>
                 </td>
                 <td>
-                  <a href=" {{url('invoiceuoload',$inv->id)}}  ">
+                  <a href=" {{ url('/download/'.$inv->id) }}  ">
                     <button type="submit"><i class="fa-sharp fa-solid fa-download"></i></button>
                    </a>
                 </td>
                 <td>
-                 <a href=" {{url('delete',$inv->id)}} ">
+                 <a href=" ">
                   <button type="submit"><i class="fa-solid fa-trash"></i></button>
                  </a>
                 </td>
