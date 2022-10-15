@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\show\ProjectViewController;
 use App\Http\Controllers\show\UserViewController;
+use App\Http\Controllers\ReleseFund\ReleseFundController;
 use App\Http\Controllers\ProjectBudgetAmount\ProjectBudgetAmountController;
 use App\Http\Controllers\InvoiceUpload\InvoiceUploadController;
 use App\Http\Controllers\ProjectDetails\ProjectDetailsController;
@@ -126,5 +127,10 @@ require __DIR__.'/auth.php';
     Route::get('/download/{file}',[InvoiceUploadController::class,'download']);
     Route::get('/view/{id}',[InvoiceUploadController::class,'view']);
     Route::get('invoiceuoload/delete/{$id}',[InvoiceUploadController::class,'destroy']);
+
+
+    //fund relies
+    Route::get('/relesefund',[ReleseFundController::class,'index'])->name('relesefund.index');
+
 
 
