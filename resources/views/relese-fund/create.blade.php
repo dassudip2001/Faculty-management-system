@@ -4,21 +4,24 @@
             {{ __('Relese Fund') }}
         </h2>
     </x-slot>
-
+    {{-- script add   for drop down --}}
+    <script src="{{ asset('js/relese.js') }}" defer></script>
+    {{-- main code  --}}
    <div class="card mt-4 mx-2">
     <div class="card-title mt-2 mx-2">
-        <h6>Relese Fund</h6>
         <!-- Button trigger modal -->
        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Add New
        </button>
-        <hr>
+       <h6 class="mt-2">Relese Fund</h6>
+       <hr>
+        
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog  modal-xl">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Fund Relese Module</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -52,12 +55,14 @@
                                         <!-- <input type="text" class="form-control form-control-sm" name="fac_designtion"  id="faculty_designation" aria-describedby="faculty_designation" placeholder="Enter  Faculty Designation"> -->
                                         <select name="fac_designtion" class="form-select form-select-sm @error('fac_designtion') is-invalid @enderror"  aria-label=".form-select-sm example">
                                           <option selected hidden> Select Payment method  </option>
-                                          <option id="check" >Check </option>
+                                          <option id="firstVal" >Check </option>
                                            <option id="neft" > NeFT </option>
                                        </select>
                                     </div>
                                 </div>
-
+                                {{--  --}}
+                                
+                                {{--  --}}
 
                             </form>
                         </div>
@@ -75,9 +80,14 @@
             {{-- card body --}}
     </div>
    </div>
-    @section('script')
-        <script>
-
+    {{-- @section('script')
+    <script>
+     $("#check").click(function(){
+     if ( ($("#firstVal").val() > 0) && ($("#secondVal").val() != '') ) {
+    displayVals();
+}else{
+alert("insert a value");
+}
         </script>
-    @endsection
+    @endsection --}}
 </x-admin-layout>
