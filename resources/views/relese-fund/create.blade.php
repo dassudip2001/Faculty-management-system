@@ -27,67 +27,168 @@
               <div class="modal-body">
                      {{-- Contant page --}}
                      <div class="card">
+                       
                         <div class="card-title mt-2 mx-2">
                             <h6>Fund Relese Form</h6>
                             <hr>
                         </div>
                         <div class="card-body">
                             {{-- form --}}
-                            <form action="" method="post">
+                            <form action="" method="POST">
                                 @csrf
                                 {{-- form value  --}}
                                 <div class="row">
                                     <div class="col">
                                         {{-- date --}}
                                         <label for="datfilde">Date<span class="required" style="color: red;">*</span></label>
-                                        <input type="date" class="form-control form-control-sm " name="datefild"  id="datefild" aria-describedby="datefild" placeholder="Enter Date" require>
+                                        <input type="text" class="form-control form-control-sm " name="date"  id="datefild" aria-describedby="datefild" placeholder="Enter Date" require>
                                     </div>
                                     <div class="col">
                                         {{-- Transtation no --}}
                                         <label for="transtation_no">Transtation No<span class="required" style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm " name="transtation_no"  id="transtation_no" aria-describedby="transtation_no" placeholder="Enter Your Transtation No" require>
+                                        <input type="text" class="form-control form-control-sm " name="transaction_no"  id="transtation_no" aria-describedby="transtation_no" placeholder="Enter Your Transtation No" require>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col">
                                         <label for="faculty_designation">Payment Recive Method<span class="required" style="color: red;">*</span></label>
-                                        <!-- <input type="text" class="form-control form-control-sm" name="fac_designtion"  id="faculty_designation" aria-describedby="faculty_designation" placeholder="Enter  Faculty Designation"> -->
-                                        <select name="fac_designtion" class="form-select form-select-sm @error('fac_designtion') is-invalid @enderror"  aria-label=".form-select-sm example">
-                                          <option selected hidden> Select Payment method  </option>
-                                          <option id="firstVal" >Check </option>
-                                           <option id="neft" > NeFT </option>
-                                       </select>
+                                        <div>
+
+                                           <select  name="payment_method" class="form-select" aria-label="Default select example" id="selector" onchange="yesnoCheck(this);">
+                                               <option   value="select">_Select payment mathod_</option>
+                                               <option   name="payment_method"  value="cHECK">Check</option>
+                                               <option  name="payment_method"   value="nEFT">NEFT</option>
+                                           </select>
+                                       </div>
+
+                                       <div id="check" style="display: none;" class="mt-2">
+                                         <div class="row">
+                                           <div class="col">
+                                               <label for="payment_method_no">Enter Check No.</label> 
+                                           <input class="form-control" type="text" id="payment_method_no" name="transtation_date" />
+                                           </div>
+                                           <div class="col">
+                                                  <label for="transtation_date">Enter Transeation Date</label> 
+                                           <input class="form-control" type="text" id="transtation_date" name="payment_method_no" />
+                                           </div>
+                                         </div>
+                                       </div>
+                                     <div id="neft" style="display: none;" class="mt-2">
+                                     <div class="row">
+                                         <div class="col">
+                                            <label for="payment_method_no">Enter Transeation No.</label> 
+                                         <input class="form-control"type="text" id="payment_method_no" name="payment_method_no" />
+                                         </div>
+                                         <div class="col">
+                                             <label for="transtation_date">Enter Transeation Date</label> 
+                                         <input class="form-control" type="text" id="transtation_date" name="transtation_date" />
+                                         </div>
+                                     </div>
+
+                                     <!-- <label for="pan">Enter Pan Card No.</label> 
+                                     <input type="text" id="pan" name="pan" /><br /> -->
+                                     </div>
                                     </div>
                                 </div>
                                 {{--  --}}
                                 
                                 {{--  --}}
 
-                            </form>
+                           
                         </div>
                      </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
               </div>
-            </div>
+            </div> 
+        </form>
           </div>
         </div>
     </div>
-    <div class="card-title">
+    <div class="card-title mx-3">
+
             {{-- card body --}}
+            <h6>Show Relese Funding</h6>
+            <hr>  
+            @if(session('success'))
+            <div class="alert alert-primary" role="alert">
+                {{session('success')}}
+            </div>
+            @endif
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+             @endif          
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+             <tr>
+                <th>Date</th>
+                <th>Transtation No</th>
+                <th>Type</th>
+                <th>No</th>
+                <th>Transtation  Date</th>
+                <th>Action</th>
+             </tr>
+            </thead>
+            <tbody>
+                @foreach ($fund as $trans)
+                    
+               
+                <tr>
+                    <td> {{$trans->date}} </td>
+                    <td>{{$trans->transaction_no}}</td>
+                    <td>{{$trans->payment_method}}</td>
+                    <td>{{$trans->payment_method_no}}</td>
+                    <td>{{$trans->transtation_date}}</td>
+                    <th>
+                        <a href=" {{ url('/relesefund/edit',$trans->id) }} ">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                           </a>
+                           <a href=" {{ url('/relesefund/delete',$trans->id) }} ">
+                            <button type="submit">
+                              <i class="fa-solid fa-trash">
+                              </i>
+                            </button>
+                                </a>
+                    </th>
+                </tr>
+            </tbody>
+             @endforeach
+        </table>
     </div>
    </div>
-    {{-- @section('script')
+    @section('script')
     <script>
-     $("#check").click(function(){
-     if ( ($("#firstVal").val() > 0) && ($("#secondVal").val() != '') ) {
-    displayVals();
-}else{
-alert("insert a value");
+            function yesnoCheck(that) 
+{
+    if (that.value == "cHECK") 
+    {
+        document.getElementById("check").style.display = "block";
+    }
+    else
+    {
+        document.getElementById("check").style.display = "none";
+    }
+    if (that.value == "nEFT")
+    {
+        document.getElementById("neft").style.display = "block";
+    }
+    else
+    {
+        document.getElementById("neft").style.display = "none";
+    }
+   
 }
         </script>
-    @endsection --}}
+    @endsection 
 </x-admin-layout>

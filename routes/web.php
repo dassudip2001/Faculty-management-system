@@ -131,6 +131,12 @@ require __DIR__.'/auth.php';
 
     //fund relies
     Route::get('/relesefund',[ReleseFundController::class,'index'])->name('relesefund.index');
+    Route::post('/relesefund',[ReleseFundController::class,'create'])->name('relesefund.create');
+    Route::put('/relesefund/edit/{id}',[ReleseFundController::class,'edit'])->name('relesefund.edit');
+    Route::get('/relesefund/edit/{id}',[ReleseFundController::class,'update'])->name('relesefund.update');
+    Route::delete('/relesefund',[ReleseFundController::class,'destroy'])->name('relesefund.destroy');
+
+
 
 
 

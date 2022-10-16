@@ -257,15 +257,15 @@
             {{-- @can('edit_user') --}}
             {{-- @if(Auth::user()->id=='1' || Auth::id()==$item->user->id) --}}
              <th>
-             <a href=" {{ url('/createuser/edit',$item->id) }} ">
-             <i class="fa-regular fa-pen-to-square"></i>
-            </a>
-            <a href=" {{ url('/createuser/delete',$item->id) }} ">
-            <button type="submit">
-              <i class="fa-solid fa-trash">
-              </i>
-            </button>
-                </a>
+              <a href=" {{ url('/createuser/edit',$item->id) }} ">
+                <i class="fa-regular fa-pen-to-square"></i>
+               </a>
+               <a href=" {{ url('/createuser/delete',$item->id) }} ">
+                <button type="submit">
+                  <i class="fa-solid fa-trash">
+                  </i>
+                </button>
+                    </a>
             </th>
             
            @endif

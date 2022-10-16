@@ -18,9 +18,10 @@ class CreateReleseFundsTable extends Migration
             $table->date('date');
             $table->string('transaction_no');
             $table->string('payment_method');
-            $table->string('check_no');
-            $table->string('trans_no');
-            
+            $table->date('transtation_date');
+            $table->string('payment_method_no');
+            // $table->string('trans_no');
+
             $table->timestamps();
         });
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\ReleseFund;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\ReleseFund;
+use Exception;
 
 class ReleseFundController extends Controller
 {
@@ -14,7 +16,8 @@ class ReleseFundController extends Controller
      */
     public function index()
     {
-        return view('relese-fund.create');
+        $fund=ReleseFund::all();
+        return view('relese-fund.create',compact('fund'));
     }
 
     /**
@@ -22,9 +25,29 @@ class ReleseFundController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+    // dd($request->all());
+
+      
+           
+               $fund=new ReleseFund;
+             
+               $fund->date=$request->date;
+               $fund->transaction_no=$request->transaction_no;
+               $fund->payment_method=$request->payment_method;
+           
+                $fund->transtation_date=$request->transtation_date;
+               $fund->payment_method_no=$request->payment_method_no;
+            
+       
+               $fund->save();
+               return redirect(route('relesefund.create'))->with('success','Created Successfully');
+        
+        // dd($request->all());
+   
+        
+
     }
 
     /**
@@ -57,7 +80,15 @@ class ReleseFundController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $releseFund=ReleseFund::find($id);
+            return view('relese-fund.edit',compact('releseFund'));
+        } catch (Exception $e){
+
+            return ["message" => $e->getMessage(),
+                "status" => $e->getCode()
+            ];
+        }
     }
 
     /**
@@ -69,7 +100,25 @@ class ReleseFundController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $releseFund=ReleseFund::find($id);
+            $releseFund->date=$request->date;
+            $releseFund->transaction_no=$request->transaction_no;
+            $releseFund->payment_method=$request->dapayment_methodte;
+            
+            $releseFund->payment_method_no=$request->payment_method_no;
+            $releseFund->transtation_date=$request->transtation_date;
+            
+
+            $releseFund->save();
+            return redirect(round('relesefund.index'))->with('success','Update Successfully');
+ 
+        } catch (Exception $e){
+
+            return ["message" => $e->getMessage(),
+                "status" => $e->getCode()
+            ];
+        }
     }
 
     /**
@@ -80,6 +129,14 @@ class ReleseFundController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            ReleseFund::destroy($id);
+            return redirect(route('relesefund.index'))->with('success','Delete Successfully');
+        } catch (Exception $e){
+
+            return ["message" => $e->getMessage(),
+                "status" => $e->getCode()
+            ];
+        }
     }
 }
