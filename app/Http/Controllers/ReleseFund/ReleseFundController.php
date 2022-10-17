@@ -103,26 +103,28 @@ class ReleseFundController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // try {
+        try {
             $fund=ReleseFund::find($id);
             $fund->date=$request->date;
             $fund->transaction_no=$request->transaction_no;
             $fund->payment_method=$request->payment_method;
-            
-            $fund->payment_method_no=$request->payment_method_no;
+        
             $fund->transtation_date=$request->transtation_date;
-            
-
+            $fund->payment_method_no=$request->payment_method_no;
+         
+    
             $fund->save();
             return redirect(route('relesefund.index'))
             ->with('success','Update Successfully');
- 
-        // } catch (Exception $e){
+        } catch (Exception $e){
 
-        //     return ["message" => $e->getMessage(),
-        //         "status" => $e->getCode()
-        //     ];
-        // }
+            return ["message" => $e->getMessage(),
+                "status" => $e->getCode()
+            ];
+        }
+            
+ 
+        
     }
 
     /**

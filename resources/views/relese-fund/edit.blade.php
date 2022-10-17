@@ -13,7 +13,8 @@
         <div class="card-body" >
             <div class="container" >
                 <form action=" " method="POST">
-            @method('PUT')
+                 @method('PUT')
+                 @csrf
               <div class="row">
                 <div class="col">
                     <label for="datfilde">Date</label>
@@ -29,48 +30,58 @@
                 <div class="col">
                     <label for="faculty_designation">Payment Recive Method<span class="required" style="color: red;">*</span></label>
                     <div>
-                       
-                       <select value=" {{$releseFund->payment_method}} " name="payment_method" class="form-select" aria-label="Default select example" id="selector" onchange="yesnoCheck(this);">
-                           <option   value="select">_Select payment mathod_</option>
-                           <option   name="payment_method"  value="cHECK" >Check</option>
-                           <option  name="payment_method"   value="nEFT">NEFT</option>
-                           {{-- <option   name="payment_method"  value="cHECK" >Check</option> --}}
+
+                       <select  name="payment_method"  class="form-select" aria-label="Default select example" id="selector" value="{{$releseFund->payment_method}}" onchange="yesnoCheck(this);">
+                           <option   value="select">Select payment mathod</option>
+                           <option   value="CHECK">Check</option>
+                           <option   value="NEFT">NEFT</option>
                        </select>
                    </div>
-
-                   <div id="check" style="display: none;" class="mt-2">
+                
+                   <div id="input" style="display: none;" class="mt-2">
                      <div class="row">
                        <div class="col">
-                           <label for="payment_method_no">Enter Check No.</label> 
-                       <input class="form-control" type="text" value="{{$releseFund->payment_method_no}}" id="payment_method_no" name="transtation_date" />
+                           <!-- <label for="payment_method_no">Enter Check No.</label>  -->
+                       <input class="form-control" type="text" id="payment_method_no" value=" {{$releseFund->payment_method_no}} " name="payment_method_no" placeholder="Enter payment Method No"/>
                        </div>
                        <div class="col">
-                              <label for="transtation_date">Enter Transeation Date</label> 
-                       <input class="form-control" type="text" value="{{$releseFund->transtation_date}}" id="transtation_date" name="payment_method_no" />
+                              <!-- <label for="transtation_date">Enter  Date</label>  -->
+                       <input class="form-control" type="text" id="transtation_date" value=" {{$releseFund->transtation_date}} " name="transtation_date" />
                        </div>
                      </div>
                    </div>
-                 <div id="neft" style="display: none;" class="mt-2">
-                 <div class="row">
-                     <div class="col">
-                        <label for="payment_method_no">Enter Transeation No.</label> 
-                     <input class="form-control"type="text" id="payment_method_no" value="{{$releseFund->payment_method_no}}" name="payment_method_no" />
-                     </div>
-                     <div class="col">
-                         <label for="transtation_date">Enter Transeation Date</label> 
-                     <input class="form-control" type="text" value="{{$releseFund->transtation_date}}" id="transtation_date" name="transtation_date" />
-                     </div>
-                 </div>
 
-                 <!-- <label for="pan">Enter Pan Card No.</label> 
-                 <input type="text" id="pan" name="pan" /><br /> -->
-                 </div><div class="mt-4 my-3">
-                <button type="submit" class="btn btn-primary float-end">Update</button>
+                   <div id="neft" style="display: none;" class="mt-2">
+                      <div class="row">
+                        <div class="col">
+                            <label for="payment_method_no">Enter Check No.</label>
+                        </div>
+                        <div class="col">
+                             <label for="transtation_date">Enter  Date</label>
+                        </div>
+                      </div>
+                   </div>
 
-              </div>
+                   <div id="neft" style="display: none;" class="mt-2">
+                       <div class="row">
+                        <div class="col">
+                            <label >Enter Transeation No.</label>
+                        </div>
+                        <div class="col">
+                            <label>Enter Transeation Date</label>
+                        </div>
+                       </div>
+                   </div>
+
+                 
+                </div>
+            </div>
                 </div>
               </div>
-              
+              <div class="mt-2 my-2 mx-4">
+                <button type="submit" class="btn btn-primary float-end">Update changes</button>
+
+              </div>
 
             </form>
             </div>
@@ -80,25 +91,25 @@
    </div>
    @section('script')
    <script>
-  function yesnoCheck(that) 
+ function yesnoCheck(that) 
 {
-   if (that.value == "cHECK") 
-   {
-       document.getElementById("check").style.display = "block";
-   }
-   else
-   {
-       document.getElementById("check").style.display = "none";
-   }
-   if (that.value == "nEFT")
-   {
-       document.getElementById("neft").style.display = "block";
-   }
-   else
-   {
-       document.getElementById("neft").style.display = "none";
-   }
-  
+    if (that.value == "CHECK") 
+    {
+        document.getElementById("check" && "input").style.display = "block";
+    }
+    else
+    {
+        document.getElementById("check" && "input").style.display = "none";
+    }
+    if (that.value == "NEFT")
+    {
+        document.getElementById("neft" && "input").style.display = "block";
+    }
+    else
+    {
+        document.getElementById("neft" ).style.display = "none";
+    }
+   
 }
        </script>
    @endsection 
