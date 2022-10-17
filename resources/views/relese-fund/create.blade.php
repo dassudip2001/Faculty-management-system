@@ -56,25 +56,48 @@
                                         <div>
 
                                            <select  name="payment_method" class="form-select" aria-label="Default select example" id="selector" onchange="yesnoCheck(this);">
-                                               <option   value="select">_Select payment mathod_</option>
+                                               <option   value="select">Select payment mathod</option>
                                                <option   value="CHECK">Check</option>
                                                <option   value="NEFT">NEFT</option>
                                            </select>
                                        </div>
-
-                                       <div id="check" style="display: none;" class="mt-2">
+                                    
+                                       <div id="input" style="display: none;" class="mt-2">
                                          <div class="row">
                                            <div class="col">
-                                               <label for="payment_method_no">Enter Check No.</label> 
-                                           <input class="form-control" type="text" id="payment_method_no" name="payment_method_no" />
+                                               <!-- <label for="payment_method_no">Enter Check No.</label>  -->
+                                           <input class="form-control" type="text" id="payment_method_no" name="payment_method_no" placeholder="Enter payment Method No"/>
                                            </div>
                                            <div class="col">
-                                                  <label for="transtation_date">Enter  Date</label> 
+                                                  <!-- <label for="transtation_date">Enter  Date</label>  -->
                                            <input class="form-control" type="date" id="transtation_date" name="transtation_date" />
                                            </div>
                                          </div>
                                        </div>
-                                     <div id="neft" style="display: none;" class="mt-2">
+
+                                       <div id="neft" style="display: none;" class="mt-2">
+                                          <div class="row">
+                                            <div class="col">
+                                                <label for="payment_method_no">Enter Check No.</label>
+                                            </div>
+                                            <div class="col">
+                                                 <label for="transtation_date">Enter  Date</label>
+                                            </div>
+                                          </div>
+                                       </div>
+
+                                       <div id="neft" style="display: none;" class="mt-2">
+                                           <div class="row">
+                                            <div class="col">
+                                                <label >Enter Transeation No.</label>
+                                            </div>
+                                            <div class="col">
+                                                <label>Enter Transeation Date</label>
+                                            </div>
+                                           </div>
+                                       </div>
+
+                                     <!-- <div id="neft" style="display: none;" class="mt-2">
                                      <div class="row">
                                          <div class="col">
                                             <label for="payment_method_no">Enter Transeation No.</label> 
@@ -84,11 +107,11 @@
                                              <label for="transtation_date">Enter Transeation Date</label> 
                                          <input class="form-control" type="date" id="transtation_date" name="transtation_date" />
                                          </div>
-                                     </div>
+                                     </div> -->
 
                                      <!-- <label for="pan">Enter Pan Card No.</label> 
                                      <input type="text" id="pan" name="pan" /><br /> -->
-                                     </div>
+                                     <!-- </div> -->
                                     </div>
                                 </div>
                                 {{--  --}}
@@ -171,19 +194,19 @@
 {
     if (that.value == "CHECK") 
     {
-        document.getElementById("check").style.display = "block";
+        document.getElementById("check" && "input").style.display = "block";
     }
     else
     {
-        document.getElementById("check").style.display = "none";
+        document.getElementById("check" && "input").style.display = "none";
     }
     if (that.value == "NEFT")
     {
-        document.getElementById("neft").style.display = "block";
+        document.getElementById("neft" && "input").style.display = "block";
     }
     else
     {
-        document.getElementById("neft").style.display = "none";
+        document.getElementById("neft" ).style.display = "none";
     }
    
 }

@@ -35,7 +35,7 @@
                       <select name="" class="form-select form-select-sm" aria-label=".form-select-sm example">
                           <option selected hidden>Select Project</option>
                           @foreach ($amountCal as $funding)
-                              <option value="{{$funding->id}}">Project No-{{$funding->project_no}}-Project Title-{{$funding->project_title}}-Project Duration-{{$funding->project_duration}}
+                              <option value="{{$funding->id}}">Project No-{{$funding->project_no}}-Project Title-{{$funding->project_title}}-Project Duration-{{$funding->project_duration}}--{{$funding->budget_title}}--{{$funding->budget_details_amount}}
                               </option>
                           @endforeach
                       </select>
@@ -45,25 +45,27 @@
                    <div class="row">
                     <div class="col-sm-6">
                       {{-- Budget Name --}}
-                      <label for="budget_title">Budget Name<span class="required" style="color: red;">*</span></label>
-                           <input type="text" class="form-control form-control-sm" name="budget_title" value=" {{$funding->budget_title}} " id="budget_title" aria-describedby="budget_title" placeholder="Enter  Faculty Title">  
-
+                      <label for="budget_name">Budget Name<span class="required" style="color: red;">*</span></label>
                       <br>
-                      {{-- <select name="" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                      <select name="" class="form-select form-select-sm" aria-label=".form-select-sm example">
                           <option selected hidden>Select Budget Name</option>
                           {{-- @foreach ($data as $funding) --}}
                               {{-- <option value="{{$funding->id}}">{{$funding->agency_name}} --}}
-                              {{-- </option> --}}
+                              </option>
                           {{-- @endforeach --}}
-                      {{-- </select> --}} 
+                      </select>
                     </div>
                     <div class="col-sm-6">
                       {{-- budget Amount --}}
-                      <label for="budget_details_amount"> Budget Amount<span class="required" style="color: red;">*</span></label>
-                      <input type="text" class="form-control form-control-sm" name="budget_details_amount" value=" {{$funding->budget_details_amount}} " id="budget_details_amount" aria-describedby="budget_details_amount" placeholder="Enter  Faculty Title">  
-
+                      <label for="project_name"> Budget Amount<span class="required" style="color: red;">*</span></label>
                       <br>
-                     
+                      <select name="" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                          <option selected hidden>Select Budget Amount</option>
+                          {{-- @foreach ($data as $funding) --}}
+                              {{-- <option value="{{$funding->id}}">{{$funding->agency_name}} --}}
+                              </option>
+                          {{-- @endforeach --}}
+                      </select>
                     </div>
                    </div>
                   
