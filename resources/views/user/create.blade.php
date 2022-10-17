@@ -120,7 +120,7 @@
                <!-- Faculty Join Date -->
                <div class="mb-6">
                 <label for="faculty_join">Faculty Join<span class="required" style="color: red;">*</span></label>
-                <input type="text" class="form-control form-control-sm @error('fac_join') is-invalid @enderror" name="fac_join"  id="from-datepicker" aria-describedby="faculty_join" placeholder="Enter  Faculty Join" checked>
+                <input type="date" class="form-control form-control-sm @error('fac_join') is-invalid @enderror" name="fac_join"  id="from-datepicker" aria-describedby="faculty_join" placeholder="Enter  Faculty Join" checked>
               </div>
               @error('fac_join')
                  <div class="alert alert-danger">{{ $message }}</div>
@@ -132,7 +132,7 @@
                 <!-- Faculty Retirement Date -->
                 <div class="mb-6">
                 <label for="faculty_retirement">Faculty Retirement<span class="required" style="color: red;">*</span></label>
-                <input type="text" class="form-control form-control-sm @error('fac_retirement') is-invalid @enderror" name="fac_retirement"  id="from-datepicker" aria-describedby="faculty_retirement" placeholder="Enter  Faculty Retirement">
+                <input type="date" class="form-control form-control-sm @error('fac_retirement') is-invalid @enderror" name="fac_retirement"  id="from-datepicker" aria-describedby="faculty_retirement" placeholder="Enter  Faculty Retirement">
               </div>
               @error('fac_retirement')
                  <div class="alert alert-danger">{{ $message }}</div>

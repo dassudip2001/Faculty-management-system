@@ -80,15 +80,18 @@ class ReleseFundController extends Controller
      */
     public function edit($id)
     {
-        try {
-            $releseFund=ReleseFund::find($id);
-            return view('relese-fund.edit',compact('releseFund'));
-        } catch (Exception $e){
+            $releseFund= ReleseFund::find($id);
 
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
+        return view('relese-fund.edit',compact('releseFund'));
+        // try {
+        //     $releseFund=ReleseFund::find($id);
+        //     return view('relese-fund.edit',compact('releseFund'));
+        // } catch (Exception $e){
+
+        //     return ["message" => $e->getMessage(),
+        //         "status" => $e->getCode()
+        //     ];
+        // }
     }
 
     /**
@@ -100,25 +103,26 @@ class ReleseFundController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
-            $releseFund=ReleseFund::find($id);
-            $releseFund->date=$request->date;
-            $releseFund->transaction_no=$request->transaction_no;
-            $releseFund->payment_method=$request->dapayment_methodte;
+        // try {
+            $fund=ReleseFund::find($id);
+            $fund->date=$request->date;
+            $fund->transaction_no=$request->transaction_no;
+            $fund->payment_method=$request->payment_method;
             
-            $releseFund->payment_method_no=$request->payment_method_no;
-            $releseFund->transtation_date=$request->transtation_date;
+            $fund->payment_method_no=$request->payment_method_no;
+            $fund->transtation_date=$request->transtation_date;
             
 
-            $releseFund->save();
-            return redirect(round('relesefund.index'))->with('success','Update Successfully');
+            $fund->save();
+            return redirect(route('relesefund.index'))
+            ->with('success','Update Successfully');
  
-        } catch (Exception $e){
+        // } catch (Exception $e){
 
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
+        //     return ["message" => $e->getMessage(),
+        //         "status" => $e->getCode()
+        //     ];
+        // }
     }
 
     /**

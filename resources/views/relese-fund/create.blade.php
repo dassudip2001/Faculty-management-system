@@ -41,7 +41,7 @@
                                     <div class="col">
                                         {{-- date --}}
                                         <label for="datfilde">Date<span class="required" style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm " name="date"  id="datefild" aria-describedby="datefild" placeholder="Enter Date" require>
+                                        <input type="date" class="form-control form-control-sm " name="date"  id="datefild" aria-describedby="datefild" placeholder="Enter Date" require>
                                     </div>
                                     <div class="col">
                                         {{-- Transtation no --}}
@@ -57,8 +57,8 @@
 
                                            <select  name="payment_method" class="form-select" aria-label="Default select example" id="selector" onchange="yesnoCheck(this);">
                                                <option   value="select">_Select payment mathod_</option>
-                                               <option   name="payment_method"  value="cHECK">Check</option>
-                                               <option  name="payment_method"   value="nEFT">NEFT</option>
+                                               <option   value="CHECK">Check</option>
+                                               <option   value="NEFT">NEFT</option>
                                            </select>
                                        </div>
 
@@ -66,11 +66,11 @@
                                          <div class="row">
                                            <div class="col">
                                                <label for="payment_method_no">Enter Check No.</label> 
-                                           <input class="form-control" type="text" id="payment_method_no" name="transtation_date" />
+                                           <input class="form-control" type="text" id="payment_method_no" name="payment_method_no" />
                                            </div>
                                            <div class="col">
-                                                  <label for="transtation_date">Enter Transeation Date</label> 
-                                           <input class="form-control" type="text" id="transtation_date" name="payment_method_no" />
+                                                  <label for="transtation_date">Enter  Date</label> 
+                                           <input class="form-control" type="date" id="transtation_date" name="transtation_date" />
                                            </div>
                                          </div>
                                        </div>
@@ -82,7 +82,7 @@
                                          </div>
                                          <div class="col">
                                              <label for="transtation_date">Enter Transeation Date</label> 
-                                         <input class="form-control" type="text" id="transtation_date" name="transtation_date" />
+                                         <input class="form-control" type="date" id="transtation_date" name="transtation_date" />
                                          </div>
                                      </div>
 
@@ -110,9 +110,7 @@
     </div>
     <div class="card-title mx-3">
 
-            {{-- card body --}}
-            <h6>Show Relese Funding</h6>
-            <hr>  
+
             @if(session('success'))
             <div class="alert alert-primary" role="alert">
                 {{session('success')}}
@@ -171,7 +169,7 @@
     <script>
             function yesnoCheck(that) 
 {
-    if (that.value == "cHECK") 
+    if (that.value == "CHECK") 
     {
         document.getElementById("check").style.display = "block";
     }
@@ -179,7 +177,7 @@
     {
         document.getElementById("check").style.display = "none";
     }
-    if (that.value == "nEFT")
+    if (that.value == "NEFT")
     {
         document.getElementById("neft").style.display = "block";
     }
@@ -189,6 +187,7 @@
     }
    
 }
+
         </script>
     @endsection 
 </x-admin-layout>
