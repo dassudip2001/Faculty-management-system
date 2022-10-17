@@ -164,17 +164,21 @@ class ProjectDetailsController extends Controller
      */
     public function edit(int $id)
     {
+        $projectDetail= DB::table('project_details')
+        ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+        ->join('projects','projects.id',"=",'project_details.project_id')
+        ->get();
 
-        $projectDetail=Project::with([           
-             'fundingagency'=>function($q){
-                    $q->select(['id','agency_name']);
-                     },
-                'createuser'=>function($q){
-                $q->select(['id']);
-                 },           
-        ]
+        // $projectDetail=Project::with([           
+        //      'fundingagency'=>function($q){
+        //             $q->select(['id','agency_name']);
+        //              },
+        //         'createuser'=>function($q){
+        //         $q->select(['id']);
+        //          },           
+        // ]
 
-        )->find($id);
+        // )->find($id);
         
         return view('projectdetails.edit',compact('projectDetail'))
                 ->with('success','Project Update Successfully');
@@ -284,8 +288,8 @@ class ProjectDetailsController extends Controller
      */
     public function destroy($id)
     {
-//        abort_unless(auth()->user()->can('delete_project'),
-//            403,'you dont have required authorization to this resource');
+       abort_unless(auth()->user()->can('delete_project'),
+           403,'you dont have required authorization to this resource');
 
         try {
             // $pc=ProjectDetails::find($id)->project_id;

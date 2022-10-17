@@ -9,10 +9,19 @@
 * show and update multiple table->done
 * 1.user can edit his own  profile and change password and read other user details->done
 
+
+
+
+---------------- upload -------------------
+* upload --->done
+-------------------DONE------------------------
+* fund release 
+     - CURD OPERATION
+----------------Done-------------------     -------------------------------------
 ------------------- project------------------
-* create-----done
+* create----->done
 * edit 
-* delete
+* delete----->done
 -----------------------------------------
 
 ---------------- project budget amount ---------
@@ -21,9 +30,3 @@
 * edit 
 * delete
 -------------------------------------------
----------------- upload -------------------
-* upload --->done
--------------------DONE------------------------
-* fund release 
-     - CURD OPERATION
------------------------------------     -------------------------------------

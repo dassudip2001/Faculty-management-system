@@ -13,13 +13,13 @@
                          <div class="modal-body">
                             <!-- form Start -->
                          <form action="" method="POST" name="budgetForm">
-                            @csrf
                             @method('PUT')
+                            @csrf
                             <div class="row g-2">
                                 <div class="col-md">
                                     <div >
                                         <label for="name">Project No<span class="required" style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm" name="project_no" id="project_no" value=" { " aria-describedby="project_no" placeholder="Enter Project No">
+                                        <input type="text" class="form-control form-control-sm" name="project_no" id="project_no" value=" " aria-describedby="project_no" placeholder="Enter Project No">
                                     </div>
                                 </div>
                                 <div class="col-md">
