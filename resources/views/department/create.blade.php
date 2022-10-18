@@ -29,6 +29,7 @@
           @csrf
             <div class="card-title mx-2 mt-2">
                 <h6>Department Form<span class="required" style="color: red;">*</span></h6>
+               
             </div>
             <hr>
             <div class="card-body">
@@ -73,6 +74,7 @@
       <div class="card max-h-96">
         <div class="card-title mx-2 mt-2">
             <h6>Department Details</h6>
+            <a href="{{ url('/department/download') }}">Print</a>
         </div>
         <!-- <div class="card-body"> -->
          <!-- output -->
@@ -87,6 +89,7 @@
               <th>Description</th>
               @role('admin')
               <th>Action</th>
+              {{-- <th>print</th> --}}
               @endrole
             </tr>
            </thead>
@@ -98,6 +101,8 @@
              <td> {{$item->dept_name}}</td>
              <td> {{$item->dept_code}}</td>
              <td> {{$item->description}}</td>
+             {{-- <td>{{ $item->jdcontent }} --}}
+            </td>
              <td>
               @role('admin')
              <a href=" {{ url('/department/edit',$item->id) }} ">
@@ -108,6 +113,7 @@
              @endrole
              </td>
                 </a>
+              
 
           </tr>
           @endforeach

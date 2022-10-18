@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Department;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+
+
+use PDF;
 class DepartmentController extends Controller
 {
     /**
@@ -33,6 +37,7 @@ class DepartmentController extends Controller
      */
     public function create(Request $request)
     {
+        // print_r($request->all());
         abort_unless(auth()->user()->can('create_department'),403,'you dont have required authorization to this resource');
 //        try {
         $request->validate([
@@ -168,5 +173,10 @@ class DepartmentController extends Controller
             ];
         }
 
+    }
+    public function pdf(){
+         $department=Department::all();
+         $pdf=PDF::loadView('department.pdf',compact('department'));
+         return $pdf->download('department.pdf');
     }
 }

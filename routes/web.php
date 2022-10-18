@@ -66,7 +66,11 @@ require __DIR__.'/auth.php';
     Route::post('/department',[DepartmentController::class,'create'])->name('create')->middleware(['auth','role:admin']);
     Route::get('/department/edit/{id}',[DepartmentController::class,'edit'])->name('edit')->middleware(['auth','role:admin']);
     Route::put('/department/edit/{id}',[DepartmentController::class,'update'])->name('update')->middleware(['auth','role:admin']);
-    Route::delete('/department/delete/{id}',[DepartmentController::class,'destroy'])->name('destroy')->middleware(['auth','role:admin']);
+    Route::get('/department/delete/{id}',[DepartmentController::class,'destroy'])->name('destroy')->middleware(['auth','role:admin']);
+    // download pdf
+    Route::get('/department/download',[DepartmentController::class,'pdf'])->name('pdf');
+
+
 
 // Faculty Routes
    Route::get('/faculty',[FacultyController::class,'index'])->name('faculty.index');
