@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ReleseFund;
 use Exception;
-
+use PDF;
 class ReleseFundController extends Controller
 {
     /**
@@ -27,26 +27,24 @@ class ReleseFundController extends Controller
      */
     public function create(Request $request)
     {
-    // dd($request->all());
-
-      
-           
+        abort_unless(auth()->user()->can('create_relese_fund'),403,'you dont have required authorization to this resource');
+            
                $fund=new ReleseFund;
-             
+
                $fund->date=$request->date;
                $fund->transaction_no=$request->transaction_no;
                $fund->payment_method=$request->payment_method;
-           
+
                 $fund->transtation_date=$request->transtation_date;
                $fund->payment_method_no=$request->payment_method_no;
-            
-       
+
+
                $fund->save();
                return redirect(route('relesefund.create'))->with('success','Created Successfully');
+
         
-        // dd($request->all());
-   
-        
+
+
 
     }
 
@@ -108,11 +106,11 @@ class ReleseFundController extends Controller
             $fund->date=$request->date;
             $fund->transaction_no=$request->transaction_no;
             $fund->payment_method=$request->payment_method;
-        
+
             $fund->transtation_date=$request->transtation_date;
             $fund->payment_method_no=$request->payment_method_no;
-         
-    
+
+
             $fund->save();
             return redirect(route('relesefund.index'))
             ->with('success','Update Successfully');
@@ -122,9 +120,9 @@ class ReleseFundController extends Controller
                 "status" => $e->getCode()
             ];
         }
-            
- 
-        
+
+
+
     }
 
     /**
@@ -144,5 +142,18 @@ class ReleseFundController extends Controller
                 "status" => $e->getCode()
             ];
         }
+    }
+
+    // pdf generate all pdf
+    public function pdf(){
+        $releseFund=ReleseFund::all();
+        $pdf=PDF::loadView('relese-fund.pdf',compact('releseFund'));
+        return $pdf->download('fund.pdf');
+    }
+    // generate pdf one row
+    public function pdfForm(Request $request,$id){
+        $releseFund1 = ReleseFund::all()->where('id', $id);
+        $pdf=PDF::loadView('relese-fund.pdf_download',compact('releseFund1'));
+        return $pdf->download('funding.pdf');
     }
 }

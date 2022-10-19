@@ -73,8 +73,8 @@
     <div class="col">
       <div class="card max-h-96">
         <div class="card-title mx-2 mt-2">
+            <a class="  float-end" href="{{ url('/department/download') }}"><i class="fa-solid fa-print"></i>Print All</a>
             <h6>Department Details</h6>
-            <a href="{{ url('/department/download') }}">Print</a>
         </div>
         <!-- <div class="card-body"> -->
          <!-- output -->
@@ -89,7 +89,7 @@
               <th>Description</th>
               @role('admin')
               <th>Action</th>
-              {{-- <th>print</th> --}}
+              <th>print</th>
               @endrole
             </tr>
            </thead>
@@ -113,7 +113,12 @@
              @endrole
              </td>
                 </a>
-              
+              <td>
+                <a href=" {{ url('/department/pdfForm',$item->id) }} ">
+                  <i class="fa-regular fa-solid fa-print"></i>
+                 </a>
+                
+              </td>
 
           </tr>
           @endforeach

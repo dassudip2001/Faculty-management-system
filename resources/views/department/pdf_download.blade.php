@@ -16,12 +16,13 @@
    </style>
     <table>
         
-          @foreach ($department as $item)
+          @foreach ($department1 as $item)
            <tr>
              <td>{{$item->id}}</td>
              <td> {{$item->dept_name}}</td>
              <td> {{$item->dept_code}}</td>
              <td> {{$item->description}}</td>
+            
           </tr>
           @endforeach
     </table>
