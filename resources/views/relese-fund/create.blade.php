@@ -6,6 +6,9 @@
     </x-slot>
     {{-- script add   for drop down --}}
     <script src="{{ asset('js/relese.js') }}" defer></script>
+    {{-- css --}}
+    <link rel="stylesheet" href="{{ asset('css/relesefund.css') }}">
+
     {{-- main code  --}}
    <div class="card mt-4 mx-2">
     <div class="card-title mt-2 mx-2">
@@ -13,7 +16,9 @@
        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Add New
        </button>
-       <h6 class="mt-2">Relese Fund</h6>
+       <a class=" mx-4 mt-2  float-end" href="{{ url('/relesefund/download') }}"><i class="fa-solid fa-print"></i>Print All</a>
+       <h6 class="mt-2">Relese Fund </h6>
+
        <hr>
         
         <!-- Modal -->
@@ -30,6 +35,7 @@
                        
                         <div class="card-title mt-2 mx-2">
                             <h6>Fund Relese Form</h6>
+
                             <hr>
                         </div>
                         <div class="card-body">
@@ -159,6 +165,8 @@
                 <th>No</th>
                 <th>Transtation  Date</th>
                 <th>Action</th>
+                <th>Print</th>
+
              </tr>
             </thead>
             <tbody>
@@ -181,6 +189,11 @@
                               </i>
                             </button>
                                 </a>
+                    </th>
+                    <th>
+                        <a href=" {{ url('/relesefund/pdfForm',$trans->id) }} ">
+                            <i class="fa-regular fa-solid fa-print"></i>
+                           </a>
                     </th>
                 </tr>
             </tbody>

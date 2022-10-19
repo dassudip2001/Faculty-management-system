@@ -12,6 +12,7 @@ use App\Models\CreateUser;
 use App\Models\BudgetDetails;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use PDF;
 class ProjectDetailsController extends Controller
 {
     /**
@@ -21,10 +22,23 @@ class ProjectDetailsController extends Controller
      */
     public function index()
     {
-        $projectDetail= DB::table('project_details')
+        // $projectDetail= 
+        $projectDetail=  DB::table('project_details')
         // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
         ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
         ->join('projects','projects.id',"=",'project_details.project_id')
+        ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+        // ->join('faculties','faculties.id',"=",'create_users.faculty_id')
+        //     ->join('users','users.id',"=",'create_users.user_id')
+        //     ->join('departments','departments.id','=','create_users.department_id')
+        // ->join('users','users.id',"=",'project_details.user_id')
+        // ->join('users','user.id',"=",'project_details.project_id')
+        // ->join (DB::table('create_users'))
+        // ->join('faculties','faculties.id',"=",'create_users.faculty_id')
+        // ->join('users','users.id',"=",'create_users.user_id')
+        // ->join('departments','departments.id','=','create_users.department_id')
+        
+
         // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
         ->get();
         // $projectDetail=ProjectDetails::all();
@@ -307,5 +321,34 @@ class ProjectDetailsController extends Controller
             ];
         }
         //
+    }
+
+      // pdf generate all pdf
+      public function pdf(){
+        $createUser=DB::table('project_details')
+        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
+        ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+        ->join('projects','projects.id',"=",'project_details.project_id')
+        ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+        // ->join('users','user.id',"=",'project_details.project_id')
+
+        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+        ->get();
+        $pdf=PDF::loadView('projectdetails.print',compact('createUser'));
+        return $pdf->download('project.pdf');
+   }
+    // generate pdf one row
+    public function pdfForm(Request $request,$id){
+    $createUser1 =DB::table('project_details')
+    // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
+    ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+    ->join('projects','projects.id',"=",'project_details.project_id')
+    ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+    // ->join('users','user.id',"=",'project_details.project_id')
+
+    // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+    ->get()->where('id', $id);  
+    $pdf=PDF::loadView('projectdetails.pdf_download',compact('createUser1'));
+    return $pdf->download('project.pdf');
     }
 }

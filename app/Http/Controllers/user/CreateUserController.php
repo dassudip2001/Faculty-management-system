@@ -13,7 +13,7 @@ use App\Models\User;
 use App\Models\CreateUser;
 use Database\Seeders\AdminSeeder;
 use Exception;
-
+use PDF;
 
 class CreateUserController extends Controller
 {
@@ -293,5 +293,19 @@ class CreateUserController extends Controller
                 "status" => $e->getCode()
             ];
         }
+    }
+
+
+      // pdf generate all pdf
+      public function pdf(){
+        $createUser=CreateUser::all();
+        $pdf=PDF::loadView('user.print',compact('createUser'));
+        return $pdf->download('user.pdf');
+   }
+    // generate pdf one row
+    public function pdfForm(Request $request,$id){
+    $createUser1 = CreateUser::all()->where('id', $id);  
+    $pdf=PDF::loadView('user.pdf_download',compact('createUser1'));
+    return $pdf->download('user.pdf');
     }
 }

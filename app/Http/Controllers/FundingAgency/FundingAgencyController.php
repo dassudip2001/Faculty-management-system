@@ -7,6 +7,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\FundingAgency;
 use Exception;
+use PDF;
 
 class FundingAgencyController extends Controller
 {
@@ -144,5 +145,18 @@ class FundingAgencyController extends Controller
                 "status" => $e->getCode()
             ];
         }
+    }
+
+     // pdf generate all pdf
+     public function pdf(){
+        $fundingAgency=FundingAgency::all();
+        $pdf=PDF::loadView('funding.print',compact('fundingAgency'));
+        return $pdf->download('funding.pdf');
+   }
+    // generate pdf one row
+    public function pdfForm(Request $request,$id){
+    $fundingAgency1 = FundingAgency::all()->where('id', $id);  
+    $pdf=PDF::loadView('funding.pdf_download',compact('fundingAgency1'));
+    return $pdf->download('funding.pdf');
     }
 }

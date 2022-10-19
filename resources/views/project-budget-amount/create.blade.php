@@ -30,15 +30,15 @@
                    <div class="row">
                     <div class="col-sm-12">
                       {{-- project name --}}
-                      <label for="project_name">Project Details<span class="required" style="color: red;">*</span></label>
+                      {{-- <label for="project_name">Project Details<span class="required" style="color: red;">*</span></label>
                       <br>
                       <select name="" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                          <option selected hidden>Select Project</option>
-                          @foreach ($amountCal as $funding)
-                              <option value="{{$funding->id}}">Project No-{{$funding->project_no}}-Project Title-{{$funding->project_title}}-Project Duration-{{$funding->project_duration}}--{{$funding->budget_title}}--{{$funding->budget_details_amount}}
-                              </option>
-                          @endforeach
-                      </select>
+                        <option selected hidden>Select Project</option>
+                        @foreach ($amountCal as $funding)
+                            <option value="{{$funding->id}}">Project No-{{$funding->project_no}}-Project Title-{{$funding->project_title}}-Project Duration-{{$funding->project_duration}}--{{$funding->budget_title}}--{{$funding->budget_details_amount}}
+                            </option>
+                        @endforeach
+                    </select> --}}
                     </div>
                     
                    </div>
@@ -57,18 +57,57 @@
                     </div>
                     <div class="col-sm-6">
                       {{-- budget Amount --}}
-                      <label for="project_name"> Budget Amount<span class="required" style="color: red;">*</span></label>
+                      {{-- <label for="project_name"> Budget Amount<span class="required" style="color: red;">*</span></label>
                       <br>
                       <select name="" class="form-select form-select-sm" aria-label=".form-select-sm example">
                           <option selected hidden>Select Budget Amount</option>
                           {{-- @foreach ($data as $funding) --}}
                               {{-- <option value="{{$funding->id}}">{{$funding->agency_name}} --}}
-                              </option>
+                              {{-- </option> --}}
                           {{-- @endforeach --}}
-                      </select>
+                      {{-- </select> --}} 
                     </div>
                    </div>
-                  
+                  {{-- start dropdown --}}
+                  <div class="form-group mb-3">
+                    <label for="project_name">Project Details<span class="required" style="color: red;">*</span></label>
+                    
+                    <select  id="project-dropdown" class="form-control">
+
+                        <option value="">-- Select Project --</option>
+
+                        @foreach ($amountCal as $data)
+
+                        <option value="{{$data->id}}">
+
+                            {{$data->project_no}} {{$data->project_title}}
+
+                        </option>
+
+                        @endforeach
+
+                    </select>
+
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="budget_name">Budget Name<span class="required" style="color: red;">*</span></label>
+                   
+                    <select id="state-dropdown" class="form-control">
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                  <label for="project_name"> Budget Amount<span class="required" style="color: red;">*</span></label>
+                    
+                    <select id="city-dropdown" class="form-control">
+
+                    </select>
+
+                </div>
+                  {{-- end drop down --}}
                    </div>
                    <hr>
                    <div class="card">
@@ -196,6 +235,123 @@
                       }
                     });
                   });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+
+
+        /*------------------------------------------
+
+        --------------------------------------------
+
+         Dropdown Change Event
+
+        --------------------------------------------
+
+        --------------------------------------------*/
+
+        $('#project-dropdown').on('change', function () {
+
+            var idproject = this.value;
+
+            $("#state-dropdown").html('');
+
+            $.ajax({
+
+                url: "{{url('api/fetch-states')}}",
+
+                type: "POST",
+
+                data: {
+
+                    project_id: idproject,
+
+                    _token: '{{csrf_token()}}'
+
+                },
+
+                dataType: 'json',
+
+                success: function (result) {
+
+                    $('#state-dropdown').html('<option value="">-- Select State --</option>');
+
+                    $.each(result.states, function (key, value) {
+
+                        $("#state-dropdown").append('<option value="' + value
+
+                            .id + '">' + value.name + '</option>');
+
+                    });
+
+                    $('#city-dropdown').html('<option value="">-- Select City --</option>');
+
+                }
+
+            });
+
+        });
+
+
+
+        /*------------------------------------------
+
+        --------------------------------------------
+
+         Dropdown Change Event
+
+        --------------------------------------------
+
+        --------------------------------------------*/
+
+        $('#state-dropdown').on('change', function () {
+
+            var idState = this.value;
+
+            $("#city-dropdown").html('');
+
+            $.ajax({
+
+                url: "{{url('api/fetch-cities')}}",
+
+                type: "POST",
+
+                data: {
+
+                    state_id: idState,
+
+                    _token: '{{csrf_token()}}'
+
+                },
+
+                dataType: 'json',
+
+                success: function (res) {
+
+                    $('#city-dropdown').html('<option value="">-- Select City --</option>');
+
+                    $.each(res.cities, function (key, value) {
+
+                        $("#city-dropdown").append('<option value="' + value
+
+                            .id + '">' + value.name + '</option>');
+
+                    });
+
+                }
+
+            });
+
+        });
+
+
+
+    });
+
 </script>
 @endsection
 

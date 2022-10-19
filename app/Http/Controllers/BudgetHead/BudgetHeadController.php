@@ -151,14 +151,14 @@ class BudgetHeadController extends Controller
     }
     // pdf generate all pdf
     public function pdf(){
-        $funding=FundingAgency::all();
-        $pdf=PDF::loadView('funding.pdf',compact('funding'));
+        $budgetHead=BudgetHead::all();
+        $pdf=PDF::loadView('budget.print',compact('budgetHead'));
         return $pdf->download('funding.pdf');
    }
       // generate pdf one row
       public function pdfForm(Request $request,$id){
-        $funding1 = FundingAgency::all()->where('id', $id);  
-    $pdf=PDF::loadView('funding.pdf_download',compact('funding1'));
+        $budgetHead1 = BudgetHead::all()->where('id', $id);  
+    $pdf=PDF::loadView('budget.pdf_download',compact('budgetHead1'));
     return $pdf->download('funding.pdf');
     }
 }

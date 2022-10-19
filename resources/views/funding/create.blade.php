@@ -50,6 +50,8 @@
     <div class="col">
       <div class="card">
         <div class="card-title mx-2 mt-2">
+          <a class="  float-end" href="{{ url('/funding/download') }}"><i class="fa-solid fa-print"></i>Print All</a>
+
             <h6>Funding Agency Details</h6>
         </div>
 
@@ -63,6 +65,7 @@
               @role('admin')
               <th>Action</th>
               @endrole
+              <th>Print</th>
             </tr>
            </thead>
          <tbody>
@@ -73,14 +76,20 @@
              <th>
              @role('admin')
              <a href=" {{ url('/funding/edit',$item->id) }} ">
-             <i class="fa-regular fa-pen-to-square"></i>
-            </a>
+              <i class="fa-regular fa-pen-to-square"></i>
+             </a>
             <a href=" {{ url('/funding/delete',$item->id) }} ">
              <i class="fa-solid fa-trash" ></i>
              @endrole
              </th>
              <th>
                 </a>
+            </th>
+            <th>
+              <a href=" {{ url('/funding/pdfForm',$item->id) }} ">
+                <i class="fa-regular fa-solid fa-print"></i>
+               </a>
+
             </th>
           </tr>
           @endforeach

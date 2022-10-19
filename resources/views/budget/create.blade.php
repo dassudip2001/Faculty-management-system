@@ -67,6 +67,9 @@
     <div class="col">
       <div class="card max-h-96">
         <div class="card-title mx-2 mt-2">
+          <a class="float-end" href=" {{ url('/budget/download') }} ">
+            <i class="fa-regular fa-solid fa-print"></i>Print All
+           </a>
             <h6>Budget Details</h6>
         </div>
        <!-- <div class="card-body"> -->
@@ -81,6 +84,8 @@
               @role('admin')
               <th >Action</th>
               @endrole
+              <th >Print</th>
+
             </tr>
            </thead>
            <div class="overflow-auto">
@@ -101,6 +106,12 @@
              @endrole
              </td>
              </a>
+             <th>
+              <a href=" {{ url('/budget/pdfForm',$item->id) }} ">
+                <i class="fa-regular fa-solid fa-print"></i>
+               </a>
+
+            </th>
           </tr>
           @endforeach
         </tbody>

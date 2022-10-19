@@ -14,6 +14,7 @@
                       <div class="modal-content">
                           @role('admin')
                           <div class="modal-header">
+
                               <h5 class="modal-title" id="exampleModalToggleLabel">Create User</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
@@ -207,6 +208,8 @@
             </div>
             </div>
               @role('admin')
+            <a class=" " href="{{ url('/createuser/download') }}"><i class="fa-solid fa-print"></i>Print All</a>
+
               <a class="btn btn-primary float-end" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><i class="fa-solid fa-user-plus"></i> Add New User</a>
               @endrole
           </div>
@@ -218,6 +221,7 @@
            </div>
            @endif
             <hr>
+
           <h6> User Details</h6>
         </div>
         <div class="card-body p-0">
@@ -236,6 +240,8 @@
               <th> Designation</th>
               <th> Status</th>
               <th>Action </th>
+              <th>Print </th>
+
             </tr>
            </thead>
          <tbody>
@@ -266,6 +272,16 @@
                   </i>
                 </button>
                     </a>
+            </th>
+            <th>
+              <a href=" {{ url('/createuser/pdfForm',$item->id) }} ">
+                <i class="fa-regular fa-solid fa-print"></i>
+               </a>
+            </th>
+            <th>
+              <a href=" {{ url('/createuser/edit',$item->id) }} ">
+                <i class="fa-regular fa-pen-to-square"></i>
+               </a>
             </th>
             
            @endif

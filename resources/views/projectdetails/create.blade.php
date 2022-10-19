@@ -175,7 +175,9 @@
                             {{session('success')}}
                         </div>
                     @endif
-                        
+                    <a href=" {{ url('/projectdetail/download') }} ">
+                        <i class="fa-solid fa-print"></i>Print All
+                    </a>
                         <h6>Project Details</h6><hr>
                     </div>
                 <div class="card-body p-0">
@@ -183,36 +185,44 @@
                      <thead class="table-dark">
                      <tr>
                         <td>Project No</td>
+                        {{-- <td> Name</td> --}}
                         <td>Project Title</td>
                         <td>Project Scheme</td>
                         <td>Project Duration</td>
-                        <td>Project Total Cost</td>
-                         <td>FunAgency</td>
+                        {{-- <td>Project Total Cost</td> --}}
+                         <td>Funding Agency</td>
                          <td>Budget Name</td>
                          <td>Budget Details Cost</td>
+                         <td>Total Project Cost</td>
                          <td>Action</td>
+                         <td>Print</td>
                      </tr>
                      </thead>
                      <tbody>
-                     @foreach($projectDetail as $pro)
+                     @foreach($projectDetail as $pro) 
                          <tr>
                             <td>{{$pro->project_no}}</td>
+                            {{-- <td>{{$pro->name}}</td> --}}
                             <td>{{$pro->project_title}}</td>
                             <td>{{$pro->project_scheme}}</td>
                             <td>{{$pro->project_duration}}</td>
-                             <td>{{$pro->project_total_cost}}</td>
-                             <td>{{$pro->funding_agency_id}}</td>
+                             {{-- <td>{{$pro->project_total_cost}}</td> --}}
+                             <td>{{$pro->agency_name}}</td>
                              <td>{{$pro->budget_title}}</td>
                              <td>{{$pro->budget_details_amount}}</td>
-
+                             <td>{{$pro->project_total_cost}}</td>
                              <th>
                                 <a href=" {{ url('/projectdetail/edit',$pro->id) }} ">
                                     <i class="fa-regular fa-pen-to-square"></i>
-                                </a>                            <a href=" {{ url('/projectdetail/delete',$pro->id) }} ">
+                                </a>
+                                <a href=" {{ url('/projectdetail/delete',$pro->id) }} ">
                                      <button type="submit"><i class="fa-solid fa-trash"></i></button>
-
-
                                  </a>
+                             </th>
+                             <th>
+                                <a href=" {{ url('/projectdetail/pdfForm',$pro->id) }} ">
+                                    <i class="fa-solid fa-print"></i>
+                                </a>
                              </th>
                          </tr>
                      @endforeach
@@ -274,5 +284,7 @@
                 }
 
             </script>
+
+
     @endsection
 </x-admin-layout>

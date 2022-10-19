@@ -147,7 +147,7 @@ class ReleseFundController extends Controller
     // pdf generate all pdf
     public function pdf(){
         $releseFund=ReleseFund::all();
-        $pdf=PDF::loadView('relese-fund.pdf',compact('releseFund'));
+        $pdf=PDF::loadView('relese-fund.print',compact('releseFund'));
         return $pdf->download('fund.pdf');
     }
     // generate pdf one row
