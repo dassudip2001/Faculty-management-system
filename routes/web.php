@@ -124,8 +124,8 @@ require __DIR__.'/auth.php';
 
 // Project Details
     Route::get('/projectdetail',[ProjectDetailsController::class,'index'])->name('projectdetail.index');
-    Route::post('/projectdetail',[ProjectDetailsController::class,'create'])->name('projectdetail.create')->middleware(['auth','role:admin']);
-    Route::get('/projectdetail/edit/{id}',[ProjectDetailsController::class,'edit'])->name('projectdetail.edit')->middleware(['auth','role:admin']);
+    Route::post('/projectdetail',[ProjectDetailsController::class,'create'])->name('projectdetail.create')->middleware(['auth','role:admin|user|writer']);
+    Route::get('/projectdetail/edit/{id}',[ProjectDetailsController::class,'edit'])->name('projectdetail.edit')->middleware(['auth','role:admin|user|Writer']);
     Route::put('/projectdetail/edit/{id}',[ProjectDetailsController::class,'update'])->name('projectdetail.update')->middleware(['auth','role:admin']);
     Route::get('/projectdetail/delete/{id}',[ProjectDetailsController::class,'destroy'])->name('projectdetail.destroy')->middleware(['auth','role:admin']);
     // download pdf
@@ -140,7 +140,9 @@ require __DIR__.'/auth.php';
    Route::get('/projectbudgetamount/edit/{id}',[ProjectBudgetAmountController::class,'edit'])->name('projectbudgetamount.edit');
    Route::put('/projectbudgetamount/edit/{id}',[ProjectBudgetAmountController::class,'update'])->name('projectbudgetamount.update');
    Route::get('/projectbudgetamount/delete/{id}',[ProjectBudgetAmountController::class,'destroy'])->name('projectbudgetamount.destroy');
-
+//    
+   Route::get('/projectbudgetamount/find/{p_id}',[ProjectBudgetAmountController::class,'find'])->name('projectbudgetamount.find');
+   
 
     // invoice upload
 

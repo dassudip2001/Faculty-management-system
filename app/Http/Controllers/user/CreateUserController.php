@@ -298,8 +298,8 @@ class CreateUserController extends Controller
 
       // pdf generate all pdf
       public function pdf(){
-        $createUser=CreateUser::all();
-        $pdf=PDF::loadView('user.print',compact('createUser'));
+        $createUser2=CreateUser::all();
+        $pdf=PDF::loadView('user.print',compact('createUser2'));
         return $pdf->download('user.pdf');
    }
     // generate pdf one row

@@ -8,12 +8,18 @@
         padding: 8px;
 
     }
-    th{
+    /* th{
         background-color: rebeccapurple;
         color: white;
-    }
+    } */
    </style>
     <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Agency_name</th>
+            </tr>
+        </thead>
         
           @foreach ($fundingAgency1 as $item)
            <tr>

@@ -63,7 +63,7 @@ class ProjectDetailsController extends Controller
      */
     public function create(Request $request  )
     {
-
+        // if(Auth::user()->id=='1' || auth()->user()->id==$id+1)
 //       dd($request->all());
 //         abort_unless(auth()->user()->can('create_project'),
 //             403,'you dont have required authorization to this resource');
@@ -178,9 +178,15 @@ class ProjectDetailsController extends Controller
      */
     public function edit(int $id)
     {
-        $projectDetail= DB::table('project_details')
+        // if(Auth::user()->id=='1' || auth()->user()->id==$id+1)
+
+        return DB::table('project_details')
         ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
         ->join('projects','projects.id',"=",'project_details.project_id')
+        ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+        // ->join('create_users','create_users.user_id',"=",'projects.create_user_id')
+        // ->join('users','users.id',"=",'projects.create_user_id')
+        // ->join('')
         ->get();
 
         // $projectDetail=Project::with([           
@@ -302,8 +308,8 @@ class ProjectDetailsController extends Controller
      */
     public function destroy($id)
     {
-       abort_unless(auth()->user()->can('delete_project'),
-           403,'you dont have required authorization to this resource');
+    //    abort_unless(auth()->user()->can('delete_project'),
+        //    403,'you dont have required authorization to this resource');
 
         try {
             // $pc=ProjectDetails::find($id)->project_id;

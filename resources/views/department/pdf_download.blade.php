@@ -1,5 +1,4 @@
-
-   <style>
+<style>
     table,thead{
         border-collapse: collapse;
         width: 100%;
@@ -9,13 +8,20 @@
         padding: 8px;
 
     }
-    th{
+    /* th{
         background-color: rebeccapurple;
         color: white;
-    }
+    } */
    </style>
     <table>
-        
+      <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Code</th>
+             <th>Description</th>
+          </tr>
+        </thead>
           @foreach ($department1 as $item)
            <tr>
              <td>{{$item->id}}</td>
@@ -26,7 +32,3 @@
           </tr>
           @endforeach
     </table>
-          
-       
-
-

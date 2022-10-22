@@ -17,8 +17,8 @@
                 <table class="table table-striped table-hover">
                     <thead class="table-dark">
                        <tr>
-                        <th>Nmae</th>
-                        <th>Image</th>
+                        <th>Project ID</th>
+                        <th>PDF</th>
                        </tr>
                     </thead>
                    <tbody>

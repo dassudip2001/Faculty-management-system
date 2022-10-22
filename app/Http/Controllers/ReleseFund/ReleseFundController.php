@@ -78,6 +78,8 @@ class ReleseFundController extends Controller
      */
     public function edit($id)
     {
+        abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
+
             $releseFund= ReleseFund::find($id);
 
         return view('relese-fund.edit',compact('releseFund'));
@@ -101,6 +103,8 @@ class ReleseFundController extends Controller
      */
     public function update(Request $request, $id)
     {
+        abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
+
         try {
             $fund=ReleseFund::find($id);
             $fund->date=$request->date;
@@ -133,6 +137,8 @@ class ReleseFundController extends Controller
      */
     public function destroy($id)
     {
+        abort_unless(auth()->user()->can('delete_relese_fund'),403,'you dont have required authorization to this resource');
+
         try {
             ReleseFund::destroy($id);
             return redirect(route('relesefund.index'))->with('success','Delete Successfully');

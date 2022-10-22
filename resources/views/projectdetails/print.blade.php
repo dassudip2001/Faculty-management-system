@@ -24,7 +24,7 @@
             <td>{{$pro->project_title}}</td>
             <td>{{$pro->project_scheme}}</td>
             <td>{{$pro->project_duration}}</td>
-             <td>{{$pro->project_total_cost}}</td>
+             {{-- <td>{{$pro->project_total_cost}}</td> --}}
              <td>{{$pro->agency_name}}</td>
              <td>{{$pro->budget_title}}</td>
              <td>{{$pro->budget_details_amount}}</td>

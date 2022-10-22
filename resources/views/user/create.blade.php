@@ -278,11 +278,7 @@
                 <i class="fa-regular fa-solid fa-print"></i>
                </a>
             </th>
-            <th>
-              <a href=" {{ url('/createuser/edit',$item->id) }} ">
-                <i class="fa-regular fa-pen-to-square"></i>
-               </a>
-            </th>
+            
             
            @endif
            {{-- @endcan --}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ProjectBudgetAmount;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\ProjectDetails;
 use App\Models\ProjectBudgetAmount;
@@ -18,14 +19,28 @@ class ProjectBudgetAmountController extends Controller
      */
     public function index()
     {
-        $amountCal= DB::table('project_details')
+        // $projectID = $
+        $amountCal =  DB::table('project_details')
             ->join('projects','projects.id',"=",'project_details.project_id')
             ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
 
             ->get();
         $showAmountCal=ProjectBudgetAmount::all();
         return view('project-budget-amount.create',compact('amountCal',$showAmountCal));
+        //return compact('amountCal',$showAmountCal);
     }
+    // public function find($p_id){
+    //     // dd($p_id);
+    //     // echo "$p_id";
+    //     $combo=explode(";",$p_id);
+    //     // dd($combo[0]);
+    //       $value= DB::table('projects')
+    //       ->where('project_no','=','p1001')->find($p_id);
+    //       dd($value);
+    //     //   $department=Department::find($id);
+    // }
+
+   
 
     /**
      * Show the form for creating a new resource.

@@ -1,5 +1,4 @@
-
-   <style>
+<style>
     table,thead{
         border-collapse: collapse;
         width: 100%;
@@ -9,13 +8,19 @@
         padding: 8px;
 
     }
-    th{
-        background-color: rebeccapurple;
+    /* th{
+        background-color: black;
         color: white;
-    }
+    } */
    </style>
     <table>
-        
+         <thead>
+            <tr>
+                <th>Id</th>
+                <th>Budget_title</th>
+                <th>Budget_type</th>
+            </tr>
+        </thead>
           @foreach ($budgetHead as $item)
            <tr>
             <td>{{$item->id}}</td>

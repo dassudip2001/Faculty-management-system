@@ -16,7 +16,7 @@
    </style>
     <table>
         
-          @foreach ($createUser as $item)
+          @foreach ($createUser2 as $item)
            <tr>
              {{-- <td>{{$item->id}}</td> --}}
              <td>{{$item->faculty->fac_code}}</td>

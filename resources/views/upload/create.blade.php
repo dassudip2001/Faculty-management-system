@@ -4,7 +4,8 @@
             {{ __('Invoice Upload') }}
         </h2>
     </x-slot>
-    <link rel="stylesheet" href="{{ asset('css/upload.css') }}">
+    {{-- css file add --}}
+    {{-- <link rel="stylesheet" href="{{ asset('css/upload.css') }}"> --}}
 <div class="card mt-4 mx-2">
     <div class="card-title mx-2 mt-2">
         <!-- Button trigger modal -->
@@ -85,7 +86,7 @@
                                     @csrf
                                   <div class="col-sm-8 mt-4 mx-5">
                                     {{-- project name --}}
-                                    <label for="project_name">Please Select budget <span class="required" style="color: red;">*</span></label>
+                                    <label for="project_name">Enter Project ID <span class="required" style="color: red;">*</span></label>
                                     <br>
                                     <input type="text" class="form-control" name="name" id="name" placeholder="Name">
 

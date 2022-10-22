@@ -23,12 +23,16 @@
 * edit 
 * delete----->done
 -----------------------------------------
-
+**************panging*******
 ---------------- project budget amount ---------
 * create 
 * show 
 * edit 
 * delete
+---------------------------------------
+upload pdf ->delete
+project --->edit
 -------------------------------------------
 
-print page ->done
+print page ->done-----------
+
