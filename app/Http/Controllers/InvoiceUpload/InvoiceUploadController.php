@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use App\Models\InvoiceUpload;
 use Exception;
-// use File;
+//use Illuminate\Support\Facades\File;
 class InvoiceUploadController extends Controller
 {
     /**
@@ -119,9 +119,56 @@ class InvoiceUploadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( $id)
     {
-        // DB::table('invoice_uploads')
+        $items = InvoiceUpload::find($id); //Reports is my model
+
+
+
+        $file_path = public_path('assets').'/'.$items->file; // if your file is in some folder in public directory.
+
+
+        // $file_path = public_path().'/'.$items->file;  use incase you didn't store your files in any folder inside public folder.
+
+        if(File::exists($file_path)) {
+
+            File::delete($file_path); //for deleting only file try this
+            $items->delete(); //for deleting record and file try both
+        }
+
+//        $file = InvoiceUpload::find($request->id);
+//        $file_path = $file->file;
+//        if(file_exists($file_path))
+//        {
+//            unlink($file_path);
+//            InvoiceUpload::destroy($request->id);
+//        }
+//        $file=InvoiceUpload::find($id);
+//        $filename=$file->file;
+////        $file_path=public_path('assets/' .$filename);
+//
+//        if(File::exists(public_path('assets/' .$filename))){
+//
+//            File::delete(public_path('assets/' .$filename));
+//
+//        }else{
+//
+//            dd('File does not exists.');
+//
+////        }
+//        $news = InvoiceUpload::findOrFail($id);
+//        $image_path = app_path("assets/{$news}");
+//
+//        if (File::exists($image_path)) {
+//            //File::delete($image_path);
+//            unlink($image_path);
+//        }
+//        $news->delete();
+
+//        $file =public_path('assets/');
+//        $img=File::delete($file);
+//        dd($img);
+//        // DB::table('invoice_uploads')
         // $data=InvoiceUpload::find($id);
         // unlink('assets/'.$data->file);
         // $data->delete();
@@ -132,11 +179,13 @@ class InvoiceUploadController extends Controller
         // $file->delete();
         // return redirect()->route('invoiceuoload.index');
         // $filename=File::find($id);
-        $file=InvoiceUpload::find($id);
-        $filename=$file->file;
-        $file_path=public_path('assets/' .$filename);
-        unlink($file_path,);
-        echo $file->delete();
+//        .....................delete...................
+//        $file=InvoiceUpload::find($id);
+//        $filename=$file->file;
+//        $file_path=public_path('assets/' .$filename);
+//        unlink($file_path,);
+//        echo $file->delete();
+//        ...................
         // return redirect()->route('invoiceuoload.index');
         return redirect(route('invoiceuoload.index'))->with('success',' delete Successfully');
 

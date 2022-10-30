@@ -22,7 +22,7 @@ class ProjectDetailsController extends Controller
      */
     public function index()
     {
-        // $projectDetail= 
+        // $projectDetail=
         $projectDetail=  DB::table('project_details')
         // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
         ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
@@ -37,7 +37,7 @@ class ProjectDetailsController extends Controller
         // ->join('faculties','faculties.id',"=",'create_users.faculty_id')
         // ->join('users','users.id',"=",'create_users.user_id')
         // ->join('departments','departments.id','=','create_users.department_id')
-        
+
 
         // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
         ->get();
@@ -189,17 +189,17 @@ class ProjectDetailsController extends Controller
         // ->join('')
         ->get();
 
-        // $projectDetail=Project::with([           
+        // $projectDetail=Project::with([
         //      'fundingagency'=>function($q){
         //             $q->select(['id','agency_name']);
         //              },
         //         'createuser'=>function($q){
         //         $q->select(['id']);
-        //          },           
+        //          },
         // ]
 
         // )->find($id);
-        
+
         return view('projectdetails.edit',compact('projectDetail'))
                 ->with('success','Project Update Successfully');
         // $projectDetail= DB::table('project_details')
@@ -312,10 +312,12 @@ class ProjectDetailsController extends Controller
         //    403,'you dont have required authorization to this resource');
 
         try {
-            // $pc=ProjectDetails::find($id)->project_id;
-            // ProjectDetails::find($id)->delete();
+//             $pc=ProjectDetails::find($id)->project_id;
+//             ProjectDetails::find($id)->delete();
             Project::find($id)->delete();
-            
+//            $pc=Project::find($id);
+//            ProjectDetails::find($pc)->delete();
+
             // ProjectDetails::find($pc)->project_id->delete();
             //  ProjectDetails::find($pc)->delete();
             return redirect(route('projectdetail.index'))
@@ -353,7 +355,7 @@ class ProjectDetailsController extends Controller
     // ->join('users','user.id',"=",'project_details.project_id')
 
     // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
-    ->get()->where('id', $id);  
+    ->get()->where('id', $id);
     $pdf=PDF::loadView('projectdetails.pdf_download',compact('createUser1'));
     return $pdf->download('project.pdf');
     }
