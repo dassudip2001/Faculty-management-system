@@ -20,6 +20,9 @@ class CreateReleseFundsTable extends Migration
             $table->string('payment_method');
             $table->date('transtation_date');
             $table->string('payment_method_no');
+            $table->bigInteger('relese_funds_amount');
+            $table->unsignedBigInteger('projec_fund_relese_id');
+
             // $table->string('trans_no');
 
             $table->timestamps();

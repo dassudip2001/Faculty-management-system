@@ -48,6 +48,10 @@
                               <!-- <label for="transtation_date">Enter  Date</label>  -->
                        <input class="form-control" type="text" id="transtation_date" value=" {{$releseFund->transtation_date}} " name="transtation_date" />
                        </div>
+                       <div class="col">
+                        <!-- <label for="transtation_date">Enter  Date</label>  -->
+                       <input class="form-control" type="number" id="relese_amount" name="relese_funds_amount"  value=" {{$releseFund->relese_funds_amount}} " />
+                      </div>
                      </div>
                    </div>
 
@@ -59,6 +63,9 @@
                         <div class="col">
                              <label for="transtation_date">Enter  Date</label>
                         </div>
+                        <div class="col">
+                            <label for="relese_amount">Enter  Amount</label>
+                       </div>
                       </div>
                    </div>
 
@@ -70,6 +77,9 @@
                         <div class="col">
                             <label>Enter Transeation Date</label>
                         </div>
+                        <div class="col">
+                            <label for="relese_amount">Enter  Amount</label>
+                       </div>
                        </div>
                    </div>
 
@@ -108,6 +118,12 @@
     else
     {
         document.getElementById("neft" ).style.display = "none";
+    }
+    if (that.value=="AMOUNT") {
+        document.getElementById("amount" && "input").style.display = "block";
+    } else {
+        document.getElementById("amount" ).style.display = "none";
+        
     }
    
 }

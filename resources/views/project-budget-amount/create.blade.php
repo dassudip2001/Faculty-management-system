@@ -116,16 +116,17 @@
                   </div>
 
                 </div> --}}
-
+                
                 
                 <div class="row">
                   <div class="col">
                   <div class="form-group">
                   <label for="project_name"> Budget Amount<span class="required" style="color: red;">*</span></label>
+                  <input type="text" class="form-control form-control" name="budget_details_amount" value="  "   placeholder=" Budget Amount" />
                     
-                    <select id="amount-dropdown" class="form-control">
+                    {{-- <select id="amount-dropdown" class="form-control">
 
-                    </select>
+                    </select> --}}
 
                 </div>
                   </div>
@@ -133,10 +134,11 @@
 
                    <div class="form-group mb-3">
                     <label for="project_year"> Year<span class="required" style="color: red;">*</span></label>
+                    <input type="text" class="form-control form-control" name=""  placeholder=" year" />
                      
-                      <select  id="year-dropdown" class="form-control">
+                      {{-- <select  id="year-dropdown" class="form-control">
   
-                      </select>
+                      </select> --}}
   
                   </div>
 
@@ -171,6 +173,9 @@
                                                     <option value="{{$funding->project_no}};{{$funding->id}}">
                                                       Budget Head:{{$funding->budget_title}}:Project No:{{$funding->project_no}}
                                                     </option>
+                                                    
+                                                    {{-- <input type="text" class="form-control form-control" name="project_total_cost" value="{{$amountCal->project_total_cost}}  "   id="optionText" placeholder=" Budget Amount" /> --}}
+
                                                 @endforeach
                                             </select>
                                         </td>
@@ -280,20 +285,20 @@
     let select1 = document.getElementById('project_details_id');   
     let optionText = select1.options[select1.selectedIndex].value; 
     console.log('Selected Option = ', optionText);
-    jQuery.ajax({
-                   url : 'projectdetail/' + optionText,
-                   type : "GET",
-                   dataType : "json",
-                   success:function(data)
-                   {
-                      console.log(data);
-                      jQuery('select[name="subproject"]').empty();
-                      jQuery.each(data, function(key,value){
-                         $('select[name="subproject"]').append('<option value="'+ key +'">'+ value +'</option>');
-                         console.log(key, ' ' , value);
-                      });
-                   }
-                });
+    // jQuery.ajax({
+    //                url : 'projectdetail/' + optionText,
+    //                type : "GET",
+    //                dataType : "json",
+    //                success:function(data)
+    //                {
+    //                   console.log(data);
+    //                   jQuery('select[name="subproject"]').empty();
+    //                   jQuery.each(data, function(key,value){
+    //                      $('select[name="subproject"]').append('<option value="'+ key +'">'+ value +'</option>');
+    //                      console.log(key, ' ' , value);
+    //                   });
+    //                }
+    //             });
   }
 
 

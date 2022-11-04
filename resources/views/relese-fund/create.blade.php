@@ -45,6 +45,25 @@
                                 {{-- form value  --}}
                                 <div class="row">
                                     <div class="col">
+                                        {{-- select project --}}
+                                        <label for="faculty_designation">Payment Recive Method<span class="required" style="color: red;">*</span></label>
+                                        <div>
+
+                                           <select  name="projec_fund_relese_id" class="form-select" aria-label="Default select example" id="selector" onchange="yesnoCheck(this);">
+                                               <option   value="select">Select Project</option>
+                                               
+                                               @foreach ($projectDetail as $funding)
+                                               <option value="{{$funding->id}}">Project No:{{$funding->project_no}} ||  Project Name:{{$funding->project_title}} || Project Cost: {{$funding->project_total_cost}}
+                                               </option>
+                                           @endforeach
+                                           </select>
+                                       </div>
+
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
                                         {{-- date --}}
                                         <label for="datfilde">Date<span class="required" style="color: red;">*</span></label>
                                         <input type="date" class="form-control form-control-sm " name="date"  id="datefild" aria-describedby="datefild" placeholder="Enter Date" require>
@@ -78,6 +97,10 @@
                                                   <!-- <label for="transtation_date">Enter  Date</label>  -->
                                            <input class="form-control" type="date" id="transtation_date" name="transtation_date" />
                                            </div>
+                                           <div class="col">
+                                            <!-- <label for="transtation_date">Enter  Date</label>  -->
+                                           <input class="form-control" type="number" id="relese_amount" name="relese_funds_amount" />
+                                          </div>
                                          </div>
                                        </div>
 
@@ -89,6 +112,9 @@
                                             <div class="col">
                                                  <label for="transtation_date">Enter  Date</label>
                                             </div>
+                                            <div class="col">
+                                                <label for="relese_amount">Enter  Amount</label>
+                                           </div>
                                           </div>
                                        </div>
 
@@ -100,6 +126,9 @@
                                             <div class="col">
                                                 <label>Enter Transeation Date</label>
                                             </div>
+                                            <div class="col">
+                                                <label for="relese_amount">Enter  Amount</label>
+                                           </div>
                                            </div>
                                        </div>
 
@@ -159,26 +188,29 @@
         <table class="table table-striped table-hover">
             <thead class="table-dark">
              <tr>
+
+                <th>Project Name</th>
                 <th>Date</th>
                 <th>Transtation No</th>
                 <th>Type</th>
                 <th>No</th>
                 <th>Transtation  Date</th>
+                <th>Amount</th>
                 <th>Action</th>
                 <th>Print</th>
 
              </tr>
             </thead>
             <tbody>
-                @foreach ($fund as $trans)
-                    
-               
+                @foreach ($fund as $trans)              
                 <tr>
+                    <td>{{$trans->project_no}} ||  {{$trans->project_title}} </td>
                     <td> {{$trans->date}} </td>
                     <td>{{$trans->transaction_no}}</td>
                     <td>{{$trans->payment_method}}</td>
                     <td>{{$trans->payment_method_no}}</td>
                     <td>{{$trans->transtation_date}}</td>
+                    <td>{{$trans->relese_funds_amount}}</td>
                     <th>
                         <a href=" {{ url('/relesefund/edit',$trans->id) }} ">
                             <i class="fa-regular fa-pen-to-square"></i>
@@ -220,6 +252,12 @@
     else
     {
         document.getElementById("neft" ).style.display = "none";
+    }
+    if (that.value=="AMOUNT") {
+        document.getElementById("amount" && "input").style.display = "block";
+    } else {
+        document.getElementById("amount" ).style.display = "none";
+        
     }
    
 }

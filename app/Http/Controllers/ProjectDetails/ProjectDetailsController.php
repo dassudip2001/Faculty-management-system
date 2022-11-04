@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ProjectDetails;
 
 use App\Http\Controllers\Controller;
 use App\Models\BudgetHead;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\ProjectDetails;
@@ -23,24 +24,30 @@ class ProjectDetailsController extends Controller
     public function index()
     {
         // $projectDetail=
-        $projectDetail=  DB::table('project_details')
-        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
-        ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
-        ->join('projects','projects.id',"=",'project_details.project_id')
-        ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
-        // ->join('faculties','faculties.id',"=",'create_users.faculty_id')
-        //     ->join('users','users.id',"=",'create_users.user_id')
-        //     ->join('departments','departments.id','=','create_users.department_id')
-        // ->join('users','users.id',"=",'project_details.user_id')
-        // ->join('users','user.id',"=",'project_details.project_id')
-        // ->join (DB::table('create_users'))
-        // ->join('faculties','faculties.id',"=",'create_users.faculty_id')
-        // ->join('users','users.id',"=",'create_users.user_id')
-        // ->join('departments','departments.id','=','create_users.department_id')
+        $projectDetail= DB::table('projects')
+            ->join('project_details','project_id',"=",'projects.id')
+            ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+            ->join('funding_agencies','funding_agencies.id',"=",'projects.funding_agency_id')
 
-
-        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
-        ->get();
+            ->get();
+//        $projectDetail=  DB::table('project_details')
+//        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
+//        ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+//        ->join('projects','projects.id',"=",'project_details.project_id')
+//        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+//        // ->join('faculties','faculties.id',"=",'create_users.faculty_id')
+//        //     ->join('users','users.id',"=",'create_users.user_id')
+//        //     ->join('departments','departments.id','=','create_users.department_id')
+//        // ->join('users','users.id',"=",'project_details.user_id')
+//        // ->join('users','user.id',"=",'project_details.project_id')
+//        // ->join (DB::table('create_users'))
+//        // ->join('faculties','faculties.id',"=",'create_users.faculty_id')
+//        // ->join('users','users.id',"=",'create_users.user_id')
+//        // ->join('departments','departments.id','=','create_users.department_id')
+//
+//
+//        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+//        ->get();
         // $projectDetail=ProjectDetails::all();
        $data2=DB::table('create_users')
             ->join('faculties','faculties.id',"=",'create_users.faculty_id')
@@ -178,16 +185,32 @@ class ProjectDetailsController extends Controller
      */
     public function edit(int $id)
     {
+//        return ProjectDetails::with(
+//            [
+//                'project'=>function($q){
+//                $q->select(['project_no','project_title','project_scheme']);
+//                }
+//            ]
+//        )->find($project_id);
+
         // if(Auth::user()->id=='1' || auth()->user()->id==$id+1)
 
-        return DB::table('project_details')
-        ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
-        ->join('projects','projects.id',"=",'project_details.project_id')
-        ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
-        // ->join('create_users','create_users.user_id',"=",'projects.create_user_id')
-        // ->join('users','users.id',"=",'projects.create_user_id')
-        // ->join('')
-        ->get();
+//        return DB::table('project_details')
+//        ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+//        ->join('projects','projects.id',"=",'project_details.project_id')
+//        ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
+//        // ->join('create_users','create_users.user_id',"=",'projects.create_user_id')
+//        // ->join('users','users.id',"=",'projects.create_user_id')
+//        // ->join('')
+//        ->get();
+
+
+        return DB::table('projects')
+            ->join('project_details','project_id',"=",'projects.id')
+            ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+            ->join('funding_agencies','funding_agencies.id',"=",'projects.funding_agency_id')
+
+            ->get();
 
         // $projectDetail=Project::with([
         //      'fundingagency'=>function($q){
@@ -312,6 +335,9 @@ class ProjectDetailsController extends Controller
         //    403,'you dont have required authorization to this resource');
 
         try {
+//            DB::table('projects')
+//                ->join('project_details','project_id',"=",'projects.id')
+//                ->where($id)->delete();
 //             $pc=ProjectDetails::find($id)->project_id;
 //             ProjectDetails::find($id)->delete();
             Project::find($id)->delete();
@@ -320,6 +346,12 @@ class ProjectDetailsController extends Controller
 
             // ProjectDetails::find($pc)->project_id->delete();
             //  ProjectDetails::find($pc)->delete();
+//            $fc=Project::find($id)->project_id;
+////            $uc=CreateUser::find($id)->user_id;
+////            create user delete
+//            Project::find($id)->delete();
+////            faculty Delete
+//            ProjectDetails::find($fc)->delete();
             return redirect(route('projectdetail.index'))
                 ->with('success', 'Data Deleted Successfully');
         }catch (Exception $e){
@@ -333,29 +365,23 @@ class ProjectDetailsController extends Controller
 
       // pdf generate all pdf
       public function pdf(){
-        $createUser=DB::table('project_details')
-        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
-        ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
-        ->join('projects','projects.id',"=",'project_details.project_id')
-        ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
-        // ->join('users','user.id',"=",'project_details.project_id')
+        $createUser=DB::table('projects')
+            ->join('project_details','project_id',"=",'projects.id')
+            ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+            ->join('funding_agencies','funding_agencies.id',"=",'projects.funding_agency_id')
 
-        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
-        ->get();
+            ->get();
         $pdf=PDF::loadView('projectdetails.print',compact('createUser'));
         return $pdf->download('project.pdf');
    }
     // generate pdf one row
     public function pdfForm(Request $request,$id){
-    $createUser1 =DB::table('project_details')
-    // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
-    ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
-    ->join('projects','projects.id',"=",'project_details.project_id')
-    ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
-    // ->join('users','user.id',"=",'project_details.project_id')
+    $createUser1 =DB::table('projects')
+        ->join('project_details','project_id',"=",'projects.id')
+        ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+        ->join('funding_agencies','funding_agencies.id',"=",'projects.funding_agency_id')
 
-    // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
-    ->get()->where('id', $id);
+        ->get()->where('id', $id);
     $pdf=PDF::loadView('projectdetails.pdf_download',compact('createUser1'));
     return $pdf->download('project.pdf');
     }

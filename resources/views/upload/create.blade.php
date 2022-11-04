@@ -6,7 +6,7 @@
     </x-slot>
     {{-- css file add --}}
     {{-- <link rel="stylesheet" href="{{ asset('css/upload.css') }}"> --}}
-<div class="card mt-4 mx-2">
+<div class="card mt-4 mx-2 ">
     <div class="card-title mx-2 mt-2">
         <!-- Button trigger modal -->
            <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -16,12 +16,12 @@
     </div>
     <hr>
     {{-- <div class="card-body">  --}}
-      <div class="card-body">
+      <div class="card-body  ">
 
 
 
      
-      <div class="table-responsive">
+      <div class="table-responsive max-h-96">
         <table class="table table-striped table-hover">
           <thead class="table-dark">
             <tr>

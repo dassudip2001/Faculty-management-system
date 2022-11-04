@@ -30,9 +30,9 @@
 * edit 
 * delete
 ---------------------------------------
-upload pdf ->delete
+upload pdf ->delete------->done
 project --->edit
--------------------------------------------
+---------------- All Print Page Done ---------------------------
 
 print page ->done-----------
 
