@@ -44,6 +44,15 @@ class ReleseFundController extends Controller
     {
         // abort_unless(auth()->user()->can('create_relese_fund'),403,'you dont have required authorization to this resource');
             
+        $request->validate([
+            'date'=>'required',
+            'transaction_no'=>'required',
+            'payment_method'=>'required',
+            'transtation_date'=>'required',
+            'relese_funds_amount'=>'required',
+            'payment_method_no'=>'required',
+            'projec_fund_relese_id'=>'required',
+        ]);
                $fund=new ReleseFund;
 
                $fund->date=$request->date;

@@ -18,7 +18,20 @@
     {{-- <div class="card-body">  --}}
       <div class="card-body  ">
 
-
+        @if(session('success'))
+        <div class="alert alert-primary" role="alert">
+            {{session('success')}}
+        </div>
+        @endif
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
      
       <div class="table-responsive max-h-96">
@@ -88,8 +101,10 @@
                                     {{-- project name --}}
                                     <label for="project_name">Enter Project ID <span class="required" style="color: red;">*</span></label>
                                     <br>
-                                    <input type="text" class="form-control" name="name" id="name" placeholder="Name">
-
+                                    <input type="text" class="form-control " name="name" id="name" placeholder="Name">
+                                    {{-- @error('name')
+                                      <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror --}}
                                     {{-- <select name="" class="form-select form-select-sm" aria-label=".form-select-sm example"> --}}
                                         {{-- <option selected hidden>Select Budget</option> --}}
                                         {{-- @foreach ($amountCal as $funding) --}}
@@ -117,7 +132,8 @@
                                     {{-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --}}
                                     <div>
                                       <label for="formFileLg" class="form-label">Please Upload Invoice</label>
-                                      <input class="form-control form-control-lg" id="formFileLg" name="file" type="file">
+                                      <input class="form-control form-control-lg " id="formFileLg" name="file" type="file">
+                                      
                                     </div>
                                   </div>
                                 </div>

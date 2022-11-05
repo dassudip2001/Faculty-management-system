@@ -20,7 +20,20 @@
        <h6 class="mt-2">Relese Fund </h6>
 
        <hr>
-        
+       {{-- @if(session('success'))
+       <div class="alert alert-primary" role="alert">
+           {{session('success')}}
+       </div>
+       @endif
+       @if ($errors->any())
+       <div class="alert alert-danger">
+           <ul>
+               @foreach ($errors->all() as $error)
+                   <li>{{ $error }}</li>
+               @endforeach
+           </ul>
+       </div>
+   @endif --}}
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog  modal-xl">
@@ -67,11 +80,17 @@
                                         {{-- date --}}
                                         <label for="datfilde">Date<span class="required" style="color: red;">*</span></label>
                                         <input type="date" class="form-control form-control-sm " name="date"  id="datefild" aria-describedby="datefild" placeholder="Enter Date" require>
+                                        @error('date')
+                                           <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col">
                                         {{-- Transtation no --}}
                                         <label for="transtation_no">Transtation No<span class="required" style="color: red;">*</span></label>
                                         <input type="text" class="form-control form-control-sm " name="transaction_no"  id="transtation_no" aria-describedby="transtation_no" placeholder="Enter Your Transtation No" require>
+                                        @error('transaction_no')
+                                         <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -92,14 +111,23 @@
                                            <div class="col">
                                                <!-- <label for="payment_method_no">Enter Check No.</label>  -->
                                            <input class="form-control" type="text" id="payment_method_no" name="payment_method_no" placeholder="Enter payment Method No"/>
+                                           @error('payment_method_no')
+                                         <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                            </div>
                                            <div class="col">
                                                   <!-- <label for="transtation_date">Enter  Date</label>  -->
                                            <input class="form-control" type="date" id="transtation_date" name="transtation_date" />
+                                           @error('transtation_date')
+                                         <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                            </div>
                                            <div class="col">
                                             <!-- <label for="transtation_date">Enter  Date</label>  -->
                                            <input class="form-control" type="number" id="relese_amount" name="relese_funds_amount" />
+                                           @error('relese_funds_amount')
+                                         <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                           </div>
                                          </div>
                                        </div>

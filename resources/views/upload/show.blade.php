@@ -8,6 +8,10 @@
  <div class="container">
     <div class="card mt-4 mx-2">
         <div class="card-title mt-4 mx-2">
+            <button type="button" class="btn btn-primary float-end mx-2" >
+                <a class="dropdown-item" href=" {{url('/invoiceuoload')}} ">Back To Invoice</a>
+                
+              </button>
             <h5>Invoice View</h5>
             
         </div>

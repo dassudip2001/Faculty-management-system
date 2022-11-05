@@ -30,6 +30,10 @@ class InvoiceUploadController extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+            'name'=>'required',
+            'file'=>'required',
+        ]);
         $data=new InvoiceUpload();
         $file=$request->file;
         $filename='' .$file->getClientOriginalName();
