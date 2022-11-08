@@ -30,6 +30,8 @@ class InvoiceUploadController extends Controller
      */
     public function create(Request $request)
     {
+        abort_unless(auth()->user()->can('create_invoice'),403,'you dont have required authorization to this resource');
+
         $request->validate([
             'name'=>'required',
             'file'=>'required',
@@ -125,6 +127,8 @@ class InvoiceUploadController extends Controller
      */
     public function destroy( $id)
     {
+        abort_unless(auth()->user()->can('delete_invoice'),403,'you dont have required authorization to this resource');
+
         $items = InvoiceUpload::find($id); //Reports is my model
 
 

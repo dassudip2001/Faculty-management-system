@@ -4,13 +4,13 @@
             {{ __('Create Department') }}
         </h2>
     </x-slot>
-   
+
 <div class="container  mt-4">
   <div class="row">
     <div class="col">
     @role('admin')
       <div class="card">
-         
+
           @if(session('success'))
               <div class="alert alert-primary" role="alert">
                   {{session('success')}}
@@ -29,7 +29,7 @@
           @csrf
             <div class="card-title mx-2 mt-2">
                 <h6>Department Form<span class="required" style="color: red;">*</span></h6>
-               
+
             </div>
             <hr>
             <div class="card-body">
@@ -74,11 +74,38 @@
       <div class="card max-h-96">
         <div class="card-title mx-2 mt-2">
             <a class="  float-end" href="{{ url('/department/download') }}"><i class="fa-solid fa-print"></i>Print All</a>
+            <br>
+           <hr>
+            <form action="{{ route('search') }}" method="GET" class="d-flex">
+              <input class="form-control me-2  type="text" name="search" placeholder="Search" aria-label="Search" required>
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            {{-- <form action="{{ route('search') }}" method="GET">
+                <input type="text" name="search" required/>
+                <button type="submit">Search</button>
+            </form> --}}
+{{--            <div class="input-group">--}}
+{{--                        <span class="input-group-btn mr-5 mt-1">--}}
+{{--                            <button class="btn btn-info" type="submit" title="Search projects">--}}
+{{--                                <span class="fas fa-search"></span>--}}
+{{--                            </button>--}}
+{{--                        </span>--}}
+{{--                <input type="text" class="form-control mr-2" name="term" placeholder="Search Department" id="term">--}}
+{{--                <a href="" class=" mt-1">--}}
+{{--                            <span class="input-group-btn">--}}
+{{--                                <button class="btn btn-danger" type="button" title="Refresh page">--}}
+{{--                                    <span class="fas fa-sync-alt"></span>--}}
+{{--                                </button>--}}
+{{--                            </span>--}}
+{{--                </a>--}}
+{{--            </div>--}}
+            <hr>
+
             <h6>Department Details</h6>
         </div>
         <!-- <div class="card-body"> -->
          <!-- output -->
-         
+
          <div class="table-responsive">
          <table class="table table-striped table-hover">
            <thead class="table-dark">
@@ -117,7 +144,7 @@
                 <a href=" {{ url('/department/pdfForm',$item->id) }} ">
                   <i class="fa-regular fa-solid fa-print"></i>
                  </a>
-                
+
               </td>
 
           </tr>

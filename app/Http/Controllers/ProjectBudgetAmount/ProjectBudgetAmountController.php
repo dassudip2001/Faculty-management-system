@@ -7,6 +7,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\ProjectDetails;
 use App\Models\ProjectBudgetAmount;
+use Exception;
 
 use Illuminate\Support\Facades\DB;
 
@@ -49,16 +50,36 @@ class ProjectBudgetAmountController extends Controller
      */
     public function create(Request $request)
     {
-        foreach ($request->project_details_id as $key=>$insert){
+        try{
+            
+
+            foreach ($request->project_details_id as $key=>$insert){
             $saveRecord=[
-                'project_details_id'=>$request->project_details_id[$key],
+                'project_details_id'=>require['project_details_id'],
                 'year'=>$request->year[$key],
                 'project_budge_amount'=>$request->project_budge_amount[$key],
             ];
             DB::table('project_budget_amounts')->insert($saveRecord);
         }
-        return redirect(route('project-budget-amount.create'))
+            // $projectBudgetAmount->save();
+            return redirect(route('project-budget-amount.create'))
             ->with('success','  Successfully Created');
+        }
+        catch (Exception $e)
+        {
+            return ["message" => $e->getMessage(),
+                "status" => $e->getCode()
+            ];
+        }
+        // foreach ($request->project_details_id as $key=>$insert){
+        //     $saveRecord=[
+        //         'project_details_id'=>$request->project_details_id[$key],
+        //         'year'=>$request->year[$key],
+        //         'project_budge_amount'=>$request->project_budge_amount[$key],
+        //     ];
+        //     DB::table('project_budget_amounts')->insert($saveRecord);
+        // }
+        
     }
 
     /**

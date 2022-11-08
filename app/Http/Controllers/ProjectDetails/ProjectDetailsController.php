@@ -335,21 +335,22 @@ class ProjectDetailsController extends Controller
         //    403,'you dont have required authorization to this resource');
 
         try {
-//            DB::table('projects')
-//                ->join('project_details','project_id',"=",'projects.id')
-//                ->where($id)->delete();
+
+        //    DB::table('projects')
+        //        ->join('project_details','project_id',"=",'projects.id')
+        //        ->where($id)->delete();
 //             $pc=ProjectDetails::find($id)->project_id;
 //             ProjectDetails::find($id)->delete();
-            Project::find($id)->delete();
+            // Project::find($id)->delete();
 //            $pc=Project::find($id);
 //            ProjectDetails::find($pc)->delete();
 
             // ProjectDetails::find($pc)->project_id->delete();
             //  ProjectDetails::find($pc)->delete();
-//            $fc=Project::find($id)->project_id;
+        //    $fc=ProjectDetails::find($id)->project_id;
 ////            $uc=CreateUser::find($id)->user_id;
 ////            create user delete
-//            Project::find($id)->delete();
+        //    Project::find($fc)->delete();
 ////            faculty Delete
 //            ProjectDetails::find($fc)->delete();
             return redirect(route('projectdetail.index'))

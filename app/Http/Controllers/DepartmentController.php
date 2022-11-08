@@ -28,7 +28,7 @@ class DepartmentController extends Controller
         }
 
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -165,7 +165,7 @@ class DepartmentController extends Controller
 
         try {
             Department::destroy($id);
-            return redirect(route('index'))->with('success','Department Delete Successfully');
+            return redirect(route('department.index'))->with('success','Department Delete Successfully');
         }catch (Exception $e){
 
             return ["message" => $e->getMessage(),
@@ -185,7 +185,7 @@ class DepartmentController extends Controller
         // $department = Department::find($id);
         // $pdf=PDF::loadView('department.pdf_download',compact('department'));
         //  return $pdf->download('department.pdf');
-        // view()->share('department',$department);       
+        // view()->share('department',$department);
         //     //   if($request->has('download')){
         //         $pdf = PDF::loadView('department.pdf_download');
         //         return $pdf->download('pdf_download.pdf');
@@ -198,11 +198,29 @@ class DepartmentController extends Controller
 //       $pdf = PDF::loadview('department.pdf_download', ['department' => $department]);
 // return $pdf->stream();
 
-        
+
 //         // return view('department.create')->with('listing', $listing);
 //     }
-    $department1 = Department::all()->where('id', $id);  
+    $department1 = Department::all()->where('id', $id);
     $pdf=PDF::loadView('department.pdf_download',compact('department1'));
     return $pdf->download('department.pdf');
     }
+
+    // search
+
+    public function search(Request $request){
+        // Get the search value from the request
+       $search = $request->input('search');
+
+       // Search in the title and body columns from the posts table
+       $posts = Department::query()
+           ->where('dept_name', 'LIKE', "%{$search}%")
+           ->orWhere('description', 'LIKE', "%{$search}%")
+           ->get();
+        
+
+        // Return the search view with the resluts compacted
+        return view('department.search', compact('posts'));
+    }
+    
 }

@@ -134,7 +134,7 @@
 
                    <div class="form-group mb-3">
                     <label for="project_year"> Year<span class="required" style="color: red;">*</span></label>
-                    <input type="text" class="form-control form-control" name=""  placeholder=" year" />
+                    <input type="text" class="form-control form-control"   placeholder=" year" />
                      
                       {{-- <select  id="year-dropdown" class="form-control">
   
@@ -208,7 +208,7 @@
                    <div class="modal-footer">
                     <hr>
                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary">Save </button>
+                     <button type="submit" class="btn btn-primary">Save </button>
                    </div>
                  </div>
                  </form>

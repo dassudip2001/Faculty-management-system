@@ -308,4 +308,21 @@ class CreateUserController extends Controller
     $pdf=PDF::loadView('user.pdf_download',compact('createUser1'));
     return $pdf->download('user.pdf');
     }
+
+    // search
+
+    public function search(Request $request){
+        // Get the search value from the request
+       $search = $request->input('search');
+
+       // Search in the title and body columns from the posts table
+       $posts = CreateUser::query()
+           ->where('name', 'LIKE', "%{$search}%")
+//            ->orWhere('dept_code', 'LIKE', "%{$search}%")
+           ->get();
+        
+
+        // Return the search view with the resluts compacted
+        return view('user.search', compact('posts'));
+    }
 }

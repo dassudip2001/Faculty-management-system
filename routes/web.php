@@ -71,6 +71,8 @@ require __DIR__.'/auth.php';
     Route::get('/department/download',[DepartmentController::class,'pdf']);
     // at a time one pdf
     Route::get('/department/pdfForm/{id}',[DepartmentController::class,'pdfForm']);
+//    search
+    Route::get('/search', [DepartmentController::class,'search'])->name('search');
 
 
 
@@ -92,6 +94,8 @@ require __DIR__.'/auth.php';
    Route::get('/createuser/download',[CreateUserController::class,'pdf']);
    // at a time one pdf
    Route::get('/createuser/pdfForm/{id}',[CreateUserController::class,'pdfForm']);
+   //    search
+   Route::get('/search', [CreateUserController::class,'search'])->name('search');
 
 //   funding agency
     Route::get('/funding',[FundingAgencyController::class,'index'])->name('funding.index');
@@ -103,6 +107,9 @@ require __DIR__.'/auth.php';
      Route::get('/funding/download',[FundingAgencyController::class,'pdf']);
      // at a time one pdf
      Route::get('/funding/pdfForm/{id}',[FundingAgencyController::class,'pdfForm']);
+    //  search
+   Route::get('/search', [FundingAgencyController::class,'search'])->name('search');
+
 
 //    Budget Head
     Route::get('/budget',[BudgetHeadController::class,'index'])->name('budget.index');
@@ -114,6 +121,8 @@ require __DIR__.'/auth.php';
     Route::get('/budget/download',[BudgetHeadController::class,'pdf']);
     // at a time one pdf
     Route::get('/budget/pdfForm/{id}',[BudgetHeadController::class,'pdfForm']);
+    //  search
+   Route::get('/search', [BudgetHeadController::class,'search'])->name('search');
 
 //Project
     Route::get('/project',[ProjectController::class,'index'])->name('project.index');
@@ -132,16 +141,18 @@ require __DIR__.'/auth.php';
     Route::get('/projectdetail/download',[ProjectDetailsController::class,'pdf']);
     // at a time one pdf
     Route::get('/projectdetail/pdfForm/{id}',[ProjectDetailsController::class,'pdfForm']);
+    //  search
+   Route::get('/search', [ProjectDetailsController::class,'search'])->name('search');
 
     // budget amount calculation
 
-   Route::get('/projectbudgetamount',[ProjectBudgetAmountController::class,'index'])->name('projectbudgetamount.index');
-   Route::post('/projectbudgetamount',[ProjectBudgetAmountController::class,'create'])->name('projectbudgetamount.create')->middleware(['auth','role:admin']);
-   Route::get('/projectbudgetamount/edit/{id}',[ProjectBudgetAmountController::class,'edit'])->name('projectbudgetamount.edit');
-   Route::put('/projectbudgetamount/edit/{id}',[ProjectBudgetAmountController::class,'update'])->name('projectbudgetamount.update');
-   Route::get('/projectbudgetamount/delete/{id}',[ProjectBudgetAmountController::class,'destroy'])->name('projectbudgetamount.destroy');
-//
-   Route::get('/projectbudgetamount/find/{p_id}',[ProjectBudgetAmountController::class,'find'])->name('projectbudgetamount.find');
+//    Route::get('/projectbudgetamount',[ProjectBudgetAmountController::class,'index'])->name('projectbudgetamount.index');
+//    Route::post('/projectbudgetamount',[ProjectBudgetAmountController::class,'create'])->name('projectbudgetamount.create')->middleware(['auth','role:admin']);
+//    Route::get('/projectbudgetamount/edit/{id}',[ProjectBudgetAmountController::class,'edit'])->name('projectbudgetamount.edit');
+//    Route::put('/projectbudgetamount/edit/{id}',[ProjectBudgetAmountController::class,'update'])->name('projectbudgetamount.update');
+//    Route::get('/projectbudgetamount/delete/{id}',[ProjectBudgetAmountController::class,'destroy'])->name('projectbudgetamount.destroy');
+// //
+//    Route::get('/projectbudgetamount/find/{p_id}',[ProjectBudgetAmountController::class,'find'])->name('projectbudgetamount.find');
 
 
     // invoice upload
@@ -151,6 +162,8 @@ require __DIR__.'/auth.php';
     Route::get('/download/{file}',[InvoiceUploadController::class,'download']);
     Route::get('/view/{id}',[InvoiceUploadController::class,'view']);
     Route::get('invoiceuoload/delete/{id}',[InvoiceUploadController::class,'destroy']);
+        //  search
+   Route::get('/search', [InvoiceUploadController::class,'search'])->name('search');
 
 
     //fund relies
@@ -159,9 +172,12 @@ require __DIR__.'/auth.php';
     Route::get('/relesefund/edit/{id}',[ReleseFundController::class,'edit'])->name('relesefund.edit');
     Route::put('/relesefund/edit/{id}',[ReleseFundController::class,'update'])->name('relesefund.update');
     Route::get('/relesefund/delete/{id}',[ReleseFundController::class,'destroy'])->name('relesefund.destroy');
+    // all pdf
     Route::get('/relesefund/download',[ReleseFundController::class,'pdf']);
     // at a time one pdf
     Route::get('/relesefund/pdfForm/{id}',[ReleseFundController::class,'pdfForm']);
+        //  search
+   Route::get('/search', [ReleseFundController::class,'search'])->name('search');
 
 
 

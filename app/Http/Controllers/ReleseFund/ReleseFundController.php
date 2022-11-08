@@ -42,7 +42,7 @@ class ReleseFundController extends Controller
      */
     public function create(Request $request)
     {
-        // abort_unless(auth()->user()->can('create_relese_fund'),403,'you dont have required authorization to this resource');
+        abort_unless(auth()->user()->can('create_relese_fund'),403,'you dont have required authorization to this resource');
             
         $request->validate([
             'date'=>'required',
@@ -105,7 +105,7 @@ class ReleseFundController extends Controller
      */
     public function edit($id)
     {
-        // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
+        abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
 
             $releseFund= ReleseFund::find($id);
 
@@ -130,7 +130,7 @@ class ReleseFundController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
+        abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
 
         try {
             $fund=ReleseFund::find($id);
@@ -165,7 +165,7 @@ class ReleseFundController extends Controller
      */
     public function destroy($id)
     {
-        // abort_unless(auth()->user()->can('delete_relese_fund'),403,'you dont have required authorization to this resource');
+        abort_unless(auth()->user()->can('delete_relese_fund'),403,'you dont have required authorization to this resource');
 
         try {
             ReleseFund::destroy($id);
@@ -193,5 +193,22 @@ class ReleseFundController extends Controller
         ->get()->where('id', $id);
         $pdf=PDF::loadView('relese-fund.pdf_download',compact('releseFund1'));
         return $pdf->download('funding.pdf');
+    }
+
+    // search
+
+    public function search(Request $request){
+        // Get the search value from the request
+       $search = $request->input('search');
+
+       // Search in the title and body columns from the posts table
+       $posts = ReleseFund::query()
+           ->where('transaction_no', 'LIKE', "%{$search}%")
+//            ->orWhere('dept_code', 'LIKE', "%{$search}%")
+           ->get();
+        
+
+        // Return the search view with the resluts compacted
+        return view('relese-fund.search', compact('posts'));
     }
 }
