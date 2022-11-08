@@ -53,6 +53,12 @@
           <a class="  float-end" href="{{ url('/funding/download') }}"><i class="fa-solid fa-print"></i>Print All</a>
 
             <h6>Funding Agency Details</h6>
+            <br>
+            <form action="{{route('funding.search')}}" method="GET" class="d-flex">
+              <input class="form-control me-2  type="text" name="search" placeholder="Search" aria-label="Search" required>
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <br>
         </div>
 
         <!-- <div class="card-body"> -->

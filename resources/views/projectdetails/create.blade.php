@@ -179,6 +179,12 @@
                         <i class="fa-solid fa-print"></i>Print All
                     </a>
                         <h6>Project Details</h6><hr>
+                        <br>
+                        <form action="" method="GET" class="d-flex">
+                            <input class="form-control me-2  type="text" name="search" placeholder="Search" aria-label="Search" required>
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                          </form>
+                          <br>
                     </div>
                 <div class="card-body p-0">
                  <table class="table table-striped table-hover">

@@ -73,6 +73,11 @@ require __DIR__.'/auth.php';
     Route::get('/department/pdfForm/{id}',[DepartmentController::class,'pdfForm']);
 //    search
     Route::get('/search', [DepartmentController::class,'search'])->name('search');
+    //  search
+   Route::get('/fundingsearch', [FundingAgencyController::class,'search'])->name('funding.search');
+       //  search
+   Route::get('/budgetssearch', [BudgetHeadController::class,'search'])->name('budget.search');
+
 
 
 
@@ -95,7 +100,7 @@ require __DIR__.'/auth.php';
    // at a time one pdf
    Route::get('/createuser/pdfForm/{id}',[CreateUserController::class,'pdfForm']);
    //    search
-   Route::get('/search', [CreateUserController::class,'search'])->name('search');
+//    Route::get('/search', [CreateUserController::class,'search'])->name('search');
 
 //   funding agency
     Route::get('/funding',[FundingAgencyController::class,'index'])->name('funding.index');
@@ -107,8 +112,7 @@ require __DIR__.'/auth.php';
      Route::get('/funding/download',[FundingAgencyController::class,'pdf']);
      // at a time one pdf
      Route::get('/funding/pdfForm/{id}',[FundingAgencyController::class,'pdfForm']);
-    //  search
-   Route::get('/search', [FundingAgencyController::class,'search'])->name('search');
+    
 
 
 //    Budget Head
@@ -121,8 +125,6 @@ require __DIR__.'/auth.php';
     Route::get('/budget/download',[BudgetHeadController::class,'pdf']);
     // at a time one pdf
     Route::get('/budget/pdfForm/{id}',[BudgetHeadController::class,'pdfForm']);
-    //  search
-   Route::get('/search', [BudgetHeadController::class,'search'])->name('search');
 
 //Project
     Route::get('/project',[ProjectController::class,'index'])->name('project.index');
@@ -142,7 +144,7 @@ require __DIR__.'/auth.php';
     // at a time one pdf
     Route::get('/projectdetail/pdfForm/{id}',[ProjectDetailsController::class,'pdfForm']);
     //  search
-   Route::get('/search', [ProjectDetailsController::class,'search'])->name('search');
+//    Route::get('/search', [ProjectDetailsController::class,'search'])->name('search');
 
     // budget amount calculation
 
@@ -163,7 +165,7 @@ require __DIR__.'/auth.php';
     Route::get('/view/{id}',[InvoiceUploadController::class,'view']);
     Route::get('invoiceuoload/delete/{id}',[InvoiceUploadController::class,'destroy']);
         //  search
-   Route::get('/search', [InvoiceUploadController::class,'search'])->name('search');
+//    Route::get('/search', [InvoiceUploadController::class,'search'])->name('search');
 
 
     //fund relies
@@ -177,8 +179,12 @@ require __DIR__.'/auth.php';
     // at a time one pdf
     Route::get('/relesefund/pdfForm/{id}',[ReleseFundController::class,'pdfForm']);
         //  search
-   Route::get('/search', [ReleseFundController::class,'search'])->name('search');
+//    Route::get('/search', [ReleseFundController::class,'search'])->name('search');
 
+
+// search Route
+
+    
 
 
 

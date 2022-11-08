@@ -70,6 +70,12 @@
           <a class="float-end" href=" {{ url('/budget/download') }} ">
             <i class="fa-regular fa-solid fa-print"></i>Print All
            </a>
+           <br>
+           <form action=" {{route('budget.search')}} " method="GET" class="d-flex">
+            <input class="form-control me-2  type="text" name="search" placeholder="Search" aria-label="Search" required>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <br>
             <h6>Budget Details</h6>
         </div>
        <!-- <div class="card-body"> -->

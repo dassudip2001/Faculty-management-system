@@ -12,7 +12,12 @@
            <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="fa-solid fa-plus"></i> Add New
              </button>
-        <h6 >Budget Amount Calculation Details</h6>       
+        <h6 >Budget Amount Calculation Details</h6>  
+        <br>
+        <form action="" method="GET" class="d-flex">
+          <input class="form-control me-2  type="text" name="search" placeholder="Search" aria-label="Search" required>
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>     
     </div>
     <hr>
     {{-- <div class="card-body">  --}}
