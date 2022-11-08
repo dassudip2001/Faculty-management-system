@@ -78,6 +78,9 @@ require __DIR__.'/auth.php';
        //  search
    Route::get('/budgetssearch', [BudgetHeadController::class,'search'])->name('budget.search');
 
+    //    search
+   Route::get('/usersearch', [CreateUserController::class,'search'])->name('usercreate.search');
+
 
 
 
@@ -99,8 +102,7 @@ require __DIR__.'/auth.php';
    Route::get('/createuser/download',[CreateUserController::class,'pdf']);
    // at a time one pdf
    Route::get('/createuser/pdfForm/{id}',[CreateUserController::class,'pdfForm']);
-   //    search
-//    Route::get('/search', [CreateUserController::class,'search'])->name('search');
+  
 
 //   funding agency
     Route::get('/funding',[FundingAgencyController::class,'index'])->name('funding.index');

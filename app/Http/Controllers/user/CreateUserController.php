@@ -315,8 +315,10 @@ class CreateUserController extends Controller
         // Get the search value from the request
        $search = $request->input('search');
 
+      
+
        // Search in the title and body columns from the posts table
-       $posts = CreateUser::query()
+       $posts = User::query()
            ->where('name', 'LIKE', "%{$search}%")
 //            ->orWhere('dept_code', 'LIKE', "%{$search}%")
            ->get();
@@ -325,4 +327,8 @@ class CreateUserController extends Controller
         // Return the search view with the resluts compacted
         return view('user.search', compact('posts'));
     }
+
+
+    
+
 }
