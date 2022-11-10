@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\show\ProjectViewController;
 use App\Http\Controllers\show\UserViewController;
 use App\Http\Controllers\ReleseFund\ReleseFundController;
+use App\Http\Controllers\FundReleseBudget\FundReleseBudgetController;
 use App\Http\Controllers\ProjectBudgetAmount\ProjectBudgetAmountController;
 use App\Http\Controllers\InvoiceUpload\InvoiceUploadController;
 use App\Http\Controllers\ProjectDetails\ProjectDetailsController;
@@ -102,7 +103,7 @@ require __DIR__.'/auth.php';
    Route::get('/createuser/download',[CreateUserController::class,'pdf']);
    // at a time one pdf
    Route::get('/createuser/pdfForm/{id}',[CreateUserController::class,'pdfForm']);
-  
+
 
 //   funding agency
     Route::get('/funding',[FundingAgencyController::class,'index'])->name('funding.index');
@@ -114,7 +115,7 @@ require __DIR__.'/auth.php';
      Route::get('/funding/download',[FundingAgencyController::class,'pdf']);
      // at a time one pdf
      Route::get('/funding/pdfForm/{id}',[FundingAgencyController::class,'pdfForm']);
-    
+
 
 
 //    Budget Head
@@ -184,9 +185,15 @@ require __DIR__.'/auth.php';
 //    Route::get('/search', [ReleseFundController::class,'search'])->name('search');
 
 
-// search Route
+    Route::get('/projectbudgetamount',[FundReleseBudgetController::class,'index'])->name('projectbudgetamount.index');
+    Route::post('/projectbudgetamount',[FundReleseBudgetController::class,'create'])->name('projectbudgetamount.create');
+    Route::get('/projectbudgetamount/edit/{id}',[FundReleseBudgetController::class,'edit'])->name('projectbudgetamount.edit');
+    Route::put('/projectbudgetamount/edit/{id}',[FundReleseBudgetController::class,'update'])->name('projectbudgetamount.update');
+    Route::get('/projectbudgetamount/delete/{id}',[FundReleseBudgetController::class,'destroy'])->name('projectbudgetamount.destroy');
 
-    
+
+
+
 
 
 
