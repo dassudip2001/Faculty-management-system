@@ -183,8 +183,21 @@ class ProjectDetailsController extends Controller
      * @param  int  $id
     * @return array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit(int $id)
+    public function edit( $id)
     {
+        try{
+            
+        return view('projectdetails.edit',compact('projectDetail'))
+        ->with('success','Project Update Successfully');
+        }catch (Exception $e){
+
+            return ["message" => $e->getMessage(),
+                "status" => $e->getCode()
+            ];
+        }
+
+      
+
 //        return ProjectDetails::with(
 //            [
 //                'project'=>function($q){
@@ -205,12 +218,13 @@ class ProjectDetailsController extends Controller
 //        ->get();
 
 
-        return DB::table('projects')
-            ->join('project_details','project_id',"=",'projects.id')
-            ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
-            ->join('funding_agencies','funding_agencies.id',"=",'projects.funding_agency_id')
+    //    return DB::table('projects')
+    //         ->join('project_details','project_id',"=",'projects.id')
+    //         ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
+    //         ->join('funding_agencies','funding_agencies.id',"=",'projects.funding_agency_id')
+    // return DB::table('project_details')
 
-            ->get();
+            // ->get()->where('project_id', $project_id);
 
         // $projectDetail=Project::with([
         //      'fundingagency'=>function($q){
@@ -223,8 +237,9 @@ class ProjectDetailsController extends Controller
 
         // )->find($id);
 
-        return view('projectdetails.edit',compact('projectDetail'))
-                ->with('success','Project Update Successfully');
+        // return DB::table('projects')->where('id',$id);
+
+
         // $projectDetail= DB::table('project_details')
         // // ->join('funding_agencies','funding_agencies.id',"=",'project_details.funding_agency_id')
         // ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
@@ -331,10 +346,23 @@ class ProjectDetailsController extends Controller
      */
     public function destroy($id)
     {
+
+//        public function destroy(Ticket $ticket)
+////    {
+//        $ticket =DB::table('projects')
+//            -> leftJoin('projects','tickets.id', '=','gp_group.ticket_id')
+//            -> where('tickets.id',$ticket)->first();
+////    }
+//        $ticket->delete();
+//        Project::where("id", $ticket)->delete();
+//        gp_group::where("gpid", $ticket->id)->delete();
+//        $ticket->delete();
+//        gp_group::where("gpid", $ticket->id)->delete();
     //    abort_unless(auth()->user()->can('delete_project'),
         //    403,'you dont have required authorization to this resource');
 
         try {
+
 
         //    DB::table('projects')
         //        ->join('project_details','project_id',"=",'projects.id')
