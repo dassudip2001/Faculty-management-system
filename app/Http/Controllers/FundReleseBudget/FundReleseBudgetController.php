@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FundReleseBudget;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FundReleseBudgetController extends Controller
 {
@@ -14,7 +15,10 @@ class FundReleseBudgetController extends Controller
      */
     public function index()
     {
-        return view('fund-relese-budget.create');
+        // return DB::table('budget_heads')->get();
+        $funds= DB::table('relese_funds')->get();
+
+        return view('fund-relese-budget.create',compact('funds'));
     }
 
     /**

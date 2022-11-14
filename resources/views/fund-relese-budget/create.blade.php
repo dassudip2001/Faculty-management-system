@@ -59,10 +59,12 @@
                       </div>
                       <div class="col">
                         <label for="faculty_designation">Fund Relese Budget<span class="required" style="color: red;">*</span></label>
-                        <select  name="project_total_cost" id="amount" class="form-select" aria-label="Default select example" id="selector" onchange="yesnoCheck(this);">
-                            <option   value="select">Select payment mathod</option>
-                            <option   value="CHECK">Check</option>
-                            <option   value="NEFT">NEFT</option>
+                        <select name="funding_agency_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <option selected hidden>Select</option>
+                            @foreach ($funds as $funding)
+                                <option value="{{$funding->id}}">{{$funding->relese_funds_amount}}
+                                </option>
+                            @endforeach
                         </select>
                       </div>
                  </div>
