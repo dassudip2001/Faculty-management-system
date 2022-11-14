@@ -22,8 +22,12 @@ class FundReleseBudgetModule extends Model
         return $this->belongsTo(ReleseFund::class,'relese_fund_id','id');
     }
 
-    public function fundReleseBudget(){
-        return $this->belongsToMany(BudgetHead::class,'fund_relese_budget_amount','id');
+    // public function fundReleseBudget(){
+    //     return $this->belongsToMany(BudgetHead::class,'relese_fund_budget_id','id');
+    // }
+
+    public function budgethead(){
+        return $this->belongsToMany(BudgetHead::class,'relese_fund_budget_id','id');
     }
 
 }

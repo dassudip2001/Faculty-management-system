@@ -199,24 +199,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (old('budget_id', ['']) as $index => $oldProduct)
+                            @foreach (old('relese_fund_budget_id', ['']) as $index => $oldProduct)
                                 <tr id="product{{ $index }}">
                                     <td>
-                                        <select name="budget_id[]" class="form-control">
+                                        <select name="relese_fund_budget_id[]" class="form-control">
                                             <option value="">-- choose Budget Name --</option>
-                                           
-                                                <option value="">
-                                                   
+                                             @foreach ($budget as $bud )
+                                                 
+                                            
+                                                <option value="$bud->id">
+                                                   {{$bud->budget_title}}
                                                 </option>
-                                       
+                                        @endforeach
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" />
+                                        <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="fund_relese_budget_amount[]" id="clear" placeholder="Enter Budget Amount" />
                                     </td>
                                 </tr>
                             @endforeach
-                            <tr id="product{{ count(old('budget_id', [''])) }}"></tr>
+                            <tr id="product{{ count(old('relese_fund_budget_id', [''])) }}"></tr>
                         </tbody>
                     </table>
 
@@ -349,7 +351,7 @@
         {{--  --}}
         <script>
             $(document).ready(function(){
-                let row_number = {{ count(old('budget_id', [''])) }};
+                let row_number = {{ count(old('relese_fund_budget_id', [''])) }};
                 $("#add_row").click(function(e){
                   e.preventDefault();
                   let new_row_number = row_number - 1;
@@ -371,7 +373,7 @@
               //calculation
             function findTotal() {
 
-                var arr = document.getElementsByName('budget_details_amount[]');
+                var arr = document.getElementsByName('fund_relese_budget_amount[]');
                 var tot = 0;
                 //button
                 var Amount = document.getElementById('amount').value;

@@ -31,7 +31,10 @@ class ReleseFundController extends Controller
             // ->join('project_details','project_details.project_id',"=",'relese_funds.projec_fund_relese_id')->get();
             // return DB::table('relese_funds')->get();
             // = ReleseFund::all();
-        return view('relese-fund.create',compact('fund','projectDetail'));
+
+            // budgets
+            $budget=DB::table('budget_heads')->get();
+        return view('relese-fund.create',compact('fund','projectDetail','budget'));
     }
 
     // Search The Budget
@@ -54,6 +57,24 @@ class ReleseFundController extends Controller
             'payment_method_no'=>'required',
             'projec_fund_relese_id'=>'required',
         ]);
+
+        // $fields=$request->only([
+        //     'date','transaction_no','payment_method','transtation_date',
+        //     'relese_funds_amount','payment_method_no','projec_fund_relese_id',
+        //     'projec_fund_relese_id','relese_fund_id','relese_fund_budget_id',
+        // ]);
+        //   $fund=new ReleseFund([
+        //     'date'=>$fields['date'],
+        //     'transaction_no'=>$fields['transaction_no'],
+        //     'payment_method'=>$fields['payment_method'],
+        //     'transtation_date'=>$fields['transtation_date'],
+        //     'payment_method_no'=>$fields['payment_method_no'],
+        //     'relese_funds_amount'=>$fields['relese_funds_amount'],
+        //     // project Id
+        //     // 'projec_fund_relese_id'=>$fields['projec_fund_relese_id'],
+        //   ]);
+        //   $fund->projec_fund_relese_id=$fields['projec_fund_relese_id'];
+        //   $fund->save();
                $fund=new ReleseFund;
                $fund->date=$request->date;
                $fund->transaction_no=$request->transaction_no;
@@ -63,6 +84,16 @@ class ReleseFundController extends Controller
                $fund->relese_funds_amount=$request->relese_funds_amount;
                $fund->projec_fund_relese_id=$request['projec_fund_relese_id'];
                $fund->save();
+
+            //    budget Calculation
+            foreach($request->relese_fund_budget_id as $key=>$insert){
+                $saveRecord=[
+                    'relese_fund_id'=>$fund->id,
+                    'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key],
+                    'fund_relese_budget_amount'=>$request->fund_relese_budget_amount[$key],
+                ];
+                DB::table('fund_relese_budget_modules')->insert($saveRecord);
+            }
                return redirect(route('relesefund.create'))->with('success','Created Successfully');
     }
 
