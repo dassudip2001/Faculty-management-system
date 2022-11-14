@@ -70,6 +70,7 @@ class ProjectDetailsController extends Controller
      */
     public function create(Request $request  )
     {
+        // dd($request->all());
         // if(Auth::user()->id=='1' || auth()->user()->id==$id+1)
 //       dd($request->all());
 //         abort_unless(auth()->user()->can('create_project'),

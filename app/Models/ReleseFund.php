@@ -14,6 +14,8 @@ class ReleseFund extends Model
         'payment_method',
         'transtation_date',
         'payment_method_no',
+        'relese_funds_amount',
+        'projec_fund_relese_id'
     ];
     // public function projectFund(){
     //     return $this->belongsTo(Project::class,'projec_fund_relese_id','id');

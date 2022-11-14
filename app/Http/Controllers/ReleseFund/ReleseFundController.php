@@ -46,6 +46,7 @@ class ReleseFundController extends Controller
      */
     public function create(Request $request)
     {
+        dd($request->all());
         abort_unless(auth()->user()->can('create_relese_fund'),403,'you dont have required authorization to this resource');
 
         $request->validate([
@@ -58,32 +59,33 @@ class ReleseFundController extends Controller
             'projec_fund_relese_id'=>'required',
         ]);
 
-        // $fields=$request->only([
-        //     'date','transaction_no','payment_method','transtation_date',
-        //     'relese_funds_amount','payment_method_no','projec_fund_relese_id',
-        //     'projec_fund_relese_id','relese_fund_id','relese_fund_budget_id',
-        // ]);
-        //   $fund=new ReleseFund([
-        //     'date'=>$fields['date'],
-        //     'transaction_no'=>$fields['transaction_no'],
-        //     'payment_method'=>$fields['payment_method'],
-        //     'transtation_date'=>$fields['transtation_date'],
-        //     'payment_method_no'=>$fields['payment_method_no'],
-        //     'relese_funds_amount'=>$fields['relese_funds_amount'],
-        //     // project Id
-        //     // 'projec_fund_relese_id'=>$fields['projec_fund_relese_id'],
-        //   ]);
-        //   $fund->projec_fund_relese_id=$fields['projec_fund_relese_id'];
-        //   $fund->save();
-               $fund=new ReleseFund;
-               $fund->date=$request->date;
-               $fund->transaction_no=$request->transaction_no;
-               $fund->payment_method=$request->payment_method;
-               $fund->transtation_date=$request->transtation_date;
-               $fund->payment_method_no=$request->payment_method_no;
-               $fund->relese_funds_amount=$request->relese_funds_amount;
-               $fund->projec_fund_relese_id=$request['projec_fund_relese_id'];
-               $fund->save();
+        $fields=$request->only([
+            'date','transaction_no','payment_method','transtation_date',
+            'relese_funds_amount','payment_method_no','projec_fund_relese_id',
+            'projec_fund_relese_id','relese_fund_id','relese_fund_budget_id',
+            'fund_relese_budget_amount'
+        ]);
+          $fund=new ReleseFund([
+            'date'=>$fields['date'],
+            'transaction_no'=>$fields['transaction_no'],
+            'payment_method'=>$fields['payment_method'],
+            'transtation_date'=>$fields['transtation_date'],
+            'payment_method_no'=>$fields['payment_method_no'],
+            'relese_funds_amount'=>$fields['relese_funds_amount'],
+            // project Id
+            // 'projec_fund_relese_id'=>$fields['projec_fund_relese_id'],
+          ]);
+          $fund->projec_fund_relese_id=$fields['projec_fund_relese_id'];
+          $fund->save();
+            //    $fund=new ReleseFund;
+            //    $fund->date=$request->date;
+            //    $fund->transaction_no=$request->transaction_no;
+            //    $fund->payment_method=$request->payment_method;
+            //    $fund->transtation_date=$request->transtation_date;
+            //    $fund->payment_method_no=$request->payment_method_no;
+            //    $fund->relese_funds_amount=$request->relese_funds_amount;
+            //    $fund->projec_fund_relese_id=$request['projec_fund_relese_id'];
+            //    $fund->save();
 
             //    budget Calculation
             foreach($request->relese_fund_budget_id as $key=>$insert){

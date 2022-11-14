@@ -124,7 +124,7 @@
                                            </div>
                                            <div class="col">
                                             <!-- <label for="transtation_date">Enter  Date</label>  -->
-                                           <input class="form-control" type="number" id="relese_amount" name="relese_funds_amount" />
+                                           <input class="form-control" type="number" id="relese_amount" name="relese_funds_amount" placeholder="Enter Relese Amount"/>
                                            @error('relese_funds_amount')
                                          <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -207,7 +207,7 @@
                                              @foreach ($budget as $bud )
                                                  
                                             
-                                                <option value="$bud->id">
+                                                <option value="{{$bud->id}}">
                                                    {{$bud->budget_title}}
                                                 </option>
                                         @endforeach
@@ -231,7 +231,7 @@
                          <div class="col-sm-2">
                         
                     <label for="total_amount">Total Amount</label>
-                    <input type="number" class="form-control form-control" name="totalAmount"  id="grandTotal" aria-describedby="total_amount" placeholder="0" readonly>
+                    <input type="number"  class="form-control form-control" name="totalAmount"  id="grandTotal" aria-describedby="total_amount" placeholder="0" readonly>
                 </div>
                 </div>
                 </div>
@@ -240,7 +240,7 @@
             </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit"  id="submit" disabled class="btn btn-primary">Save changes</button>
               </div>
             </div> 
         </form>
@@ -376,7 +376,7 @@
                 var arr = document.getElementsByName('fund_relese_budget_amount[]');
                 var tot = 0;
                 //button
-                var Amount = document.getElementById('amount').value;
+                var Amount = document.getElementById('relese_amount').value;
                 var button = document.querySelector("#submit");
                   //setting button state to disabled
                 //button complete

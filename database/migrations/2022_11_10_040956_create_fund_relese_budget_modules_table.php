@@ -18,7 +18,7 @@ class CreateFundReleseBudgetModulesTable extends Migration
             $table->unsignedBigInteger('relese_fund_id');
             $table->unsignedBigInteger('relese_fund_budget_id');
             $table->bigInteger('fund_relese_budget_amount');
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 
