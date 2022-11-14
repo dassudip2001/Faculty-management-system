@@ -20,20 +20,7 @@
        <h6 class="mt-2">Relese Fund </h6>
 
        <hr>
-       {{-- @if(session('success'))
-       <div class="alert alert-primary" role="alert">
-           {{session('success')}}
-       </div>
-       @endif
-       @if ($errors->any())
-       <div class="alert alert-danger">
-           <ul>
-               @foreach ($errors->all() as $error)
-                   <li>{{ $error }}</li>
-               @endforeach
-           </ul>
-       </div>
-   @endif --}}
+      
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog  modal-xl">
@@ -160,21 +147,7 @@
                                            </div>
                                        </div>
 
-                                     <!-- <div id="neft" style="display: none;" class="mt-2">
-                                     <div class="row">
-                                         <div class="col">
-                                            <label for="payment_method_no">Enter Transeation No.</label> 
-                                         <input class="form-control"type="text" id="payment_method_no" name="payment_method_no" />
-                                         </div>
-                                         <div class="col">
-                                             <label for="transtation_date">Enter Transeation Date</label> 
-                                         <input class="form-control" type="date" id="transtation_date" name="transtation_date" />
-                                         </div>
-                                     </div> -->
-
-                                     <!-- <label for="pan">Enter Pan Card No.</label> 
-                                     <input type="text" id="pan" name="pan" /><br /> -->
-                                     <!-- </div> -->
+                                    
                                     </div>
                                 </div>
                                 {{--  --}}
@@ -204,11 +177,9 @@
                                     <td>
                                         <select name="relese_fund_budget_id[]" class="form-control">
                                             <option value="">-- choose Budget Name --</option>
-                                             @foreach ($budget as $bud )
-                                                 
-                                            
-                                                <option value="{{$bud->id}}">
-                                                   {{$bud->budget_title}}
+                                             @foreach ($budget as $budgets )                 
+                                                <option value="{{$budgets->id}}">
+                                                   {{$budgets->budget_title}}
                                                 </option>
                                         @endforeach
                                         </select>
@@ -244,12 +215,13 @@
               </div>
             </div> 
         </form>
+
           </div>
         </div>
     </div>
     <div class="card-title mx-3">
         <form action="" method="GET" class="d-flex">
-            <input class="form-control me-2  type="text" name="search" placeholder="Search" aria-label="Search" required>
+            <input class="form-control me-2"  type="text" name="search" placeholder="Search" aria-label="Search" required>
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
 
@@ -346,10 +318,9 @@
    
 }
 
-        </script>
+        
 
-        {{--  --}}
-        <script>
+        
             $(document).ready(function(){
                 let row_number = {{ count(old('relese_fund_budget_id', [''])) }};
                 $("#add_row").click(function(e){
