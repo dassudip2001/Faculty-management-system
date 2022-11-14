@@ -40,7 +40,7 @@
                         </div>
                         <div class="card-body">
                             {{-- form --}}
-                            <form action="" method="POST">
+                            <form action="" method="POST" name="budgetForm">
                                 @csrf
                                 {{-- form value  --}}
                                 <div class="row">
@@ -146,8 +146,60 @@
                                            </div>
                                            </div>
                                        </div>
+                                       <br>
+                                       <hr>
 
+                                       <div class="card">
+                                        <div class="card-header">
+                                            Budget Details 
+                                        </div>
+                        
+                                        <div class="card-body">
+                                            <table class="table" id="products_table">
+                                                <thead>
+                                                    <tr>
+                                                        <th >Budget Name</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (old('relese_fund_budget_id', ['']) as $index => $oldProduct)
+                                                        <tr id="product{{ $index }}">
+                                                            <td>
+                                                                <select name="relese_fund_budget_id[]" class="form-control">
+                                                                    <option value="">-- choose Budget Name --</option>
+                                                                     @foreach ($budget as $budgets )                 
+                                                                        <option value="{{$budgets->id}}">
+                                                                           {{$budgets->budget_title}}
+                                                                        </option>
+                                                                @endforeach
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="fund_relese_budget_amount[]" id="clear" placeholder="Enter Budget Amount" />
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    <tr id="product{{ count(old('relese_fund_budget_id', [''])) }}"></tr>
+                                                </tbody>
+                                            </table>
+                        
+                                            <div class="row">
+                                                <div class="col-sm-10">
+                                                    <button  id="add_row" class="btn  btn-success pull-left">+ Add Row</button>
+                                                    <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
+                                                </div>
+                                                
+                                                 <div class="col-sm-2">
+                                                
+                                            <label for="total_amount">Total Amount</label>
+                                            <input type="number"  class="form-control form-control" name="totalAmount"  id="grandTotal" aria-describedby="total_amount" placeholder="0" readonly>
+                                        </div>
+                                        </div>
+                                        </div>
+                                   
                                     
+                                    </div>
                                     </div>
                                 </div>
                                 {{--  --}}
@@ -158,57 +210,7 @@
                         </div>
                      </div>
               </div>
-              <div class="card">
-                <div class="card-header">
-                    Budget Details 
-                </div>
-
-                <div class="card-body">
-                    <table class="table" id="products_table">
-                        <thead>
-                            <tr>
-                                <th >Budget Name</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (old('relese_fund_budget_id', ['']) as $index => $oldProduct)
-                                <tr id="product{{ $index }}">
-                                    <td>
-                                        <select name="relese_fund_budget_id[]" class="form-control">
-                                            <option value="">-- choose Budget Name --</option>
-                                             @foreach ($budget as $budgets )                 
-                                                <option value="{{$budgets->id}}">
-                                                   {{$budgets->budget_title}}
-                                                </option>
-                                        @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="fund_relese_budget_amount[]" id="clear" placeholder="Enter Budget Amount" />
-                                    </td>
-                                </tr>
-                            @endforeach
-                            <tr id="product{{ count(old('relese_fund_budget_id', [''])) }}"></tr>
-                        </tbody>
-                    </table>
-
-                    <div class="row">
-                        <div class="col-sm-10">
-                            <button  id="add_row" class="btn  btn-success pull-left">+ Add Row</button>
-                            <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
-                        </div>
-                        
-                         <div class="col-sm-2">
-                        
-                    <label for="total_amount">Total Amount</label>
-                    <input type="number"  class="form-control form-control" name="totalAmount"  id="grandTotal" aria-describedby="total_amount" placeholder="0" readonly>
-                </div>
-                </div>
-                </div>
-           
-            
-            </div>
+             
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit"  id="submit" disabled class="btn btn-primary">Save changes</button>

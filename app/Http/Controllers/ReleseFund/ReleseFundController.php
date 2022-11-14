@@ -46,7 +46,7 @@ class ReleseFundController extends Controller
      */
     public function create(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         abort_unless(auth()->user()->can('create_relese_fund'),403,'you dont have required authorization to this resource');
 
         $request->validate([
