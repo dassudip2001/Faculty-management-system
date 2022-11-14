@@ -254,6 +254,7 @@
                 <th>No</th>
                 <th>Transtation  Date</th>
                 <th>Amount</th>
+                <th>Finding Budget Name</th>
                 <th>Action</th>
                 <th>Print</th>
 

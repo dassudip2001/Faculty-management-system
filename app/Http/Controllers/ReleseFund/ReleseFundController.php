@@ -23,8 +23,17 @@ class ReleseFundController extends Controller
             // ->join('funding_agencies','funding_agencies.id',"=",'projects.funding_agency_id')
             ->get();
 
+            return DB::table('relese_funds')
+            ->join('projects','projects.id','=','relese_funds.projec_fund_relese_id')
+            ->join('fund_relese_budget_modules','fund_relese_budget_modules.relese_fund_id','=','relese_funds.id')
+            // ->join('budget_heads','budget_heads.id','=','relese_funds.relese_fund_budget_id')
+            ->join('budget_heads','budget_heads.id','=','fund_relese_budget_modules.relese_fund_budget_id')
+            // ->join('')
+            ->get();
+
             $fund= DB::table('projects')
             ->join('relese_funds','relese_funds.projec_fund_relese_id',"=",'projects.id')
+            // ->join('relese_funds','relese_funds.id','=','fund_relese_budget_modules.relese_fund_id')
             ->get();
             // show details in views
             // return DB::table('relese_funds')
@@ -34,7 +43,7 @@ class ReleseFundController extends Controller
 
             // budgets
             $budget=DB::table('budget_heads')->get();
-        return view('relese-fund.create',compact('fund','projectDetail','budget'));
+        return view('relese-fund.create',compact('fund','projectDetail','budget','relesFubdAmount'));
     }
 
     // Search The Budget
