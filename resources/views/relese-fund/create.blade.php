@@ -253,15 +253,15 @@
                 <th>Type</th>
                 <th>No</th>
                 <th>Transtation  Date</th>
-                <th>Amount</th>
-                <th>Finding Budget Name</th>
+                <th>Relese Amount</th>
+                <th> Budget Name || Amount</th>
                 <th>Action</th>
                 <th>Print</th>
 
              </tr>
             </thead>
             <tbody>
-                @foreach ($fund as $trans)              
+                @foreach ($relesFubdAmount as $trans)              
                 <tr>
                     <td>{{$trans->project_no}} ||  {{$trans->project_title}} </td>
                     <td> {{$trans->date}} </td>
@@ -270,6 +270,7 @@
                     <td>{{$trans->payment_method_no}}</td>
                     <td>{{$trans->transtation_date}}</td>
                     <td>{{$trans->relese_funds_amount}}</td>
+                    <td>{{$trans->budget_title}} || {{$trans->fund_relese_budget_amount}} </td>
                     <th>
                         <a href=" {{ url('/relesefund/edit',$trans->id) }} ">
                             <i class="fa-regular fa-pen-to-square"></i>

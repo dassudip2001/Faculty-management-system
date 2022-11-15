@@ -18,12 +18,12 @@
               <div class="row">
                 <div class="col">
                     <label for="datfilde">Date</label>
-                    <input type="text" class="form-control form-control-sm " name="date" value=" {{$releseFund->date}} "  id="datefild" aria-describedby="datefild" placeholder="Enter Date" require>
+                    <input type="text" class="form-control form-control-sm " name="date" value="  "  id="datefild" aria-describedby="datefild" placeholder="Enter Date" require>
                 </div>
                 <div class="col">
                      {{-- Transtation no --}}
                      <label for="transtation_no">Transtation No</label>
-                     <input type="text" class="form-control form-control-sm " name="transaction_no" value=" {{$releseFund->transaction_no}} "  id="transtation_no" aria-describedby="transtation_no" placeholder="Enter Your Transtation No" require>
+                     <input type="text" class="form-control form-control-sm " name="transaction_no" value=" "  id="transtation_no" aria-describedby="transtation_no" placeholder="Enter Your Transtation No" require>
                 </div>
               </div>
               <div class="row">
@@ -31,26 +31,27 @@
                     <label for="faculty_designation">Payment Recive Method<span class="required" style="color: red;">*</span></label>
                     <div>
 
-                       <select  name="payment_method"  class="form-select" aria-label="Default select example" id="selector" value="{{$releseFund->payment_method}}" onchange="yesnoCheck(this);">
+                       <select  name="payment_method"  class="form-select" aria-label="Default select example" id="selector" value="" onchange="yesnoCheck(this);">
                            <option   value="select">Select payment mathod</option>
-                           <option   value="CHECK">Check</option>
+                           <option   value="CHECK">Cheque</option>
                            <option   value="NEFT">NEFT</option>
                        </select>
                    </div>
+                   <br>
                 
                    <div id="input" style="display: none;" class="mt-2">
                      <div class="row">
                        <div class="col">
                            <!-- <label for="payment_method_no">Enter Check No.</label>  -->
-                       <input class="form-control" type="text" id="payment_method_no" value=" {{$releseFund->payment_method_no}} " name="payment_method_no" placeholder="Enter payment Method No"/>
+                       <input class="form-control" type="text" id="payment_method_no" value="  " name="payment_method_no" placeholder="Enter payment Method No"/>
                        </div>
                        <div class="col">
                               <!-- <label for="transtation_date">Enter  Date</label>  -->
-                       <input class="form-control" type="text" id="transtation_date" value=" {{$releseFund->transtation_date}} " name="transtation_date" />
+                       <input class="form-control" type="text" id="transtation_date" value=" " name="transtation_date" />
                        </div>
                        <div class="col">
                         <!-- <label for="transtation_date">Enter  Date</label>  -->
-                       <input class="form-control" type="number" id="relese_amount" name="relese_funds_amount"  value=" {{$releseFund->relese_funds_amount}} " />
+                       <input class="form-control" type="number" id="relese_amount" name="relese_funds_amount"  value=" " />
                       </div>
                      </div>
                    </div>
@@ -82,6 +83,60 @@
                        </div>
                        </div>
                    </div>
+
+                <br>
+                <hr>
+                <div class="card">
+                    <div class="card-header">
+                        Budget Details 
+                    </div>
+    
+                    <div class="card-body">
+                        <table class="table" id="products_table">
+                            <thead>
+                                <tr>
+                                    <th >Budget Name</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (old('relese_fund_budget_id', ['']) as $index => $oldProduct)
+                                    <tr id="product{{ $index }}">
+                                        <td>
+                                            <select name="relese_fund_budget_id[]" class="form-control">
+                                                <option value="">-- choose Budget Name --</option>
+                                                 
+                                                    <option value="">
+                                                      
+                                                    </option>
+                                          
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="fund_relese_budget_amount[]" id="clear" placeholder="Enter Budget Amount" />
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                <tr id="product{{ count(old('relese_fund_budget_id', [''])) }}"></tr>
+                            </tbody>
+                        </table>
+    
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <button  id="add_row" class="btn  btn-success pull-left">+ Add Row</button>
+                                <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
+                            </div>
+                            
+                             <div class="col-sm-2">
+                            
+                        <label for="total_amount">Total Amount</label>
+                        <input type="number"  class="form-control form-control" name="totalAmount"  id="grandTotal" aria-describedby="total_amount" placeholder="0" readonly>
+                    </div>
+                    </div>
+                    </div>
+               
+                
+                </div>
 
                  
                 </div>
@@ -127,6 +182,59 @@
     }
    
 }
+
+
+// amount Drop down
+$(document).ready(function(){
+                let row_number = {{ count(old('relese_fund_budget_id', [''])) }};
+                $("#add_row").click(function(e){
+                  e.preventDefault();
+                  let new_row_number = row_number - 1;
+                  $('#product' + row_number).html($('#product' + new_row_number).html()).find('td:first-child');
+                  $('#products_table').append('<tr id="product' + (row_number + 1) + '"></tr>');
+                  row_number++;
+                });
+            
+                $("#delete_row").click(function(e){
+                  e.preventDefault();
+                  if(row_number > 1){
+                    $("#product" + (row_number - 1)).html('');
+                    row_number--;
+                  }
+                });
+                console.log("#add_row");
+              });
+
+              //calculation
+            function findTotal() {
+
+                var arr = document.getElementsByName('fund_relese_budget_amount[]');
+                var tot = 0;
+                //button
+                var Amount = document.getElementById('relese_amount').value;
+                var button = document.querySelector("#submit");
+                  //setting button state to disabled
+                //button complete
+                for (var i = 0; i < arr.length; i++) {
+                    if (parseInt(arr[i].value))
+                        tot += parseInt(arr[i].value);
+                    console.log(tot);
+                }
+                document.getElementById('grandTotal').value = tot;
+                console.log(tot);
+                if (tot==Amount){
+                     alert('Equal To The Grand Total ');
+                    add_row.disabled=true;
+                    button.disabled = false;
+                  $('#budgetForm').submit();
+                }
+                else{
+                    button.disabled = true;
+                    alert('Somethings Went Wrong ');
+                }
+
+            }
+
        </script>
    @endsection 
 </x-admin-layout>

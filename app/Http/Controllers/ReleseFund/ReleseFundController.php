@@ -23,7 +23,7 @@ class ReleseFundController extends Controller
             // ->join('funding_agencies','funding_agencies.id',"=",'projects.funding_agency_id')
             ->get();
 
-            return DB::table('relese_funds')
+            $relesFubdAmount= DB::table('relese_funds')
             ->join('projects','projects.id','=','relese_funds.projec_fund_relese_id')
             ->join('fund_relese_budget_modules','fund_relese_budget_modules.relese_fund_id','=','relese_funds.id')
             // ->join('budget_heads','budget_heads.id','=','relese_funds.relese_fund_budget_id')
@@ -138,7 +138,7 @@ class ReleseFundController extends Controller
      */
     public function edit($id)
     {
-        abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
+        // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
 
             $releseFund= ReleseFund::find($id);
 
@@ -163,7 +163,7 @@ class ReleseFundController extends Controller
      */
     public function update(Request $request, $id)
     {
-        abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
+        // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
 
         try {
             $fund=ReleseFund::find($id);
@@ -198,7 +198,7 @@ class ReleseFundController extends Controller
      */
     public function destroy($id)
     {
-        abort_unless(auth()->user()->can('delete_relese_fund'),403,'you dont have required authorization to this resource');
+        // abort_unless(auth()->user()->can('delete_relese_fund'),403,'you dont have required authorization to this resource');
 
         try {
             ReleseFund::destroy($id);
