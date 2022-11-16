@@ -138,6 +138,7 @@ class ReleseFundController extends Controller
      */
     public function edit($id)
     {
+        return DB::table('relese_funds')->get();
         // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
 
             $releseFund= ReleseFund::find($id);

@@ -187,6 +187,7 @@
                           <br>
                     </div>
                 <div class="card-body p-0">
+                    <div class="table-responsive">
                  <table class="table table-striped table-hover">
                      <thead class="table-dark">
                      <tr>
@@ -234,6 +235,7 @@
                      @endforeach
                      </tbody>
                   </table>
+                    </div>
                 </div>
                 </div>
             </div>

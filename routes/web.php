@@ -138,7 +138,7 @@ require __DIR__.'/auth.php';
 
 // Project Details
     Route::get('/projectdetail',[ProjectDetailsController::class,'index'])->name('projectdetail.index');
-    Route::post('/projectdetail',[ProjectDetailsController::class,'create'])->name('projectdetail.create')->middleware(['auth','role:admin']);
+    Route::post('/projectdetail',[ProjectDetailsController::class,'create'])->name('projectdetail.create');
     Route::get('/projectdetail/edit/{id}',[ProjectDetailsController::class,'edit'])->name('projectdetail.edit')->middleware(['auth','role:admin']);
     Route::put('/projectdetail/edit/{id}',[ProjectDetailsController::class,'update'])->name('projectdetail.update')->middleware(['auth','role:admin']);
     Route::get('/projectdetail/delete/{id}',[ProjectDetailsController::class,'destroy'])->name('projectdetail.destroy')->middleware(['auth','role:admin']);

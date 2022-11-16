@@ -101,6 +101,7 @@
             </div>
             <div class="card-body p-0">
                 <!-- table Show data -->
+                <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead class="table-dark">
                         <tr>
@@ -144,6 +145,7 @@
                     </tbody>
 
                 </table>
+                </div>
             </div>
             </div>
 

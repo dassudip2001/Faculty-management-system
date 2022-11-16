@@ -7,7 +7,7 @@
 <div class="container  mt-4">
   <div class="row">
     <div class="col">
-      <div class="card">
+      <div class="card max-h-96">
           <div class="mx-3 mt-2">
               <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                   <div class="modal-dialog modal-xl">
@@ -231,6 +231,7 @@
           <h6> User Details</h6>
         </div>
         <div class="card-body p-0">
+          <div class="table-responsive">
           <table class="table table-striped table-hover ">
           <thead class="table-dark">
             <tr>
@@ -292,6 +293,7 @@
          @endforeach
         </tbody>
           </table>
+          </div>
         </div>
       </div>
     </div>

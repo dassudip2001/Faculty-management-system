@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col">
     @role('admin')
-      <div class="card">
+      <div class="card max-h-96">
 
           @if(session('success'))
               <div class="alert alert-primary" role="alert">
@@ -77,7 +77,7 @@
             <br>
            <hr>
             <form action="{{ route('search') }}" method="GET" class="d-flex">
-              <input class="form-control me-2  type="text" name="search" placeholder="Search" aria-label="Search" required>
+              <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search" required>
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             {{-- <form action="{{ route('search') }}" method="GET">

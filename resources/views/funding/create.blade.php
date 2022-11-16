@@ -63,6 +63,7 @@
 
         <!-- <div class="card-body"> -->
          <!-- output -->
+         <div class="table-responsive">
          <table class="table table-striped table-hover">
            <thead class="table-dark">
             <tr>
@@ -79,28 +80,27 @@
            <tr>
              <td>{{$item->id}}</td>
              <td> {{$item->agency_name}}</td>
-             <th>
+             <td>
              @role('admin')
              <a href=" {{ url('/funding/edit',$item->id) }} ">
               <i class="fa-regular fa-pen-to-square"></i>
              </a>
             <a href=" {{ url('/funding/delete',$item->id) }} ">
              <i class="fa-solid fa-trash" ></i>
+            </a>
              @endrole
-             </th>
-             <th>
-                </a>
-            </th>
-            <th>
+             </td>
+            <td>
               <a href=" {{ url('/funding/pdfForm',$item->id) }} ">
                 <i class="fa-regular fa-solid fa-print"></i>
                </a>
 
-            </th>
+            </td>
           </tr>
           @endforeach
         </tbody>
        </table>
+      </div>
         <!-- </div> -->
       </div>
     </div>
