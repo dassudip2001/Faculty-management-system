@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Vidyasagar University</title>
+        <link rel="icon" href="{!! asset('img/logo.png') !!}"/>
+        
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- fonts -->
@@ -41,20 +43,20 @@
         </style>
     </head>
     <body class="antialiased">
-        
+
         <div class="relative flex items-top justify-center min-h-screen bg-purple-500 dark:bg-purple-900 sm:items-center py-4 sm:pt-0">
 
 
-        
+
 
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
                         <a href="{{ url('/dashboard') }}" class="text text-red-700 ">Dashboard</a>
                     @else
-                    
+
                     <a href="{{ route('login') }}" class="text text-red-700 mx-5 "><i class="fa-solid fa-key"></i>  Log in</a>
-                    
+
                         @if (Route::has('register'))
                             {{-- <a href="{{ route('register') }}" class="ml-4 text text-read-700 "><i class="fa-solid fa-user-plus"></i>  Register</a> --}}
                         @endif
