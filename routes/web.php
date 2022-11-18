@@ -83,6 +83,9 @@ require __DIR__.'/auth.php';
    Route::get('/usersearch', [CreateUserController::class,'search'])->name('usercreate.search');
 
 
+//    search
+Route::get('/invoiceupload',[InvoiceUploadController::class,'search'])->name('invoiceupload.search');
+
 
 
 

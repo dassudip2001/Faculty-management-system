@@ -22,8 +22,8 @@
             }
         </style> --}}
     </head>
-    <body>
-        <div class="font-sans text-gray-900 antialiased">
+    <body >
+        <div class="font-sans text-gray-900 antialiased" >
             {{-- <div style="background-color: aqua"> --}}
                 {{ $slot }}
             {{-- </div> --}}
