@@ -46,7 +46,7 @@
                                 <div class="row">
                                     <div class="col">
                                         {{-- select project --}}
-                                        <label for="faculty_designation">Payment Recive Method<span class="required" style="color: red;">*</span></label>
+                                        <label for="faculty_designation">Select Project<span class="required" style="color: red;">*</span></label>
                                         <div>
 
                                            <select  name="projec_fund_relese_id" class="form-select" aria-label="Default select example" id="selector" onchange="yesnoCHEQUE(this);">

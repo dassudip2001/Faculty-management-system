@@ -56,7 +56,7 @@ class ReleseFundController extends Controller
     public function create(Request $request)
     {
         // dd($request->all());
-        abort_unless(auth()->user()->can('create_relese_fund'),403,'you dont have required authorization to this resource');
+        // abort_unless(auth()->user()->can('create_relese_fund'),403,'you dont have required authorization to this resource');
 
         $request->validate([
             'date'=>'required',
@@ -134,16 +134,30 @@ class ReleseFundController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
-        return DB::table('relese_funds')->get();
-        // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
 
-            $releseFund= ReleseFund::find($id);
 
-        return view('relese-fund.edit',compact('releseFund'));
+        $budget_heads =  DB::table('budget_heads')->get();
+        $projectDetail=DB::table('projects')->get();
+        $fund_relese_budget_modules = DB::table('fund_relese_budget_modules')->get();
+        $relese_funds = DB::table('relese_funds')
+            ->where('id',$id)
+            ->get()->first();
+        return View('relese-fund.edit')->with([
+            'relese_funds'=>$relese_funds,
+            'fund_relese_budget_modules'=>$fund_relese_budget_modules,
+            'budget_heads'=>$budget_heads,
+            'projectDetail'=>$projectDetail,
+        ]);
+//        return DB::table('relese_funds')->get();
+//        // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
+//
+//            $releseFund= ReleseFund::find($id);
+
+//        return view('relese-fund.edit',compact('releseFund'));
         // try {
         //     $releseFund=ReleseFund::find($id);
         //     return view('relese-fund.edit',compact('releseFund'));
@@ -160,24 +174,51 @@ class ReleseFundController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
     {
         // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
 
         try {
+            $request->validate([
+                'date'=>'required',
+                'transaction_no'=>'required',
+                'payment_method'=>'required',
+                'transtation_date'=>'required',
+                'relese_funds_amount'=>'required',
+                'payment_method_no'=>'required',
+                'projec_fund_relese_id'=>'required',
+            ]);
+
+            $fields=$request->only([
+                'date','transaction_no','payment_method','transtation_date',
+                'relese_funds_amount','payment_method_no','projec_fund_relese_id',
+                'projec_fund_relese_id','relese_fund_id','relese_fund_budget_id',
+                'fund_relese_budget_amount'
+            ]);
+
             $fund=ReleseFund::find($id);
-            $fund->date=$request->date;
-            $fund->transaction_no=$request->transaction_no;
-            $fund->payment_method=$request->payment_method;
-
-            $fund->transtation_date=$request->transtation_date;
-            $fund->payment_method_no=$request->payment_method_no;
-            $fund->relese_funds_amount=$request->relese_funds_amount;
+            $fund->date=$fields['date'];
+            $fund->transaction_no=$fields['transaction_no'];
+            $fund->payment_method=$fields['payment_method'];
+            $fund->transtation_date=$fields['transtation_date'];
+            $fund->relese_funds_amount=$fields['relese_funds_amount'];
 
 
+            $fund->projec_fund_relese_id=$fields['projec_fund_relese_id'];
             $fund->save();
+
+            //    budget Calculation
+            foreach($request->relese_fund_budget_id as $key=>$insert){
+                $saveRecord=[
+                    'relese_fund_id'=>$fund->id,
+                    'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key],
+                    'fund_relese_budget_amount'=>$request->fund_relese_budget_amount[$key],
+                ];
+                DB::table('fund_relese_budget_modules')->insert($saveRecord);
+            }
+
             return redirect(route('relesefund.index'))
             ->with('success','Update Successfully');
         } catch (Exception $e){

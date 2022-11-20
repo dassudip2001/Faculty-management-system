@@ -19,7 +19,7 @@
                                 <div class="col-md">
                                     <div >
                                         <label for="name">Project No<span class="required" style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm" name="project_no" id="project_no" value=" " aria-describedby="project_no" placeholder="Enter Project No">
+                                        <input type="text" class="form-control form-control-sm" name="project_no" id="project_no"  aria-describedby="project_no" placeholder="Enter Project No">
                                     </div>
                                 </div>
                                 <div class="col-md">
@@ -37,10 +37,11 @@
                                         <br>
                                         <select name="funding_agency_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option selected hidden>Select</option>
-                                            {{-- @foreach (projectDetail as $funding) --}}
-                                                <option value="">
+                                            @foreach ($funding as $fund)
+                                                <option value=" {{$fund->id}} ">
+                                                     {{$fund->agency_name}}
                                                 </option>
-                                            {{-- @endforeach --}}
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

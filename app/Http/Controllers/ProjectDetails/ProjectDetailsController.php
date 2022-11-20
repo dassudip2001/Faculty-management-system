@@ -186,18 +186,35 @@ class ProjectDetailsController extends Controller
      */
     public function edit( $id)
     {
-        try{
+
+
+        $budget_heads =  DB::table('budget_heads')->get(); 
+        $funding=DB::table('funding_agencies')->get();      
+        $project_details = DB::table('project_details')->get();
+        $projects=DB::table('projects')
+            ->where('id',$id)
+            ->get()->first();
+        return View('projectdetails.edit')->with([
+            'projects'=>$projects,
+            'funding'=>$funding,
+            'project_details'=>$project_details,
+            'budget_heads'=>$budget_heads,
             
-        return view('projectdetails.edit',compact('projectDetail'))
-        ->with('success','Project Update Successfully');
-        }catch (Exception $e){
+        ]);
 
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
 
-      
+        // try{
+
+        // return view('projectdetails.edit',compact('projectDetail'))
+        // ->with('success','Project Update Successfully');
+        // }catch (Exception $e){
+
+        //     return ["message" => $e->getMessage(),
+        //         "status" => $e->getCode()
+        //     ];
+        // }
+
+
 
 //        return ProjectDetails::with(
 //            [
@@ -348,6 +365,7 @@ class ProjectDetailsController extends Controller
     public function destroy($id)
     {
 
+
 //        public function destroy(Ticket $ticket)
 ////    {
 //        $ticket =DB::table('projects')
@@ -363,7 +381,21 @@ class ProjectDetailsController extends Controller
         //    403,'you dont have required authorization to this resource');
 
         try {
+            $data =DB::table('projects')
+                    ->leftJoin('project_details','projects.id', '=','project_details.project_id')
+                    ->where('projects.id', $id); 
+        DB::table('project_details')->where('project_id', $id)->delete();                           
+        $data->delete();
 
+
+        //     $post = Project::find($id);
+        //     ProjectDetails::where('project_id',$post)->delete();
+
+        //     $data =DB::table('project_details')
+        //             ->leftJoin('projects','projects.id', '=','project_details.project_id')
+        //             ->where('projects.id', $id); 
+        // DB::table('project_details')->where('project_id', $id)->delete();                           
+        // $data->delete();
 
         //    DB::table('projects')
         //        ->join('project_details','project_id',"=",'projects.id')
