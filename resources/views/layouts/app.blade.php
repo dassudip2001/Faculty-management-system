@@ -74,7 +74,7 @@
                     </ul>
                 </div>
 
-                <div class="dropdown mt-4 mx-4">
+                <div class="dropdown mt-4 mx-3">
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-user-pen"></i>  Edit Details
                     </button>
@@ -104,7 +104,7 @@
                  
 
 
-                <div class="dropdown mt-4 mx-4">
+                <div class="dropdown mt-4 mx-3">
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-cloud-arrow-up"></i>
                         Invoice Upload

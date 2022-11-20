@@ -138,7 +138,8 @@ class ReleseFundController extends Controller
      */
     public function edit($id)
     {
-
+        
+       
 
         $budget_heads =  DB::table('budget_heads')->get();
         $projectDetail=DB::table('projects')->get();
