@@ -180,8 +180,8 @@
                     </a>
                         <h6>Project Details</h6><hr>
                         <br>
-                        <form action="" method="GET" class="d-flex">
-                            <input class="form-control me-2  type="text" name="search" placeholder="Search" aria-label="Search" required>
+                        <form action=" {{ route('projectdetail.search') }} " method="GET" class="d-flex">
+                            <input class="form-control me-2  type="text" name="search" placeholder="Search Project Title" aria-label="Search" required>
                             <button class="btn btn-outline-success" type="submit">Search</button>
                           </form>
                           <br>

@@ -498,11 +498,14 @@ class ProjectDetailsController extends Controller
        // Search in the title and body columns from the posts table
        $ProjectPosts = Project::query()
            ->where('project_no', 'LIKE', "%{$search}%")
-//            ->orWhere('dept_code', 'LIKE', "%{$search}%")
+           ->orWhere('project_title', 'LIKE', "%{$search}%")
            ->get();
 
 
         // Return the search view with the resluts compacted
-        return view('relese-fund.search', compact('ProjectPosts'));
+        return view('projectdetails.search', compact('ProjectPosts'));
     }
+
+   
+
 }

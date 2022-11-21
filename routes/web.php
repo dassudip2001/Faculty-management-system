@@ -87,14 +87,9 @@ require __DIR__.'/auth.php';
     Route::get('/invoiceupload',[InvoiceUploadController::class,'search'])->name('invoiceupload.search');
 
 //search
-    Route::get('/relesefund',[ReleseFundController::class,'searchElement'])->name('fund.searchElement');
+    Route::get('/relesefundsearch',[ReleseFundController::class,'search'])->name('relesefund.search');
 
-
-
-
-
-
-
+   Route::get('/projectdetailsearch', [ProjectDetailsController::class,'search'])->name('projectdetail.search');
 
 // Faculty Routes
    Route::get('/faculty',[FacultyController::class,'index'])->name('faculty.index');
@@ -157,7 +152,6 @@ require __DIR__.'/auth.php';
     // at a time one pdf
     Route::get('/projectdetail/pdfForm/{id}',[ProjectDetailsController::class,'pdfForm']);
     //  search
-//    Route::get('/search', [ProjectDetailsController::class,'search'])->name('search');
 
     // budget amount calculation
 
