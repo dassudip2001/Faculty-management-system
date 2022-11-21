@@ -279,15 +279,20 @@ class ReleseFundController extends Controller
         $releseFund2=DB::table('projects')
         ->join('relese_funds','relese_funds.projec_fund_relese_id',"=",'projects.id')
         ->get();
+        
         $pdf=PDF::loadView('relese-fund.print',compact('releseFund2'));
         return $pdf->download('fund.pdf');
     }
     // generate pdf one row
     public function pdfForm(Request $request,$id){
-       return DB::table('relese_funds')
-    //    ->join('projects','projects.id','=','relese_funds.projec_fund_relese_id')
-    //    ->join('fund_relese_budget_modules','fund_relese_budget_modules.relese_fund_id','=','relese_funds.id')
-       ->where('id', $id)->get();
+
+
+    
+
+        $releseFund1= DB::table('relese_funds')
+        ->join('projects','projects.id',"=",'relese_funds.projec_fund_relese_id')
+        ->get()
+       ->where('id', $id);
         $pdf=PDF::loadView('relese-fund.pdf_download',compact('releseFund1'));
         return $pdf->download('funding.pdf');
     }
