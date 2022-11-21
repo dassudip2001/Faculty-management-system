@@ -197,16 +197,16 @@
                         <td>Project Scheme</td>
                         <td>Project Duration</td>
                         {{-- <td>Project Total Cost</td> --}}
-                         <td>Funding Agency</td>
-                         <td>Budget Name</td>
-                         <td>Budget Details Cost</td>
+                         {{-- <td>Funding Agency</td> --}}
+                         {{-- <td>Budget Name</td> --}}
+                         {{-- <td>Budget Details Cost</td> --}}
                          <td>Total Project Cost</td>
                          <td>Action</td>
                          <td>Print</td>
                      </tr>
                      </thead>
                      <tbody>
-                     @foreach($projectDetail as $pro) 
+                     @foreach($project_details as $key=> $pro) 
                          <tr>
                             <td>{{$pro->project_no}}</td>
                             {{-- <td>{{$pro->name}}</td> --}}
@@ -214,9 +214,20 @@
                             <td>{{$pro->project_scheme}}</td>
                             <td>{{$pro->project_duration}} year</td>
                              {{-- <td>{{$pro->project_total_cost}}</td> --}}
-                             <td>{{$pro->agency_name}}</td>
-                             <td>{{$pro->budget_title}}</td>
-                             <td>{{$pro->budget_details_amount}}</td>
+                             {{-- <td>{{$pro->agency_name}}</td> --}}
+                             {{-- <td>{{$pro->budget_title}}</td>
+                             <td>
+                                <ul>
+                                    <li>{{$pro->budget_title}} ( {{$pro->budget_details_amount}} )</li>
+                                </ul>
+                             </td> --}}
+                                {{-- <ul>
+                                @foreach($projectDetail as $key => $item)
+                                    <li>{{ $item->budget_title }} ({{ $item->budget_details_amount}} </li>
+                                @endforeach
+                                </ul> --}}
+                             
+                             {{-- <td>{{$pro->budget_details_amount}}</td> --}}
                              <td>{{$pro->project_total_cost}}</td>
                              <th>
                                 <a href=" {{ url('/projectdetail/edit',$pro->id) }} ">

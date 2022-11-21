@@ -101,9 +101,11 @@ class ProjectController extends Controller
      */
     public function edit(int $id)
     {
-        $project= Project::with(['agency'=>function($q){
-            $q->select('id','agency_name');
-        }])->find($id);
+
+        $project=Project::find($id);
+        // $project= Project::with(['agency'=>function($q){
+        //     $q->select('id','agency_name');
+        // }])->find($id);
         return view('project.edit',compact('project'));
     }
 

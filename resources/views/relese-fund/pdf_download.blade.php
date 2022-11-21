@@ -16,7 +16,7 @@
    </style>
     <table>
         <thead>
-            <tr>ID</tr>
+            {{-- <tr>ID</tr> --}}
             <tr>Date</tr>
             <tr>Transtation No</tr>
             <tr>Payment Method</tr>
@@ -25,7 +25,7 @@
         </thead>
           @foreach ($releseFund1 as $item)
            <tr>
-             <td>{{$item->id}}</td>
+             {{-- <td>{{$item->id}}</td> --}}
              <td>{{$item->project_no}} ||  {{$item->project_title}} </td>
 
              <td> {{$item->date}}</td>

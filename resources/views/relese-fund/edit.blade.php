@@ -38,12 +38,12 @@
               <div class="row">
                 <div class="col">
                     <label for="datfilde">Date</label>
-                    <input type="text" class="form-control form-control-sm " name="date" value="  "  id="datefild" aria-describedby="datefild"  require>
+                    <input type="text" class="form-control form-control-sm " name="date" value=" {{$relese_funds->date}} "  id="datefild" aria-describedby="datefild"  require>
                 </div>
                 <div class="col">
                      {{-- Transtation no --}}
                      <label for="transtation_no">Transtation No</label>
-                     <input type="text" class="form-control form-control-sm " name="transaction_no" value=" "  id="transtation_no" aria-describedby="transtation_no" placeholder="Enter Your Transtation No" require>
+                     <input type="text" class="form-control form-control-sm " name="transaction_no" value=" {{$relese_funds->transaction_no}} "  id="transtation_no" aria-describedby="transtation_no" placeholder="Enter Your Transtation No" require>
                 </div>
               </div>
               <div class="row">
@@ -51,7 +51,7 @@
                     <label for="faculty_designation">Payment Recive Method<span class="required" style="color: red;">*</span></label>
                     <div>
 
-                       <select  name="payment_method"  class="form-select" aria-label="Default select example" id="selector" value="  " onchange="yesnoCheck(this);">
+                       <select  name="payment_method"  class="form-select" aria-label="Default select example" id="selector" value=" {{$relese_funds->payment_method}} " onchange="yesnoCheck(this);">
                            <option   value="select">Select payment mathod</option>
                            <option   value="CHECK">Cheque</option>
                            <option   value="NEFT">NEFT</option>
@@ -63,15 +63,15 @@
                      <div class="row">
                        <div class="col">
                            <!-- <label for="payment_method_no">Enter Check No.</label>  -->
-                       <input class="form-control" type="text" id="payment_method_no" value="  " name="payment_method_no" placeholder="Enter payment Method No"/>
+                       <input class="form-control" type="text" id="payment_method_no" value=" {{$relese_funds->payment_method_no}} " name="payment_method_no" placeholder="Enter payment Method No"/>
                        </div>
                        <div class="col">
                               <!-- <label for="transtation_date">Enter  Date</label>  -->
-                       <input class="form-control" date="text" id="transtation_date" value="  " name="transtation_date" />
+                       <input class="form-control" date="text" id="transtation_date" value=" {{$relese_funds->transtation_date}} " name="transtation_date" />
                        </div>
                        <div class="col">
                         <!-- <label for="transtation_date">Enter  Date</label>  -->
-                       <input class="form-control" type="number" id="relese_amount" name="relese_funds_amount"  value=" " />
+                       <input class="form-control" type="text" id="relese_amount" name="relese_funds_amount"  value="{{$relese_funds->relese_funds_amount}} " />
                       </div>
                      </div>
                    </div>
@@ -126,7 +126,7 @@
                                             <select name="relese_fund_budget_id[]" class="form-control">
                                                 <option value="">-- choose Budget Name --</option>
                                                  @foreach ($budget_heads as $budget )
-                                                     <option value=" {{$budget->id}} ">
+                                                     <option value=" {{$budget->id}} ">{{in_array($budget->id, old("budget_title") ?: []) ? "selected": ""}}
                                                       {{ $budget->budget_title }}
                                                     </option>
                                                  @endforeach

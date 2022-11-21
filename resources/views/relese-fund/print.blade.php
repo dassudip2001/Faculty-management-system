@@ -18,11 +18,13 @@
         
           @foreach ($releseFund2 as $item)
            <tr>
-             <td>{{$item->id}}</td>
-             <td>{{$item->project_no}} ||  {{$item->project_title}} </td>
+             {{-- <td>{{$item->id}}</td> --}}
+             <td> project No:{{$item->project_no}} || Project Title: {{$item->project_title}} </td>
+             <br>
+             <br>
 
-             <td> {{$item->date}}</td>
-             <td> {{$item->transaction_no}}</td>
+             <td> Date :{{$item->date}}</td>
+             <td> Transtation No :{{$item->transaction_no}}</td>
              <td> {{$item->payment_method}}</td>
              <td> {{$item->transtation_date}}</td>
              <td> {{$item->payment_method_no}}</td>

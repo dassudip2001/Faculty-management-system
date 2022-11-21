@@ -10,7 +10,7 @@
         <div class="col">
             <div class="card">
                 <!-- Edit project -->
-                <div class="card-title">
+                <div class="card-title mt-2 mx-2">
                     <h6>Edit Project </h6>
                     <hr>
                 </div>

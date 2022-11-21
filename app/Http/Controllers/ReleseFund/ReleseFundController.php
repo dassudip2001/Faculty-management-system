@@ -17,6 +17,11 @@ class ReleseFundController extends Controller
      */
     public function index()
     {
+
+
+        $funRelese= DB::table('relese_funds')
+        // ->join('fund_relese_budget_modules','relese_fund_id','=','relese_funds.id')
+        ->get();
         $projectDetail= DB::table('projects')
             // ->join('project_details','project_id',"=",'projects.id')
             // ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
@@ -43,7 +48,7 @@ class ReleseFundController extends Controller
 
             // budgets
             $budget=DB::table('budget_heads')->get();
-        return view('relese-fund.create',compact('fund','projectDetail','budget','relesFubdAmount'));
+        return view('relese-fund.create',compact('fund','projectDetail','budget','relesFubdAmount','funRelese'));
     }
 
     // Search The Budget
@@ -217,7 +222,7 @@ class ReleseFundController extends Controller
                     'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key],
                     'fund_relese_budget_amount'=>$request->fund_relese_budget_amount[$key],
                 ];
-                DB::table('fund_relese_budget_modules')->insert($saveRecord);
+                DB::table('fund_relese_budget_modules')->update($saveRecord);
             }
 
             return redirect(route('relesefund.index'))
@@ -244,7 +249,22 @@ class ReleseFundController extends Controller
         // abort_unless(auth()->user()->can('delete_relese_fund'),403,'you dont have required authorization to this resource');
 
         try {
-            ReleseFund::destroy($id);
+
+//             $fc=CreateUser::find($id)->faculty_id;
+//             $uc=CreateUser::find($id)->user_id;
+// //            create user delete
+//             CreateUser::find($id)->delete();
+// //            faculty Delete
+//             Faculty::find($fc)->delete();
+// //            user delete
+//             User::find($uc)->delete();
+
+
+          
+        DB::table('relese_funds')
+        // ->join('fund_relese_budget_modules','fund_relese_budget_modules.relese_fund_id','=','relese_funds.id')
+        // ->whereIn('relese_fund_id',$id)
+        ->delete($id);
             return redirect(route('relesefund.index'))->with('success','Delete Successfully');
         } catch (Exception $e){
 
@@ -279,7 +299,7 @@ class ReleseFundController extends Controller
 
        // Search in the title and body columns from the posts table
        $posts = ReleseFund::query()
-           ->where('transaction_no', 'LIKE', "%{$search}%")
+           ->where('date', 'LIKE', "%{$search}%")
 //            ->orWhere('dept_code', 'LIKE', "%{$search}%")
            ->get();
 
