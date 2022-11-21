@@ -21,10 +21,13 @@
         <table class="table">
             <thead>
               <tr>
-                
-                <th scope="col"> Trnastation No</th>
                 <th scope="col"> Date</th>
-              
+                <th scope="col"> Trnastation No</th>
+                <th scope="col">Payment Method</th>
+                <th scope="col">Transtation Date</th>
+                <th scope="col">Relese Fund Amount  </th>
+                <th scope="col"> Payment Method No </th>
+                <th scope="col">Print</th>
               </tr>
             </thead>
             <tbody>
@@ -32,8 +35,15 @@
                
                 <td>{{ $post->date }}</td>
                 <td>{{ $post->transaction_no }}</td>
-                
-                
+                <td> {{$post->payment_method}} </td>
+                <td> {{$post->transtation_date}} </td>
+                <td> {{$post->relese_funds_amount}} </td>
+                <td > {{$post->payment_method_no}}</td>
+                <th>
+                  <a href=" {{ url('/relesefund/pdfForm',$post->id) }} ">
+                      <i class="fa-regular fa-solid fa-print"></i>
+                     </a>
+              </th>
               </tr>
             
               

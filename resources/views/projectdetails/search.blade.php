@@ -27,6 +27,7 @@
                 <th scope="col">  Project Scheme</th>
                 <th scope="col">  Project Duration</th>
                 <th scope="col">  Project Amount</th>
+                <th scope="col">Print</th>
               
               </tr>
             </thead>
@@ -38,6 +39,11 @@
                 <td> {{$post->project_scheme}} </td>
                 <td> {{$post->project_duration}} </td> 
                 <td> {{$post->project_total_cost}} </td>
+                <th>
+                  <a href=" {{ url('/projectdetail/pdfForm',$post->id) }} ">
+                      <i class="fa-solid fa-print"></i>
+                  </a>
+               </th>
 
               </tr>             
             </tbody>

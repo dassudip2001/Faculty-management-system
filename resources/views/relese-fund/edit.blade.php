@@ -126,7 +126,7 @@
                                             <select name="relese_fund_budget_id[]" class="form-control">
                                                 <option value="">-- choose Budget Name --</option>
                                                  @foreach ($budget_heads as $budget )
-                                                     <option value=" {{$budget->id}} " {{$budget->id==$edit->funding_agency_id ? 'selected':''}} selected>
+                                                     <option value=" {{$budget->id}} "  selected>
                                                       {{ $budget->budget_title }}
                                                     </option>
                                                  @endforeach
