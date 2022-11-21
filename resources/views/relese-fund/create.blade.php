@@ -40,7 +40,7 @@
                         </div>
                         <div class="card-body">
                             {{-- form --}}
-                            <form action="" method="POST" name="budgetForm">
+                            <form action=" {{ route('relesefund.create') }} " method="POST" name="budgetForm">
                                 @csrf
                                 {{-- form value  --}}
                                 <div class="row">
@@ -222,12 +222,15 @@
         </div>
     </div>
     <div class="card-title mx-3">
-        <form action="" method="GET" class="d-flex">
-            <input class="form-control me-2"  type="text" name="search" placeholder="Search" aria-label="Search" required>
-            <button class="btn btn-outline-success" type="submit">Search</button>
+        <form action=" " method="GET" class="d-flex">
+            <input class="form-control me-2"  type="text" name="search " placeholder="Search Using Date or Transtation number" aria-label="Search " required>
+            <button class="btn btn-outline-success" type="submit">Search </button>
           </form>
 
-            @if(session('success'))
+                     
+    </div>
+    <div class="card-body">
+        @if(session('success'))
             <div class="alert alert-primary" role="alert">
                 {{session('success')}}
             </div>
@@ -240,9 +243,7 @@
                     @endforeach
                 </ul>
             </div>
-             @endif          
-    </div>
-    <div class="card-body">
+             @endif 
         <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead class="table-dark">

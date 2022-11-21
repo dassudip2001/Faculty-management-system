@@ -75,16 +75,23 @@ require __DIR__.'/auth.php';
 //    search
     Route::get('/search', [DepartmentController::class,'search'])->name('search');
     //  search
-   Route::get('/fundingsearch', [FundingAgencyController::class,'search'])->name('funding.search');
+    Route::get('/fundingsearch', [FundingAgencyController::class,'search'])->name('funding.search');
        //  search
-   Route::get('/budgetssearch', [BudgetHeadController::class,'search'])->name('budget.search');
+    Route::get('/budgetssearch', [BudgetHeadController::class,'search'])->name('budget.search');
 
     //    search
-   Route::get('/usersearch', [CreateUserController::class,'search'])->name('usercreate.search');
+    Route::get('/usersearch', [CreateUserController::class,'search'])->name('usercreate.search');
 
 
 //    search
-Route::get('/invoiceupload',[InvoiceUploadController::class,'search'])->name('invoiceupload.search');
+    Route::get('/invoiceupload',[InvoiceUploadController::class,'search'])->name('invoiceupload.search');
+
+//search
+    Route::get('/relesefund',[ReleseFundController::class,'searchElement'])->name('fund.searchElement');
+
+
+
+
 
 
 
@@ -184,7 +191,10 @@ Route::get('/invoiceupload',[InvoiceUploadController::class,'search'])->name('in
     Route::get('/relesefund/download',[ReleseFundController::class,'pdf']);
     // at a time one pdf
     Route::get('/relesefund/pdfForm/{id}',[ReleseFundController::class,'pdfForm']);
+//   search Relese fund 
         //  search
+
+
 //    Route::get('/search', [ReleseFundController::class,'search'])->name('search');
 
 

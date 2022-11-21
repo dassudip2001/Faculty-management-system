@@ -65,11 +65,11 @@ class ReleseFundController extends Controller
 
         $request->validate([
             'date'=>'required',
-            'transaction_no'=>'required|un',
+            'transaction_no'=>'required|unique:relese_funds',
             'payment_method'=>'required',
             'transtation_date'=>'required',
             'relese_funds_amount'=>'required',
-            'payment_method_no'=>'required',
+            'payment_method_no'=>'required|unique:relese_funds',
             'projec_fund_relese_id'=>'required',
         ]);
 
@@ -293,18 +293,18 @@ class ReleseFundController extends Controller
 
     // search
 
-    public function search(Request $request){
+    public function searchElement(Request $request){
         // Get the search value from the request
        $search = $request->input('search');
 
        // Search in the title and body columns from the posts table
-       $posts = ReleseFund::query()
+       $fundSearch = ReleseFund::query()
            ->where('date', 'LIKE', "%{$search}%")
-//            ->orWhere('dept_code', 'LIKE', "%{$search}%")
+           ->orWhere('transaction_no', 'LIKE', "%{$search}%")
            ->get();
 
 
         // Return the search view with the resluts compacted
-        return view('relese-fund.search', compact('posts'));
+        return view('relese-fund.search', compact('fundSearch'));
     }
 }

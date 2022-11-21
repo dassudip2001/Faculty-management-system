@@ -16,9 +16,10 @@
   Add New
 </button>
     <h6>Upload</h6> 
+    <br>
     <hr>
     <form action="{{ route('invoiceupload.search') }}" method="GET" class="d-flex">
-      <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search" required>
+      <input class="form-control me-2 mt-2" type="text" name="search" placeholder="Search" aria-label="Search" required>
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
 
