@@ -40,13 +40,13 @@
                         </div>
                         <div class="card-body">
                             {{-- form --}}
-                            <form action="" method="POST" name="budgetForm">
+                            <form action=" {{ route('relesefund.create') }} " method="POST" name="budgetForm">
                                 @csrf
                                 {{-- form value  --}}
                                 <div class="row">
                                     <div class="col">
                                         {{-- select project --}}
-                                        <label for="faculty_designation">Payment Recive Method<span class="required" style="color: red;">*</span></label>
+                                        <label for="faculty_designation">Select Project<span class="required" style="color: red;">*</span></label>
                                         <div>
 
                                            <select  name="projec_fund_relese_id" class="form-select" aria-label="Default select example" id="selector" onchange="yesnoCHEQUE(this);">
@@ -222,12 +222,15 @@
         </div>
     </div>
     <div class="card-title mx-3">
-        <form action="" method="GET" class="d-flex">
-            <input class="form-control me-2"  type="text" name="search" placeholder="Search" aria-label="Search" required>
-            <button class="btn btn-outline-success" type="submit">Search</button>
+        <form action=" {{route('relesefund.search')}} " method="GET" class="d-flex">
+            <input class="form-control me-2"  type="text" name="search " placeholder="Search Using Date or Transtation number" aria-label="Search " required>
+            <button class="btn btn-outline-success" type="submit">Search </button>
           </form>
 
-            @if(session('success'))
+                     
+    </div>
+    <div class="card-body">
+        @if(session('success'))
             <div class="alert alert-primary" role="alert">
                 {{session('success')}}
             </div>
@@ -240,37 +243,36 @@
                     @endforeach
                 </ul>
             </div>
-             @endif          
-    </div>
-    <div class="card-body">
+             @endif 
+        <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead class="table-dark">
              <tr>
 
-                <th>Project Name</th>
+                {{-- <th>Project Name</th> --}}
                 <th>Date</th>
                 <th>Transtation No</th>
                 <th>Type</th>
                 <th>No</th>
                 <th>Transtation  Date</th>
                 <th>Relese Amount</th>
-                <th> Budget Name || Amount</th>
+                {{-- <th> Budget Name || Amount</th> --}}
                 <th>Action</th>
                 <th>Print</th>
 
              </tr>
             </thead>
             <tbody>
-                @foreach ($relesFubdAmount as $trans)              
+                @foreach ($funRelese as $trans)              
                 <tr>
-                    <td>{{$trans->project_no}} ||  {{$trans->project_title}} </td>
+                    {{-- <td>{{$trans->project_no}} ||  {{$trans->project_title}} </td> --}}
                     <td> {{$trans->date}} </td>
                     <td>{{$trans->transaction_no}}</td>
                     <td>{{$trans->payment_method}}</td>
                     <td>{{$trans->payment_method_no}}</td>
                     <td>{{$trans->transtation_date}}</td>
                     <td>{{$trans->relese_funds_amount}}</td>
-                    <td>{{$trans->budget_title}} || {{$trans->fund_relese_budget_amount}} </td>
+                    {{-- <td>{{$trans->budget_title}} || {{$trans->fund_relese_budget_amount}} </td> --}}
                     <th>
                         <a href=" {{ url('/relesefund/edit',$trans->id) }} ">
                             <i class="fa-regular fa-pen-to-square"></i>
@@ -291,6 +293,7 @@
             </tbody>
              @endforeach
         </table>
+        </div>
     </div>
    </div>
     @section('script')

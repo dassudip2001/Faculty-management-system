@@ -75,16 +75,21 @@ require __DIR__.'/auth.php';
 //    search
     Route::get('/search', [DepartmentController::class,'search'])->name('search');
     //  search
-   Route::get('/fundingsearch', [FundingAgencyController::class,'search'])->name('funding.search');
+    Route::get('/fundingsearch', [FundingAgencyController::class,'search'])->name('funding.search');
        //  search
-   Route::get('/budgetssearch', [BudgetHeadController::class,'search'])->name('budget.search');
+    Route::get('/budgetssearch', [BudgetHeadController::class,'search'])->name('budget.search');
 
     //    search
-   Route::get('/usersearch', [CreateUserController::class,'search'])->name('usercreate.search');
+    Route::get('/usersearch', [CreateUserController::class,'search'])->name('usercreate.search');
 
 
+//    search
+    Route::get('/invoiceupload',[InvoiceUploadController::class,'search'])->name('invoiceupload.search');
 
+//search
+    Route::get('/relesefundsearch',[ReleseFundController::class,'search'])->name('relesefund.search');
 
+   Route::get('/projectdetailsearch', [ProjectDetailsController::class,'search'])->name('projectdetail.search');
 
 // Faculty Routes
    Route::get('/faculty',[FacultyController::class,'index'])->name('faculty.index');
@@ -138,7 +143,7 @@ require __DIR__.'/auth.php';
 
 // Project Details
     Route::get('/projectdetail',[ProjectDetailsController::class,'index'])->name('projectdetail.index');
-    Route::post('/projectdetail',[ProjectDetailsController::class,'create'])->name('projectdetail.create')->middleware(['auth','role:admin']);
+    Route::post('/projectdetail',[ProjectDetailsController::class,'create'])->name('projectdetail.create');
     Route::get('/projectdetail/edit/{id}',[ProjectDetailsController::class,'edit'])->name('projectdetail.edit')->middleware(['auth','role:admin']);
     Route::put('/projectdetail/edit/{id}',[ProjectDetailsController::class,'update'])->name('projectdetail.update')->middleware(['auth','role:admin']);
     Route::get('/projectdetail/delete/{id}',[ProjectDetailsController::class,'destroy'])->name('projectdetail.destroy')->middleware(['auth','role:admin']);
@@ -147,7 +152,6 @@ require __DIR__.'/auth.php';
     // at a time one pdf
     Route::get('/projectdetail/pdfForm/{id}',[ProjectDetailsController::class,'pdfForm']);
     //  search
-//    Route::get('/search', [ProjectDetailsController::class,'search'])->name('search');
 
     // budget amount calculation
 
@@ -181,7 +185,10 @@ require __DIR__.'/auth.php';
     Route::get('/relesefund/download',[ReleseFundController::class,'pdf']);
     // at a time one pdf
     Route::get('/relesefund/pdfForm/{id}',[ReleseFundController::class,'pdfForm']);
+//   search Relese fund 
         //  search
+
+
 //    Route::get('/search', [ReleseFundController::class,'search'])->name('search');
 
 

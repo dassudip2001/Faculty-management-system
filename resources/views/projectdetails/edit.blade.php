@@ -11,6 +11,10 @@
                 <div class="card ">
                     <div class="mt-2 mx-2">                        
                          <div class="modal-body">
+                            <div class="card-title mt-2 mx-2">
+                                <h6>Edit Project Details </h6>
+                                <hr>
+                            </div>
                             <!-- form Start -->
                          <form action="" method="POST" name="budgetForm">
                             @method('PUT')
@@ -19,13 +23,13 @@
                                 <div class="col-md">
                                     <div >
                                         <label for="name">Project No<span class="required" style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm" name="project_no" id="project_no" value=" " aria-describedby="project_no" placeholder="Enter Project No">
+                                        <input type="text" class="form-control form-control-sm" name="project_no" id="project_no" value=" {{$projects->project_no}} " aria-describedby="project_no" placeholder="Enter Project No">
                                     </div>
                                 </div>
                                 <div class="col-md">
                                     <div class="mb-6">
                                         <label for="project_title">Project Title<span class="required" style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm" name="project_title" id="project_title" aria-describedby="project_title" placeholder="Enter Project Title">
+                                        <input type="text" class="form-control form-control-sm" name="project_title"  value=" {{$projects->project_title}} " id="project_title" aria-describedby="project_title" placeholder="Enter Project Title">
                                     </div>
                                 </div>
                             </div>
@@ -37,10 +41,11 @@
                                         <br>
                                         <select name="funding_agency_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option selected hidden>Select</option>
-                                            {{-- @foreach (projectDetail as $funding) --}}
-                                                <option value="">
+                                            @foreach ($funding as $fund)
+                                                <option value=" {{$fund->id}} " selected >
+                                                     {{$fund->agency_name}}
                                                 </option>
-                                            {{-- @endforeach --}}
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -52,10 +57,10 @@
                                             <div class="col">
                                                 <select name="create_user_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                     <option selected hidden>Select</option>
-                                                    {{-- @foreach ($data2 as $funding) --}}
-                                                        {{-- <option value="{{$funding->id}}">{{$funding->name}} - {{$funding->dept_name}} --}}
+                                                    @foreach ($createUser as $funding)
+                                                        <option value="{{$funding->id}}" selected>{{$funding->name}} - {{$funding->dept_name}}
                                                         </option>
-                                                    {{-- @endforeach --}}
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -69,19 +74,19 @@
                                 <div class="col-md">
                                     <div >
                                         <label for="project_scheme">Project Scheme<span class="required" style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm" name="project_scheme" id="project_scheme" aria-describedby="project_scheme" placeholder="Enter Project Scheme">
+                                        <input type="text" class="form-control form-control-sm" name="project_scheme" value=" {{$projects->project_scheme}} " id="project_scheme" aria-describedby="project_scheme" placeholder="Enter Project Scheme">
                                     </div>
                                 </div>
                                 <div class="col-md">
                                     <div class="mb-6">
                                         <label for="project_duration">Project Duration<span class="required" style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm" name="project_duration" id="project_duration" aria-describedby="project_duration" placeholder="Enter Project Duration">
+                                        <input type="text" class="form-control form-control-sm" name="project_duration"  value=" {{$projects->project_duration}} " id="project_duration" aria-describedby="project_duration" placeholder="Enter Project Duration">
                                     </div>
                                 </div>
                                 <div class="col-md">
                                     <div class="mb-6">
                                         <label for="project_cost">Project Cost<span class="required" style="color: red;">*</span></label>
-                                        <input type="number" class="form-control form-control-sm" name="project_total_cost" id="amount" aria-describedby="project_cost" placeholder="Enter Project Cost">
+                                        <input type="text" class="form-control form-control-sm" name="project_total_cost" value=" {{$projects->project_total_cost}} " id="amount" aria-describedby="project_cost" placeholder="Enter Project Cost">
                                     </div>
                                 </div>
                             </div>
@@ -105,15 +110,15 @@
                                                         <td>
                                                             <select name="budget_id[]" class="form-control">
                                                                 <option value="">-- choose Budget Name --</option>
-                                                                {{-- @foreach ($budget as $product) --}}
-                                                                    {{-- <option value="{{ $product->id }}"> --}}
-                                                                        {{-- {{ $product->budget_title }}  --}}
+                                                              @foreach ($budget_heads as $product) 
+                                                               <option value="{{ $product->id }}" selected> 
+                                                                      {{ $product->budget_title }}  
                                                                     </option>
-                                                                {{-- @endforeach --}}
+                                                              @endforeach 
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" />
+                                                            <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" selected/>
                                                         </td>
                                                     </tr>
                                                 @endforeach

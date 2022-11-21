@@ -71,6 +71,7 @@
                 </div>
                 <div class="card-body p-0">
                     <!-- card-body -->
+                    <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead class="table-dark">
                             <tr>
@@ -107,6 +108,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
                 </div>
             </div>
 <!-- footer contain -->

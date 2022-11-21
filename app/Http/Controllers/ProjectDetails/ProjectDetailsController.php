@@ -23,6 +23,10 @@ class ProjectDetailsController extends Controller
      */
     public function index()
     {
+    //    only iquique details
+        $project_details= DB::table('projects')
+            // ->join('project_details','project_id',"=",'projects.id')
+            ->get();
         // $projectDetail=
         $projectDetail= DB::table('projects')
             ->join('project_details','project_id',"=",'projects.id')
@@ -57,9 +61,11 @@ class ProjectDetailsController extends Controller
         $budget=BudgetHead::all();
         $data=FundingAgency::all();
         $data3=Project::all();
+
+        
 //        $data4=BudgetDetails::all();
         return view('projectdetails.create',
-            compact('data','data2','budget','data3','projectDetail'));
+            compact('data','data2','budget','data3','projectDetail','project_details'));
 
     }
 
@@ -186,18 +192,41 @@ class ProjectDetailsController extends Controller
      */
     public function edit( $id)
     {
-        try{
+
+
+        $budget_heads =  DB::table('budget_heads')->get(); 
+        $funding=DB::table('funding_agencies')->get(); 
+        $createUser=DB::table('create_users')
+        ->join('faculties','faculties.id',"=",'create_users.faculty_id')
+        ->join('users','users.id',"=",'create_users.user_id')
+        ->join('departments','departments.id','=','create_users.department_id')
+        ->get();     
+        $project_details = DB::table('project_details')->get();
+        $projects=DB::table('projects')
+            ->where('id',$id)
+            ->get()->first();
+        return View('projectdetails.edit')->with([
+            'projects'=>$projects,
+            'funding'=>$funding,
+            'project_details'=>$project_details,
+            'budget_heads'=>$budget_heads,
+            'createUser'=>$createUser,
             
-        return view('projectdetails.edit',compact('projectDetail'))
-        ->with('success','Project Update Successfully');
-        }catch (Exception $e){
+        ]);
 
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
 
-      
+        // try{
+
+        // return view('projectdetails.edit',compact('projectDetail'))
+        // ->with('success','Project Update Successfully');
+        // }catch (Exception $e){
+
+        //     return ["message" => $e->getMessage(),
+        //         "status" => $e->getCode()
+        //     ];
+        // }
+
+
 
 //        return ProjectDetails::with(
 //            [
@@ -307,28 +336,53 @@ class ProjectDetailsController extends Controller
 
         try {
             $this->validate($request,[
-                'project_no',
-                'project_title',
-                'project_scheme',
-                'project_duration',
-                'project_total_cost',
-            ]);
-            $fields=$request->only([
-                'project_no',
-                'project_title',
-                'project_scheme',
-                'project_duration',
-                'project_total_cost',
-            ]);
-            $pc=ProjectDetails::find($id)->project_id;
-            $fc=Project::find($pc);
-            $fc->project_no=$fields['project_no'];
-            $fc->project_title=$fields['project_title'];
-            $fc->project_scheme=$fields['project_scheme'];
-            $fc->project_duration=$fields['project_duration'];
-            $fc->project_total_cost=$fields['project_total_cost'];
-            $fc->save();
-            ProjectDetails::find($id)->save();
+                'project_no'=>'required',
+                'project_title'=>'required',
+                'project_scheme'=>'required',
+                'project_duration'=>'required',
+                'project_total_cost'=>'required',
+                'budget_details_amount'=>'required',
+           ]);
+           $fields=$request->only(['project_no','project_title','project_scheme',
+               'project_duration','project_total_cost',
+             'funding_agency_id', 'create_user_id','budget_id','budget_details_amount','project_id',
+           ]);
+
+           $project=Project::find($id);
+           $project->project_no=$fields['project_no'];
+           $project->project_title=$fields['project_title'];
+           $project->project_scheme=$fields['project_scheme'];
+           $project->project_duration=$fields['project_duration'];
+           $project->project_total_cost=$fields['project_total_cost'];
+
+        //    $project=new Project([
+        //        'project_no'=>$fields['project_no'],
+        //         'project_title'=>$fields['project_title'],
+        //        'project_scheme'=>$fields['project_scheme'],
+        //        'project_duration'=>$fields['project_duration'],
+        //        'project_total_cost'=>$fields['project_total_cost'],
+        //        // Funding Agency Id References
+        //        'funding_agency_id'=>$fields['funding_agency_id'],
+        //    // Create User Id References
+        //       'create_user_id'=>$fields['create_user_id'],
+
+        //    ]);
+           $project->funding_agency_id=$fields['funding_agency_id'];
+           $project->create_user_id=$fields['create_user_id'];
+           $project->save();
+            //pivot table
+//
+//
+       foreach($request->budget_id as $key=>$insert){
+           $saveRecord=[
+               'project_id'=>$project->id,
+               'budget_id'=>$request->budget_id[$key],
+               'budget_details_amount'=>$request->budget_details_amount[$key],
+           ];
+           DB::table('project_details')->update($saveRecord);
+       }
+
+
             return redirect(route('projectdetail.index'))
                 ->with('success','Project Update Successfully');
         }catch (Exception $e){
@@ -348,6 +402,7 @@ class ProjectDetailsController extends Controller
     public function destroy($id)
     {
 
+
 //        public function destroy(Ticket $ticket)
 ////    {
 //        $ticket =DB::table('projects')
@@ -363,7 +418,25 @@ class ProjectDetailsController extends Controller
         //    403,'you dont have required authorization to this resource');
 
         try {
+        //     $data =DB::table('projects')
+        //             ->leftJoin('project_details','projects.id', '=','project_details.project_id')
+        //             ->where('projects.id', $id); 
+        // DB::table('project_details')->where('project_id', $id)->delete();                           
+        // $data->delete();
 
+        DB::table('projects')
+          
+          ->delete($id);
+
+
+        //     $post = Project::find($id);
+        //     ProjectDetails::where('project_id',$post)->delete();
+
+        //     $data =DB::table('project_details')
+        //             ->leftJoin('projects','projects.id', '=','project_details.project_id')
+        //             ->where('projects.id', $id); 
+        // DB::table('project_details')->where('project_id', $id)->delete();                           
+        // $data->delete();
 
         //    DB::table('projects')
         //        ->join('project_details','project_id',"=",'projects.id')
@@ -415,4 +488,24 @@ class ProjectDetailsController extends Controller
     $pdf=PDF::loadView('projectdetails.pdf_download',compact('createUser1'));
     return $pdf->download('project.pdf');
     }
+
+
+    // search module
+    public function search(Request $request){
+        // Get the search value from the request
+       $search = $request->input('search');
+
+       // Search in the title and body columns from the posts table
+       $ProjectPosts = Project::query()
+           ->where('project_no', 'LIKE', "%{$search}%")
+           ->orWhere('project_title', 'LIKE', "%{$search}%")
+           ->get();
+
+
+        // Return the search view with the resluts compacted
+        return view('projectdetails.search', compact('ProjectPosts'));
+    }
+
+   
+
 }

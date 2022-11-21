@@ -38,7 +38,7 @@
                                 <div class="col-md">
                                     <div >
                                         <label for="name">Project No<span class="required" style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm" name="project_no" id="project_no" aria-describedby="project_no" placeholder="Enter Project No">
+                                        <input type="text" class="form-control form-control-sm" name="project_no"    id="project_no" aria-describedby="project_no" placeholder="Enter Project No">
                                     </div>
                                 </div>
                                 <div class="col-md">
@@ -180,13 +180,14 @@
                     </a>
                         <h6>Project Details</h6><hr>
                         <br>
-                        <form action="" method="GET" class="d-flex">
-                            <input class="form-control me-2  type="text" name="search" placeholder="Search" aria-label="Search" required>
+                        <form action=" {{ route('projectdetail.search') }} " method="GET" class="d-flex">
+                            <input class="form-control me-2  type="text" name="search" placeholder="Search Project Title" aria-label="Search" required>
                             <button class="btn btn-outline-success" type="submit">Search</button>
                           </form>
                           <br>
                     </div>
                 <div class="card-body p-0">
+                    <div class="table-responsive">
                  <table class="table table-striped table-hover">
                      <thead class="table-dark">
                      <tr>
@@ -196,16 +197,16 @@
                         <td>Project Scheme</td>
                         <td>Project Duration</td>
                         {{-- <td>Project Total Cost</td> --}}
-                         <td>Funding Agency</td>
-                         <td>Budget Name</td>
-                         <td>Budget Details Cost</td>
+                         {{-- <td>Funding Agency</td> --}}
+                         {{-- <td>Budget Name</td> --}}
+                         {{-- <td>Budget Details Cost</td> --}}
                          <td>Total Project Cost</td>
                          <td>Action</td>
                          <td>Print</td>
                      </tr>
                      </thead>
                      <tbody>
-                     @foreach($projectDetail as $pro) 
+                     @foreach($project_details as $key=> $pro) 
                          <tr>
                             <td>{{$pro->project_no}}</td>
                             {{-- <td>{{$pro->name}}</td> --}}
@@ -213,9 +214,20 @@
                             <td>{{$pro->project_scheme}}</td>
                             <td>{{$pro->project_duration}} year</td>
                              {{-- <td>{{$pro->project_total_cost}}</td> --}}
-                             <td>{{$pro->agency_name}}</td>
-                             <td>{{$pro->budget_title}}</td>
-                             <td>{{$pro->budget_details_amount}}</td>
+                             {{-- <td>{{$pro->agency_name}}</td> --}}
+                             {{-- <td>{{$pro->budget_title}}</td>
+                             <td>
+                                <ul>
+                                    <li>{{$pro->budget_title}} ( {{$pro->budget_details_amount}} )</li>
+                                </ul>
+                             </td> --}}
+                                {{-- <ul>
+                                @foreach($projectDetail as $key => $item)
+                                    <li>{{ $item->budget_title }} ({{ $item->budget_details_amount}} </li>
+                                @endforeach
+                                </ul> --}}
+                             
+                             {{-- <td>{{$pro->budget_details_amount}}</td> --}}
                              <td>{{$pro->project_total_cost}}</td>
                              <th>
                                 <a href=" {{ url('/projectdetail/edit',$pro->id) }} ">
@@ -234,6 +246,7 @@
                      @endforeach
                      </tbody>
                   </table>
+                    </div>
                 </div>
                 </div>
             </div>

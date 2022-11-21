@@ -9,9 +9,6 @@
         <div class="card-title mt-4 mx-4">
             <button type="button" class="btn btn-success float-end"><a href=" {{ url('/department') }} ">Back</a></button>
             <br>
-           
-
-            
             <h6>Search Department</h6>
             <hr>
         </div>

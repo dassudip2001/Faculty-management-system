@@ -35,6 +35,9 @@ class InvoiceUploadController extends Controller
         $request->validate([
             'name'=>'required',
             'file'=>'required',
+            'description'=>'required',
+            'bill_no'=>'required|unique:invoice_uploads',
+            'amount'=>'required',
         ]);
         $data=new InvoiceUpload();
         $file=$request->file;
@@ -42,6 +45,10 @@ class InvoiceUploadController extends Controller
         $request->file->move('assets',$filename);
         $data->file=$filename;
         $data->name=$request->name;
+        $data->description=$request->description;
+        $data->bill_no=$request->bill_no;
+        $data->amount=$request->amount;
+
         $data->save();
         // return redirect()->back();
         return redirect(route('invoiceuoload.index'))->with('success','Upload Successfully');
@@ -238,5 +245,20 @@ class InvoiceUploadController extends Controller
         // return back()->with("success", "Image deleted successfully.");
 
 
+    }
+
+    public function search(Request $request){
+        // Get the search value from the request
+       $search = $request->input('search');
+
+       // Search in the title and body columns from the posts table
+       $invoiceupload = InvoiceUpload::query()
+           ->where('name', 'LIKE', "%{$search}%")
+           ->orWhere('bill_no', 'LIKE', "%{$search}%")
+           ->get();
+        
+
+        // Return the search view with the resluts compacted
+        return view('upload.search', compact('invoiceupload'));
     }
 }

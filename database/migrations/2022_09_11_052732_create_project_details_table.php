@@ -15,9 +15,11 @@ class CreateProjectDetailsTable extends Migration
     {
         Schema::create('project_details', function (Blueprint $table) {
 //            $table->id();
-            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('project_id')->references('id')->on('assettypes')
+            ->onDelete('cascade');
             $table->unsignedBigInteger('budget_id');
             $table->bigInteger('budget_details_amount');
+            $table->timestamps();
             // $table->timestamps();
         });
     }

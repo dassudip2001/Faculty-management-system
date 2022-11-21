@@ -77,7 +77,12 @@
             <!-- Faculty Status -->
         <div class="mb-6">
         <label for="faculty_status">Faculty Status</label>
-        <input type="text" class="form-control form-control-sm" name="fac_status"  id="faculty_status" aria-describedby="faculty_status" value="{{$faculty->fac_status}}"  placeholder="Enter  Faculty Status">
+        {{-- <input type="text" class="form-control form-control-sm" name="fac_status"  id="faculty_status" aria-describedby="faculty_status" value="{{$faculty->fac_status}}"  placeholder="Enter  Faculty Status"> --}}
+        <select name="fac_status" value="{{$faculty->fac_status}}" class="form-select form-select-sm @error('fac_status') is-invalid @enderror" aria-label=".form-select-sm example">
+            <option selected hidden>Faculty Status </option>
+            <option >Active </option>
+           <option >Dactive </option>
+            </select>
         </div>
         </div>
         <div class="col">
