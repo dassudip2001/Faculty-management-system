@@ -11,6 +11,10 @@
                 <div class="card ">
                     <div class="mt-2 mx-2">                        
                          <div class="modal-body">
+                            <div class="card-title mt-2 mx-2">
+                                <h6>Edit Project Details </h6>
+                                <hr>
+                            </div>
                             <!-- form Start -->
                          <form action="" method="POST" name="budgetForm">
                             @method('PUT')
