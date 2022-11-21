@@ -222,7 +222,7 @@
         </div>
     </div>
     <div class="card-title mx-3">
-        <form action=" " method="GET" class="d-flex">
+        <form action=" {{route('relesefund.search')}} " method="GET" class="d-flex">
             <input class="form-control me-2"  type="text" name="search " placeholder="Search Using Date or Transtation number" aria-label="Search " required>
             <button class="btn btn-outline-success" type="submit">Search </button>
           </form>

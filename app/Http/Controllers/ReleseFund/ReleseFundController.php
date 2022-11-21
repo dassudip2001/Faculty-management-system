@@ -293,7 +293,7 @@ class ReleseFundController extends Controller
 
     // search
 
-    public function searchElement(Request $request){
+    public function search(Request $request){
         // Get the search value from the request
        $search = $request->input('search');
 
