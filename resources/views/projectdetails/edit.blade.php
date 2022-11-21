@@ -42,7 +42,7 @@
                                         <select name="funding_agency_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option selected hidden>Select</option>
                                             @foreach ($funding as $fund)
-                                                <option value=" {{$fund->id}} ">
+                                                <option value=" {{$fund->id}} " selected >
                                                      {{$fund->agency_name}}
                                                 </option>
                                             @endforeach
@@ -58,7 +58,7 @@
                                                 <select name="create_user_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                     <option selected hidden>Select</option>
                                                     @foreach ($createUser as $funding)
-                                                        <option value="{{$funding->id}}">{{$funding->name}} - {{$funding->dept_name}}
+                                                        <option value="{{$funding->id}}" selected>{{$funding->name}} - {{$funding->dept_name}}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -111,14 +111,14 @@
                                                             <select name="budget_id[]" class="form-control">
                                                                 <option value="">-- choose Budget Name --</option>
                                                               @foreach ($budget_heads as $product) 
-                                                               <option value="{{ $product->id }}"> 
+                                                               <option value="{{ $product->id }}" selected> 
                                                                       {{ $product->budget_title }}  
                                                                     </option>
                                                               @endforeach 
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" />
+                                                            <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" selected/>
                                                         </td>
                                                     </tr>
                                                 @endforeach

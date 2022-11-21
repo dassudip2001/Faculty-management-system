@@ -26,7 +26,7 @@
                             <option   value="select">Select Project</option>
                                                                
                              @foreach ($projectDetail as $funding)
-                            <option value="{{$funding->id}}">Project No:{{$funding->project_no}} ||  Project Name:{{$funding->project_title}} || Project Cost: {{$funding->project_total_cost}}
+                            <option value="{{$funding->id}}" selected>Project No:{{$funding->project_no}} ||  Project Name:{{$funding->project_title}} || Project Cost: {{$funding->project_total_cost}}
                             </option>
                         @endforeach
                         </select>
@@ -52,9 +52,9 @@
                     <div>
 
                        <select  name="payment_method"  class="form-select" aria-label="Default select example" id="selector" value=" {{$relese_funds->payment_method}} " onchange="yesnoCheck(this);">
-                           <option   value="select">Select payment mathod</option>
-                           <option   value="CHECK">Cheque</option>
-                           <option   value="NEFT">NEFT</option>
+                           <option   value="select" selected>Select payment mathod</option>
+                           <option   value="CHECK" >Cheque</option>
+                           <option   value="NEFT" >NEFT</option>
                        </select>
                    </div>
                    <br>
@@ -126,7 +126,7 @@
                                             <select name="relese_fund_budget_id[]" class="form-control">
                                                 <option value="">-- choose Budget Name --</option>
                                                  @foreach ($budget_heads as $budget )
-                                                     <option value=" {{$budget->id}} ">{{in_array($budget->id, old("budget_title") ?: []) ? "selected": ""}}
+                                                     <option value=" {{$budget->id}} " {{$budget->id==$edit->funding_agency_id ? 'selected':''}} selected>
                                                       {{ $budget->budget_title }}
                                                     </option>
                                                  @endforeach

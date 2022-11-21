@@ -65,7 +65,7 @@ class ReleseFundController extends Controller
 
         $request->validate([
             'date'=>'required',
-            'transaction_no'=>'required',
+            'transaction_no'=>'required|un',
             'payment_method'=>'required',
             'transtation_date'=>'required',
             'relese_funds_amount'=>'required',
@@ -143,8 +143,8 @@ class ReleseFundController extends Controller
      */
     public function edit($id)
     {
-        
-       
+
+
 
         $budget_heads =  DB::table('budget_heads')->get();
         $projectDetail=DB::table('projects')->get();
@@ -189,11 +189,11 @@ class ReleseFundController extends Controller
         try {
             $request->validate([
                 'date'=>'required',
-                'transaction_no'=>'required',
+                'transaction_no'=>'required|unique:relese_funds',
                 'payment_method'=>'required',
                 'transtation_date'=>'required',
                 'relese_funds_amount'=>'required',
-                'payment_method_no'=>'required',
+                'payment_method_no'=>'required|unique:relese_funds',
                 'projec_fund_relese_id'=>'required',
             ]);
 
@@ -260,7 +260,7 @@ class ReleseFundController extends Controller
 //             User::find($uc)->delete();
 
 
-          
+
         DB::table('relese_funds')
         // ->join('fund_relese_budget_modules','fund_relese_budget_modules.relese_fund_id','=','relese_funds.id')
         // ->whereIn('relese_fund_id',$id)
