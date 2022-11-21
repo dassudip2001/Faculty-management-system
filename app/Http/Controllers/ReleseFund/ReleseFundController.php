@@ -285,10 +285,6 @@ class ReleseFundController extends Controller
     }
     // generate pdf one row
     public function pdfForm(Request $request,$id){
-
-
-    
-
         $releseFund1= DB::table('relese_funds')
         ->join('projects','projects.id',"=",'relese_funds.projec_fund_relese_id')
         ->get()
