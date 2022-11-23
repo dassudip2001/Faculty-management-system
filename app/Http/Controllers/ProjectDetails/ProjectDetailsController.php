@@ -23,6 +23,17 @@ class ProjectDetailsController extends Controller
      */
     public function index()
     {
+        
+
+        // return DB::table('faculties')
+        // ->join('create_users','create_users.id','=','faculties.id')
+        // ->get();
+        $data2= DB::table('create_users')
+        ->join('faculties','faculties.id','=','create_users.id')
+        ->join('departments','departments.id','=','create_users.department_id')
+        ->join('users','users.id','=','create_users.user_id')
+        ->get();
+
     //    only iquique details
         $project_details= DB::table('projects')
             // ->join('project_details','project_id',"=",'projects.id')
@@ -53,11 +64,14 @@ class ProjectDetailsController extends Controller
 //        // ->join('funding_agencies','funding_agencies.id',"=",'project_details.project_id')
 //        ->get();
         // $projectDetail=ProjectDetails::all();
-       $data2=DB::table('create_users')
-            ->join('faculties','faculties.id',"=",'create_users.faculty_id')
-            ->join('users','users.id',"=",'create_users.user_id')
-            ->join('departments','departments.id','=','create_users.department_id')
-            ->get();
+
+
+    //    $data2=DB::table('create_users')
+    //         ->join('faculties','faculties.id',"=",'create_users.faculty_id')
+    //         ->join('users','users.id',"=",'create_users.user_id')
+    //         ->join('departments','departments.id','=','create_users.department_id')
+    //         ->get();
+            // echo "$data2";
         $budget=BudgetHead::all();
         $data=FundingAgency::all();
         $data3=Project::all();
@@ -468,23 +482,29 @@ class ProjectDetailsController extends Controller
 
       // pdf generate all pdf
       public function pdf(){
-        $createUser=DB::table('projects')
-            ->join('project_details','project_id',"=",'projects.id')
-            ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
-            ->join('funding_agencies','funding_agencies.id',"=",'projects.funding_agency_id')
-
-            ->get();
+        $createUser=DB::table('create_users')
+        ->join('faculties','faculties.id','=','create_users.id')
+        ->join('departments','departments.id','=','create_users.department_id')
+        ->join('users','users.id','=','create_users.user_id')
+        ->join('projects','projects.create_user_id','=','create_users.user_id')
+        ->join('project_details','project_details.project_id','=','projects.id')
+        ->join('budget_heads','budget_heads.id','=','project_details.budget_id')
+        ->join('funding_agencies','funding_agencies.id','=','projects.funding_agency_id')
+        ->get();
         $pdf=PDF::loadView('projectdetails.print',compact('createUser'));
         return $pdf->download('project.pdf');
    }
     // generate pdf one row
     public function pdfForm(Request $request,$id){
-    $createUser1 =DB::table('projects')
-        ->join('project_details','project_id',"=",'projects.id')
-        ->join('budget_heads','budget_heads.id',"=",'project_details.budget_id')
-        ->join('funding_agencies','funding_agencies.id',"=",'projects.funding_agency_id')
-
-        ->get()->where('id', $id);
+    $createUser1 =DB::table('create_users')
+    ->join('faculties','faculties.id','=','create_users.id')
+    ->join('departments','departments.id','=','create_users.department_id')
+    ->join('users','users.id','=','create_users.user_id')
+    ->join('projects','projects.create_user_id','=','create_users.user_id')
+    ->join('project_details','project_details.project_id','=','projects.id')
+    ->join('budget_heads','budget_heads.id','=','project_details.budget_id')
+    ->join('funding_agencies','funding_agencies.id','=','projects.funding_agency_id')
+    ->get()->where('project_id',$id);
     $pdf=PDF::loadView('projectdetails.pdf_download',compact('createUser1'));
     return $pdf->download('project.pdf');
     }
@@ -504,6 +524,23 @@ class ProjectDetailsController extends Controller
 
         // Return the search view with the resluts compacted
         return view('projectdetails.search', compact('ProjectPosts'));
+    }
+
+
+
+    // show all details for a project
+
+    public function showall(Request $request, $id){
+        $printPage= DB::table('create_users')
+        ->join('faculties','faculties.id','=','create_users.id')
+        ->join('departments','departments.id','=','create_users.department_id')
+        ->join('users','users.id','=','create_users.user_id')
+        ->join('projects','projects.create_user_id','=','create_users.user_id')
+        ->join('project_details','project_details.project_id','=','projects.id')
+        ->join('budget_heads','budget_heads.id','=','project_details.budget_id')
+        ->join('funding_agencies','funding_agencies.id','=','projects.funding_agency_id')
+        ->get()->where('project_id',$id);
+       return view('projectdetails.show',compact('printPage'));
     }
 
    

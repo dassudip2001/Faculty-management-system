@@ -151,7 +151,8 @@ require __DIR__.'/auth.php';
     Route::get('/projectdetail/download',[ProjectDetailsController::class,'pdf']);
     // at a time one pdf
     Route::get('/projectdetail/pdfForm/{id}',[ProjectDetailsController::class,'pdfForm']);
-    //  search
+    //  show all details for projects details page
+    Route::get('/projectdetails/showall/{id}',[ProjectDetailsController::class,'showall'])->name('projectdetails.showall');
 
     // budget amount calculation
 

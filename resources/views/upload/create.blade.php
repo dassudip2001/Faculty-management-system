@@ -5,7 +5,7 @@
       </h2>
   </x-slot>
   <link rel="stylesheet" href="{{ asset('css/upload.css') }}">
-   
+
  {{-- card --}}
 
  <div class="card mt-3 mx-3">
@@ -15,11 +15,11 @@
 <button type="button" class="btn btn-primary float-end m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add New
 </button>
-    <h6>Upload</h6> 
+    <h6>Upload</h6>
     <br>
     <hr>
     <form action="{{ route('invoiceupload.search') }}" method="GET" class="d-flex">
-      <input class="form-control me-2 mt-2" type="text" name="search" placeholder="Search" aria-label="Search" required>
+      <input class="form-control me-2 mt-2" type="text" name="search" placeholder="Search by Bill no" aria-label="Search" required>
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
 
@@ -52,7 +52,7 @@
         <th>Project No</th>
         <th>File</th>
         <th>Bill No</th>
-        
+
         <th>Amount</th>
         <th>Describption</th>
         <th>View</th>
@@ -89,7 +89,7 @@
              </a>
             </td>
           </tr>
-          
+
         </tbody>
         @endforeach
       </div>
@@ -162,7 +162,7 @@
                 <label for="describption" class="form-label">Describption</label>
                 <textarea class="form-control" name="description" id="describption" rows="3" placeholder="Enter The Describption"></textarea>
               </div>
-             
+
           </div>
         </div>
       </div>

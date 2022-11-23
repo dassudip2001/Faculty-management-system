@@ -53,6 +53,7 @@
                                 <div class="col">
                                     <div class="mb-6">
                                         <label for="funding_agency">Funding Agency<span class="required" style="color: red;">*</span></label>
+
                                         <br>
                                         <select name="funding_agency_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option selected hidden>Select</option>
@@ -240,6 +241,10 @@
                              <th>
                                 <a href=" {{ url('/projectdetail/pdfForm',$pro->id) }} ">
                                     <i class="fa-solid fa-print"></i>
+                                </a>
+
+                                <a href=" {{ url('projectdetails/showall',$pro->id) }} ">
+                                    <i class="fa-solid fa-street-view"></i>
                                 </a>
                              </th>
                          </tr>
