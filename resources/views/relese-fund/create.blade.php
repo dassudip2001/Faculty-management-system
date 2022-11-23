@@ -288,6 +288,9 @@
                         <a href=" {{ url('/relesefund/pdfForm',$trans->id) }} ">
                             <i class="fa-regular fa-solid fa-print"></i>
                            </a>
+                           <a href=" {{ url('relesefund/showall',$trans->id) }} ">
+                            <i class="fa-solid fa-street-view"></i>
+                        </a>
                     </th>
                 </tr>
             </tbody>

@@ -87,6 +87,10 @@
              <a href=" {{url('invoiceuoload/delete',$inv->id)}} ">
               <button type="submit"><i class="fa-solid fa-trash"></i></button>
              </a>
+
+             <a href=" {{ url('invoiceuoload/showall',$inv->id) }} ">
+              <i class="fa-solid fa-street-view"></i>
+          </a>
             </td>
           </tr>
 

@@ -29,6 +29,8 @@
              <td> {{$item->transtation_date}}</td>
              <td> {{$item->payment_method_no}}</td>
              <td>{{$item->relese_funds_amount}}</td>
+             <td> {{$item->fund_relese_budget_amount}} </td>
+             <td> {{$item->budget_title}} </td>
              
           </tr>
           @endforeach

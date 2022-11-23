@@ -188,6 +188,8 @@ require __DIR__.'/auth.php';
     Route::get('/relesefund/pdfForm/{id}',[ReleseFundController::class,'pdfForm']);
 //   search Relese fund 
         //  search
+    Route::get('/relesefund/showall/{id}',[ReleseFundController::class,'showall'])->name('relesefund.showall');
+
 
 
 //    Route::get('/search', [ReleseFundController::class,'search'])->name('search');

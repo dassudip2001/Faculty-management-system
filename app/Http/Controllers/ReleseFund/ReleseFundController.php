@@ -276,8 +276,10 @@ class ReleseFundController extends Controller
 
     // pdf generate all pdf
     public function pdf(){
-        $releseFund2=DB::table('projects')
-        ->join('relese_funds','relese_funds.projec_fund_relese_id',"=",'projects.id')
+        $releseFund2=DB::table('fund_relese_budget_modules')
+        ->join('budget_heads','budget_heads.id','=','fund_relese_budget_modules.relese_fund_budget_id')
+        ->join('relese_funds','relese_funds.id','=','fund_relese_budget_modules.relese_fund_id')
+        ->join('projects','projects.id','=','relese_funds.projec_fund_relese_id')
         ->get();
         
         $pdf=PDF::loadView('relese-fund.print',compact('releseFund2'));
@@ -285,10 +287,12 @@ class ReleseFundController extends Controller
     }
     // generate pdf one row
     public function pdfForm(Request $request,$id){
-        $releseFund1= DB::table('relese_funds')
-        ->join('projects','projects.id',"=",'relese_funds.projec_fund_relese_id')
+        $releseFund1= DB::table('fund_relese_budget_modules')
+        ->join('budget_heads','budget_heads.id','=','fund_relese_budget_modules.relese_fund_budget_id')
+        ->join('relese_funds','relese_funds.id','=','fund_relese_budget_modules.relese_fund_id')
+        ->join('projects','projects.id','=','relese_funds.projec_fund_relese_id')
         ->get()
-       ->where('id', $id);
+       ->where('relese_fund_id', $id);
         $pdf=PDF::loadView('relese-fund.pdf_download',compact('releseFund1'));
         return $pdf->download('funding.pdf');
     }
@@ -308,5 +312,16 @@ class ReleseFundController extends Controller
 
         // Return the search view with the resluts compacted
         return view('relese-fund.search', compact('fundSearch'));
+    }
+
+
+    // relese fund show pages
+    public function showall(Request $request, $id){
+        $printfund= DB::table('fund_relese_budget_modules')
+        ->join('budget_heads','budget_heads.id','=','fund_relese_budget_modules.relese_fund_budget_id')
+        ->join('relese_funds','relese_funds.id','=','fund_relese_budget_modules.relese_fund_id')
+        ->join('projects','projects.id','=','relese_funds.projec_fund_relese_id')
+        ->get()->where('relese_fund_id', $id);       
+       return view('relese-fund.show',compact('printfund'));
     }
 }
