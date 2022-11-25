@@ -204,6 +204,7 @@
                          <td>Total Project Cost</td>
                          <td>Action</td>
                          <td>Print</td>
+                         <td>View</td>
                      </tr>
                      </thead>
                      <tbody>
@@ -243,6 +244,9 @@
                                     <i class="fa-solid fa-print"></i>
                                 </a>
 
+                                
+                             </th>
+                             <th>
                                 <a href=" {{ url('projectdetails/showall',$pro->id) }} ">
                                     <i class="fa-solid fa-street-view"></i>
                                 </a>

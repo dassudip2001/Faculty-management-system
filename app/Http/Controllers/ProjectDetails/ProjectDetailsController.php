@@ -206,7 +206,17 @@ class ProjectDetailsController extends Controller
      */
     public function edit( $id)
     {
+        // $budget_heads= DB::table('create_users')
+        // ->join('faculties','faculties.id','=','create_users.id')
+        // ->join('departments','departments.id','=','create_users.department_id')
+        // ->join('users','users.id','=','create_users.user_id')
+        // ->join('projects','projects.create_user_id','=','create_users.user_id')
+        // ->join('project_details','project_details.project_id','=','projects.id')
+        // ->join('budget_heads','budget_heads.id','=','project_details.budget_id')
+        // ->join('funding_agencies','funding_agencies.id','=','projects.funding_agency_id')
+        // ->get()->where('project_id',$id);
 
+        // return View('projectdetails.edit',compact('budget_heads'));
 
         $budget_heads =  DB::table('budget_heads')->get(); 
         $funding=DB::table('funding_agencies')->get(); 
@@ -345,6 +355,8 @@ class ProjectDetailsController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        // dd($request->all());
         // abort_unless(auth()->user()->can('edit_project'),
         //     403,'you dont have required authorization to this resource');
 
@@ -386,15 +398,44 @@ class ProjectDetailsController extends Controller
            $project->save();
             //pivot table
 //
-//
-       foreach($request->budget_id as $key=>$insert){
+
+
+// if (array_key_exists('variants', $data) && count($data['variants']) > 0) {
+//     foreach ($data['variants'] as $key => $item) {
+//         $variant = new Variant();
+//         $variant->products_id = $poc->id;
+//         $variant->name = $item['name'];
+//         $variant->quantity = $item['qty'];
+//         $variant->price = $item['price'];
+//         $variant->code = $item['code'];
+//         $variant->sku = $item['sku'];
+//         $variant->user_id = auth()->user()->id;
+//         $variant->save();
+
+//         // $this->createProductCategory($item, $poc->id);
+//     }
+// }
+
+        
+// DB::table('project_details')
+//         // $variant->save();
+//            $saveRecord=[
+//                'project_id'=>$project->id,
+//                'budget_id'=>$request->budget_id[$key],
+//                'budget_details_amount'=>$request->budget_details_amount[$key],
+//            ];
+           
+    // }
+
+    foreach($request->budget_id as $key=>$insert){
+
            $saveRecord=[
                'project_id'=>$project->id,
                'budget_id'=>$request->budget_id[$key],
                'budget_details_amount'=>$request->budget_details_amount[$key],
            ];
-           DB::table('project_details')->update($saveRecord);
-       }
+           DB::table('project_details')->where('project_id', $id)->insert(['saveRecord'=>$saveRecord]);
+        }
 
 
             return redirect(route('projectdetail.index'))

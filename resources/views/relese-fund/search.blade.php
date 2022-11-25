@@ -43,6 +43,10 @@
                   <a href=" {{ url('/relesefund/pdfForm',$post->id) }} ">
                       <i class="fa-regular fa-solid fa-print"></i>
                      </a>
+
+                     <a href=" {{ url('relesefund/showall',$post->id) }} ">
+                      <i class="fa-solid fa-street-view"></i>
+                  </a>
               </th>
               </tr>
             

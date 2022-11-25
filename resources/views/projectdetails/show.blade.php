@@ -26,7 +26,7 @@
         <th scope="col">Email</th>
         <th scope="col">Department</th>
         <th scope="col">Phone</th>
-        <th>Print</th>
+        {{-- <th>Print</th> --}}
 
 
 
@@ -53,11 +53,11 @@
         <td> {{$print->email}} </td>
         <td> {{$print->dept_name}} </td>
         <td> {{$print->fac_phone}} </td>
-        <th>
+        {{-- <th>
             <a href=" {{ url('/projectdetail/pdfForm',$print->id) }} "> print
                 <i class="fa-solid fa-print"></i>
             </a>
-        </th>
+        </th> --}}
 
 
 

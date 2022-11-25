@@ -45,7 +45,7 @@
                 
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle mt-4 mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-person"></i>  Master Module
+                        <i class="fa-solid fa-person"></i>Permission
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
                         <li><a class="dropdown-item" href="{{ route( 'admin.permissions.index' ) }} ">Permission </a></li>
@@ -62,25 +62,26 @@
                 {{-- crate module --}}
                 <div class="dropdown mt-4 mx-3">
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-sharp fa-solid fa-plus"></i> Cretae Module
+                        <i class="fa-sharp fa-solid fa-plus"></i>Master Module
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
                         <li><a class="dropdown-item" href=" {{ url('/department') }}">Department </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/createuser') }}"> User </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/funding') }}"> Funding Agency </a></li>
                         <li><a class="dropdown-item" href=" {{ url('/budget') }}">Budget </a></li>
-                        <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}"> Project </a></li>
 
                     </ul>
                 </div>
 
                 <div class="dropdown mt-4 mx-3">
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-user-pen"></i>  Edit Details
+                        <i class="fa-solid fa-user-pen"></i>  Projects
                     </button>
                     <ul class="dropdown-menu dropdown-menu-light">
+                        <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}"> Project </a></li>
+
                         <li><a class="dropdown-item" href=" {{ url('/faculty') }}">Faculty </a></li>
-                        <li><a class="dropdown-item" href="{{ url('/project') }}">Projects</a></li>
+                        {{-- <li><a class="dropdown-item" href="{{ url('/project') }}">Projects</a></li> --}}
                     </ul>
                 </div>
                  {{-- fund Relese --}}

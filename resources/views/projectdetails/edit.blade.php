@@ -59,7 +59,7 @@
                                                 <select name="create_user_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                     <option selected hidden>Select</option>
                                                     @foreach ($createUser as $funding)
-                                                        <option value="{{$funding->id}}" selected>{{$funding->name}} - {{$funding->dept_name}}
+                                                        <option value="{{$funding->user_id}}" selected>{{$funding->name}} - {{$funding->dept_name}}
                                                         </option>
                                                     @endforeach
                                                 </select>

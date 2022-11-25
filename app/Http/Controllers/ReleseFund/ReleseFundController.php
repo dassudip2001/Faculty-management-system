@@ -184,6 +184,7 @@ class ReleseFundController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
 
         try {
@@ -216,13 +217,14 @@ class ReleseFundController extends Controller
             $fund->save();
 
             //    budget Calculation
+
             foreach($request->relese_fund_budget_id as $key=>$insert){
                 $saveRecord=[
                     'relese_fund_id'=>$fund->id,
                     'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key],
                     'fund_relese_budget_amount'=>$request->fund_relese_budget_amount[$key],
                 ];
-                DB::table('fund_relese_budget_modules')->update($saveRecord);
+                DB::table('fund_relese_budget_modules')->insert($saveRecord);
             }
 
             return redirect(route('relesefund.index'))
