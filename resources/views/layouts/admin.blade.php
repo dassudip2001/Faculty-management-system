@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
        <!-- jquery -->
        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
@@ -72,7 +73,7 @@
                     <ul class="dropdown-menu dropdown-menu-light">
                         <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}"> Project </a></li>
 
-                        <li><a class="dropdown-item" href=" {{ url('/faculty') }}">Faculty </a></li>
+                        {{-- <li><a class="dropdown-item" href=" {{ url('/faculty') }}">Faculty </a></li> --}}
                         {{-- <li><a class="dropdown-item" href="{{ url('/project') }}">Projects</a></li> --}}
                     </ul>
                 </div>

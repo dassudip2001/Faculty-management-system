@@ -14,11 +14,12 @@ class CreateFundReleseBudgetModulesTable extends Migration
     public function up()
     {
         Schema::create('fund_relese_budget_modules', function (Blueprint $table) {
-//            $table->id();
+           $table->id();
             $table->unsignedBigInteger('relese_fund_id');
             $table->unsignedBigInteger('relese_fund_budget_id');
             $table->bigInteger('fund_relese_budget_amount');
-            // $table->timestamps();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

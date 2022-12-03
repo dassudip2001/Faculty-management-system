@@ -89,8 +89,9 @@
 
               @role('admin')
               <th >Action</th>
-              @endrole
+              
               <th >Print</th>
+              @endrole
 
             </tr>
            </thead>
@@ -102,14 +103,15 @@
              <td> {{$item->budget_title}}</td>
 
              <td> {{$item->budget_type}}</td>
-             <td>
              @role('admin')
+             <td>
+             
              <a href=" {{ url('/budget/edit',$item->id) }} ">
              <i class="fa-regular fa-pen-to-square"></i>
             </a>
             <a href=" {{ url('/budget/delete',$item->id) }} ">
              <i class="fa-solid fa-trash" ></i>
-             @endrole
+             
              </td>
              </a>
              <th>
@@ -118,6 +120,7 @@
                </a>
 
             </th>
+            @endrole
           </tr>
           @endforeach
         </tbody>

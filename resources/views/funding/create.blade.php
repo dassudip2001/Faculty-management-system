@@ -71,8 +71,9 @@
               <th>Funding Agency Name</th>
               @role('admin')
               <th>Action</th>
-              @endrole
+              
               <th>Print</th>
+              @endrole
             </tr>
            </thead>
          <tbody>
@@ -80,15 +81,16 @@
            <tr>
              <td>{{$item->id}}</td>
              <td> {{$item->agency_name}}</td>
-             <td>
              @role('admin')
+             <td>
+             
              <a href=" {{ url('/funding/edit',$item->id) }} ">
               <i class="fa-regular fa-pen-to-square"></i>
              </a>
             <a href=" {{ url('/funding/delete',$item->id) }} ">
              <i class="fa-solid fa-trash" ></i>
             </a>
-             @endrole
+             
              </td>
             <td>
               <a href=" {{ url('/funding/pdfForm',$item->id) }} ">
@@ -96,6 +98,7 @@
                </a>
 
             </td>
+            @endrole
           </tr>
           @endforeach
         </tbody>

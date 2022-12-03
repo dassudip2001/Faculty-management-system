@@ -26,6 +26,7 @@ class CreateReleseFundsTable extends Migration
             // $table->string('trans_no');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

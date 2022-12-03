@@ -41,8 +41,8 @@
 
 {{--                <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="{{ url('/department') }}">Department</a>--}}
 {{--                <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Facilty</a>--}}
-                @role('admin')
                 
+                @role('admin')
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle mt-4 mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-person"></i>Permission
@@ -80,7 +80,7 @@
                     <ul class="dropdown-menu dropdown-menu-light">
                         <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}"> Project </a></li>
 
-                        <li><a class="dropdown-item" href=" {{ url('/faculty') }}">Faculty </a></li>
+                        {{-- <li><a class="dropdown-item" href=" {{ url('/faculty') }}">Faculty </a></li> --}}
                         {{-- <li><a class="dropdown-item" href="{{ url('/project') }}">Projects</a></li> --}}
                     </ul>
                 </div>

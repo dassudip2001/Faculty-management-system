@@ -123,8 +123,9 @@
                                             @foreach (old('budget_id', ['']) as $index => $oldProduct)
                                                 <tr id="product{{ $index }}">
                                                     <td>
-                                                        <select name="budget_id[]" class="form-control">
-                                                            <option value="">-- choose Budget Name --</option>
+                                                        <select name="budget_id[]" class="form-control budget-names" id="cars" onchange="checkValue()">
+                                                            {{-- Check whether option is already selected or not --}}                                                            
+                                                            <option value="" >-- choose Budget Name --</option>
                                                             @foreach ($budget as $product)
                                                                 <option value="{{ $product->id }}">
                                                                     {{ $product->budget_title }} 
@@ -143,7 +144,7 @@
                 
                                     <div class="row">
                                         <div class="col-sm-10">
-                                            <button  id="add_row" class="btn  btn-success pull-left">+ Add Row</button>
+                                            <button  id="add_row" class="btn  btn-success pull-left" >+ Add Row</button>
                                             <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
                                         </div>
                                         
@@ -182,7 +183,7 @@
                         <h6>Project Details</h6><hr>
                         <br>
                         <form action=" {{ route('projectdetail.search') }} " method="GET" class="d-flex">
-                            <input class="form-control me-2  type="text" name="search" placeholder="Search Project Title" aria-label="Search" required>
+                            <input class="form-control me-2"  type="text" name="search" placeholder="Search Project Title" aria-label="Search" required>
                             <button class="btn btn-outline-success" type="submit">Search</button>
                           </form>
                           <br>
@@ -261,7 +262,45 @@
             </div>
         </div>
         @section('script')
+    
         <script>
+             
+            // function getSelectvalue(select1) {
+            //     if (select1!='') {
+            //         alert(select1);
+            //     }
+            // }
+
+            var arr = [];
+            var checkValue = function() {
+                const mySelect = document.getElementById("cars");
+                let currentValue = mySelect.options[mySelect.selectedIndex].value;
+
+                if ($.inArray(currentValue, arr) != "-1") {
+    // arr.remove(arr.currentValue);
+    
+                alert("already selected");
+                console.log("already selected");
+                } else {
+                arr.push(currentValue);
+                console.log(currentValue);
+                }
+            }
+
+            // var selectedOptionsArray = [];
+            // var checkValue = function() {
+            //     var mySelectedOptions = document.querySelector('.budget-names');
+            //     for(mySelect in mySelectedOptions){
+            //         if(mySelect.options[mySelect.selectedIndex] != undefined){
+            //             let currentValue = mySelect.options[mySelect.selectedIndex].value;
+            //             selectedOptionsArray.push(currentValue); 
+            //         }
+            //     }
+            //     console.log(selectedOptionsArray); 
+            //     // return selectedOptionsArray;                 
+            // }
+
+            // 
                 $(document).ready(function(){
                     let row_number = {{ count(old('budget_id', [''])) }};
                     $("#add_row").click(function(e){

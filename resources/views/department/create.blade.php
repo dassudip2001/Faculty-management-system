@@ -130,14 +130,15 @@
              <td> {{$item->description}}</td>
              {{-- <td>{{ $item->jdcontent }} --}}
             </td>
+            @role('admin')
              <td>
-              @role('admin')
+              
              <a href=" {{ url('/department/edit',$item->id) }} ">
              <i class="fa-regular fa-pen-to-square"></i>
             </a>
             <a href=" {{ url('/department/delete',$item->id) }} ">
             <button type="submit"><i class="fa-solid fa-trash"></i></button>
-             @endrole
+            
              </td>
                 </a>
               <td>
@@ -146,7 +147,7 @@
                  </a>
 
               </td>
-
+            @endrole
           </tr>
           @endforeach
         </tbody>
