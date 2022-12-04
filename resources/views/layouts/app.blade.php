@@ -73,25 +73,19 @@
                     </ul>
                 </div>
 
-                <div class="dropdown mt-4 mx-3">
-                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-user-pen"></i>  Projects
+                <div class=" mt-4 mx-3">
+                    <button class="btn btn-light" type="button" data-bs-toggle="" aria-expanded="false">
+                        <a class="dropdown-item" href=" {{ url('/projectdetail') }}"> <i class="fa-solid fa-user-pen"></i> Project </a>  
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-light">
-                        <li><a class="dropdown-item" href=" {{ url('/projectdetail') }}"> Project </a></li>
-
-                        {{-- <li><a class="dropdown-item" href=" {{ url('/faculty') }}">Faculty </a></li> --}}
-                        {{-- <li><a class="dropdown-item" href="{{ url('/project') }}">Projects</a></li> --}}
-                    </ul>
+                   
                 </div>
                  {{-- fund Relese --}}
-                 <div class="dropdown mt-4 mx-3">
-                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-hand-holding-dollar"></i>  Fund Relese
+                 <div class=" mt-4 mx-3">
+                    <button class="btn btn-light " type="button" data-bs-toggle="" aria-expanded="false">
+                        <a class="dropdown-item" href=" {{url('/relesefund')}} "><i class="fa-solid fa-hand-holding-dollar"></i> Fund Relese</a>
+                          
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-light">
-                        <li><a class="dropdown-item" href=" {{url('/relesefund')}} ">Fund Relese</a></li>
-                    </ul>
+                   
                 </div>
                  {{-- budget cal --}}
                  {{-- <div class="dropdown mt-4 mx-3">
@@ -105,14 +99,12 @@
                  
 
 
-                <div class="dropdown mt-4 mx-3">
-                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        Invoice Upload
+                <div class=" mt-4 mx-3">
+                    <button class="btn btn-light" type="button" data-bs-toggle="" aria-expanded="false">
+                        <a class="dropdown-item" href=" {{url('/invoiceuoload')}} "> <i class="fa-solid fa-cloud-arrow-up"></i>Invoice Upload</a>
+                        
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-light">
-                        <li><a class="dropdown-item" href=" {{url('/invoiceuoload')}} "> Invoice Upload</a></li>
-                    </ul>
+                    
                 </div>
                 <form method="POST" action="{{ route('logout') }}">
                 @csrf
