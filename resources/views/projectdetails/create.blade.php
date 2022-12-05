@@ -172,15 +172,16 @@
                     <div class="card-title mt-2 mx-2">
                         <!-- Button trigger modal -->
                          <!-- success massage -->
-                    @if(session('success'))
-                        <div class="alert alert-success">
-                            {{session('success')}}
-                        </div>
-                    @endif
+                    
                     <a href=" {{ url('/projectdetail/download') }} ">
                         <i class="fa-solid fa-print"></i>Print All
                     </a>
                         <h6>Project Details</h6><hr>
+                        @if(session('success'))
+                        <div class="alert alert-success">
+                            {{session('success')}}
+                        </div>
+                    @endif
                         <br>
                         <form action=" {{ route('projectdetail.search') }} " method="GET" class="d-flex">
                             <input class="form-control me-2"  type="text" name="search" placeholder="Search Project Title" aria-label="Search" required>

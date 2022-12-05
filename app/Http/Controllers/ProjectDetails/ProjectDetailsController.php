@@ -218,7 +218,11 @@ class ProjectDetailsController extends Controller
 
         // return View('projectdetails.edit',compact('budget_heads'));
 
-        $budget_heads =  DB::table('budget_heads')->get(); 
+
+        $budget_heads= DB::table('budget_heads')
+        ->join('project_details','project_details.budget_id','=','budget_heads.id')->where('project_id',$id)->get();
+
+        $budget =  DB::table('budget_heads')->get(); 
         $funding=DB::table('funding_agencies')->get(); 
         $createUser=DB::table('create_users')
         ->join('faculties','faculties.id',"=",'create_users.faculty_id')
@@ -235,6 +239,7 @@ class ProjectDetailsController extends Controller
             'project_details'=>$project_details,
             'budget_heads'=>$budget_heads,
             'createUser'=>$createUser,
+            'budget'=>$budget,
             
         ]);
 
@@ -355,6 +360,7 @@ class ProjectDetailsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
 
         // dd($request->all());
         // abort_unless(auth()->user()->can('edit_project'),
@@ -427,14 +433,38 @@ class ProjectDetailsController extends Controller
            
     // }
 
-    foreach($request->budget_id as $key=>$insert){
 
-           $saveRecord=[
+    // foreach($request->city as $key => $v) {
+    //     $user->addresses()->where('user_id', '$id')->update([   //$user->addresses() is one to many relation
+    //         'city' => $v,
+    //         'state' => $request->state[$key],
+    //         'country' => $request->country[$key]
+    //     ]);
+    // }
+    
+//     foreach($request->mark as $item=>$v){
+//         $data=array(
+//             'mark'=>$request->mark[$item],
+//             'grade'=>$request->grade[$item],
+//             'student_id'=>$request->student_id[$item],
+//         );
+//     Result::where('student_id', $id)->update($data);
+//   }
+
+    foreach($request->budget_id as $key=>$insert){
+         
+            $data=array(
                'project_id'=>$project->id,
                'budget_id'=>$request->budget_id[$key],
                'budget_details_amount'=>$request->budget_details_amount[$key],
-           ];
-           DB::table('project_details')->where('project_id', $id)->update(['saveRecord'=>$saveRecord]);
+            );
+            ProjectDetails::where('budget_id',$request->budget_id[$key])->update($data);
+        //    $saveRecord=[
+        //        'project_id'=>$project->id,
+        //        'budget_id'=>$request->budget_id[$key],
+        //        'budget_details_amount'=>$request->budget_details_amount[$key],
+        //    ];
+        //    DB::table('project_details')->where('budget_id', $id)->update(['saveRecord'=>$saveRecord]);
         }
 
 

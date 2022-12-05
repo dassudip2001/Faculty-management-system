@@ -96,31 +96,35 @@
                                     <div class="card-header">
                                         Budget Details 
                                     </div>
-                    
+                      {{-- @php
+                          echo"$budget_heads";
+                      @endphp --}}
                                     <div class="card-body">
                                         <table class="table" id="products_table">
                                             <thead>
+                                                @foreach ($budget_heads as $product) 
                                                 <tr>
                                                     <th >Budget Name</th>
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+
+                                                
                                                 @foreach (old('budget_id', ['']) as $index => $oldProduct)
                                                     <tr id="product{{ $index }}">
                                                         <td>
                                                             <select name="budget_id[]" class="form-control">
                                                                 <option value="">-- choose Budget Name --</option>
-                                                              @foreach ($budget_heads as $product) 
-                                                               <option value="{{ $product->id }}" selected> 
+                                                               <option value="{{ $product->budget_id }}" selected> 
                                                                       {{ $product->budget_title }}  
                                                                     </option>
-                                                              @endforeach 
+                                                              
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" selected/>
-                                                        </td>
+                                                            <input type="txt" class="form-control form-control" onblur="findTotal()" id="inst_amount" value=" {{$product->budget_details_amount}} " name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" selected/>
+                                                        </td>@endforeach 
                                                     </tr>
                                                 @endforeach
                                                 <tr id="product{{ count(old('budget_id', [''])) }}"></tr>
