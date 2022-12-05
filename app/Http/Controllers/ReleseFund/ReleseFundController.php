@@ -261,12 +261,18 @@ class ReleseFundController extends Controller
 // //            user delete
 //             User::find($uc)->delete();
 
+        $data =DB::table('relese_funds')
+                    ->leftJoin('fund_relese_budget_modules','relese_funds.id', '=','fund_relese_budget_modules.relese_fund_id')
+                    ->where('relese_funds.id', $id); 
+        DB::table('fund_relese_budget_modules')->where('relese_fund_id', $id)->delete();                           
+        $data->delete();
 
 
-        DB::table('relese_funds')
-        // ->join('fund_relese_budget_modules','fund_relese_budget_modules.relese_fund_id','=','relese_funds.id')
-        // ->whereIn('relese_fund_id',$id)
-        ->delete($id);
+
+        // DB::table('relese_funds')
+        // // ->join('fund_relese_budget_modules','fund_relese_budget_modules.relese_fund_id','=','relese_funds.id')
+        // // ->whereIn('relese_fund_id',$id)
+        // ->delete($id);
             return redirect(route('relesefund.index'))->with('success','Delete Successfully');
         } catch (Exception $e){
 

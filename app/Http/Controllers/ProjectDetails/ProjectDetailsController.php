@@ -434,7 +434,7 @@ class ProjectDetailsController extends Controller
                'budget_id'=>$request->budget_id[$key],
                'budget_details_amount'=>$request->budget_details_amount[$key],
            ];
-           DB::table('project_details')->where('project_id', $id)->insert(['saveRecord'=>$saveRecord]);
+           DB::table('project_details')->where('project_id', $id)->update(['saveRecord'=>$saveRecord]);
         }
 
 
@@ -473,15 +473,21 @@ class ProjectDetailsController extends Controller
         //    403,'you dont have required authorization to this resource');
 
         try {
-        //     $data =DB::table('projects')
-        //             ->leftJoin('project_details','projects.id', '=','project_details.project_id')
-        //             ->where('projects.id', $id); 
-        // DB::table('project_details')->where('project_id', $id)->delete();                           
-        // $data->delete();
+            $data =DB::table('projects')
+                    ->leftJoin('project_details','projects.id', '=','project_details.project_id')
+                    ->where('projects.id', $id); 
+        DB::table('project_details')->where('project_id', $id)->delete();                           
+        $data->delete();
 
-        DB::table('projects')
+
+        // DB::table('project_details')
+        // ->join('projects','projects.id','=','project_details.project_id')
+        // ->delete();
+
+
+        // DB::table('projects')
           
-          ->delete($id);
+        //   ->delete($id);
 
 
         //     $post = Project::find($id);
