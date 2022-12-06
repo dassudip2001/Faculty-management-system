@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ReleseFund;
 
 use App\Http\Controllers\Controller;
+use App\Models\FundReleseBudgetModule;
 use Illuminate\Http\Request;
 use App\Models\ReleseFund;
 use Exception;
@@ -219,12 +220,18 @@ class ReleseFundController extends Controller
             //    budget Calculation
 
             foreach($request->relese_fund_budget_id as $key=>$insert){
-                $saveRecord=[
+                $data=array(
                     'relese_fund_id'=>$fund->id,
                     'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key],
                     'fund_relese_budget_amount'=>$request->fund_relese_budget_amount[$key],
-                ];
-                DB::table('fund_relese_budget_modules')->insert($saveRecord);
+                );
+                FundReleseBudgetModule::where('relese_fund_budget_id',$request->relese_fund_budget_id[$key])->update($data);
+                // $saveRecord=[
+                //     'relese_fund_id'=>$fund->id,
+                //     'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key],
+                //     'fund_relese_budget_amount'=>$request->fund_relese_budget_amount[$key],
+                // ];
+                // DB::table('fund_relese_budget_modules')->insert($saveRecord);
             }
 
             return redirect(route('relesefund.index'))

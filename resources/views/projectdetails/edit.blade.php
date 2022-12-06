@@ -102,7 +102,6 @@
                                     <div class="card-body">
                                         <table class="table" id="products_table">
                                             <thead>
-                                                @foreach ($budget_heads as $product) 
                                                 <tr>
                                                     <th >Budget Name</th>
                                                     <th>Amount</th>
@@ -114,17 +113,21 @@
                                                 @foreach (old('budget_id', ['']) as $index => $oldProduct)
                                                     <tr id="product{{ $index }}">
                                                         <td>
+
                                                             <select name="budget_id[]" class="form-control">
                                                                 <option value="">-- choose Budget Name --</option>
+                                                        @foreach ($budget_heads as $product) 
+
                                                                <option value="{{ $product->budget_id }}" selected> 
                                                                       {{ $product->budget_title }}  
                                                                     </option>
-                                                              
+                                                              @endforeach
                                                             </select>
+                                                            
                                                         </td>
                                                         <td>
                                                             <input type="txt" class="form-control form-control" onblur="findTotal()" id="inst_amount" value=" {{$product->budget_details_amount}} " name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" selected/>
-                                                        </td>@endforeach 
+                                                        </td> 
                                                     </tr>
                                                 @endforeach
                                                 <tr id="product{{ count(old('budget_id', [''])) }}"></tr>

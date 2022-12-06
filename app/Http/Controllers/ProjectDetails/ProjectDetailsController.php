@@ -14,6 +14,8 @@ use App\Models\BudgetDetails;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use PDF;
+use Symfony\Component\Console\Input\Input;
+
 class ProjectDetailsController extends Controller
 {
     /**
@@ -360,7 +362,7 @@ class ProjectDetailsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+        dd($request->all());
 
         // dd($request->all());
         // abort_unless(auth()->user()->can('edit_project'),
@@ -451,14 +453,16 @@ class ProjectDetailsController extends Controller
 //     Result::where('student_id', $id)->update($data);
 //   }
 
+
+
     foreach($request->budget_id as $key=>$insert){
          
             $data=array(
-               'project_id'=>$project->id,
+            //    'project_id'=>$project->id,
                'budget_id'=>$request->budget_id[$key],
                'budget_details_amount'=>$request->budget_details_amount[$key],
             );
-            ProjectDetails::where('budget_id',$request->budget_id[$key])->update($data);
+            ProjectDetails::where('project_id',$project->id)->update($data);
         //    $saveRecord=[
         //        'project_id'=>$project->id,
         //        'budget_id'=>$request->budget_id[$key],
@@ -466,6 +470,8 @@ class ProjectDetailsController extends Controller
         //    ];
         //    DB::table('project_details')->where('budget_id', $id)->update(['saveRecord'=>$saveRecord]);
         }
+
+   
 
 
             return redirect(route('projectdetail.index'))
