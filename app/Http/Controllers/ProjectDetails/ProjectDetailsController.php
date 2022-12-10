@@ -362,7 +362,7 @@ class ProjectDetailsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
 
         // dd($request->all());
         // abort_unless(auth()->user()->can('edit_project'),
