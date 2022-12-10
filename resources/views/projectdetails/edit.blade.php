@@ -111,24 +111,28 @@
 
                                                 
                                                 @foreach (old('budget_id', ['']) as $index => $oldProduct)
+                                                @foreach ($amount as $product)
                                                     <tr id="product{{ $index }}">
+                                                         
                                                         <td>
-
+                                                            
                                                             <select name="budget_id[]" class="form-control">
                                                                 <option value="">-- choose Budget Name --</option>
-                                                        @foreach ($budget_heads as $product) 
+                                                        
 
                                                                <option value="{{ $product->budget_id }}" selected> 
                                                                       {{ $product->budget_title }}  
                                                                     </option>
-                                                              @endforeach
+                                                              
                                                             </select>
                                                             
                                                         </td>
                                                         <td>
                                                             <input type="txt" class="form-control form-control" onblur="findTotal()" id="inst_amount" value=" {{$product->budget_details_amount}} " name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" selected/>
                                                         </td> 
+                                                        
                                                     </tr>
+                                                    @endforeach
                                                 @endforeach
                                                 <tr id="product{{ count(old('budget_id', [''])) }}"></tr>
                                             </tbody>
@@ -136,7 +140,7 @@
                     
                                         <div class="row">
                                             <div class="col-sm-10">
-                                                <button  id="add_row" class="btn  btn-success pull-left">+ Add Row</button>
+                                                <button  id="add_row" class="btn  btn-success pull-left" onclick="editOptions()" >+ Add Row</button>
                                                 <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
                                             </div>
                                             
@@ -177,6 +181,30 @@
                       }
                     });
                   });
+
+                //   edit options
+
+               function editOptions(){
+                
+                $(document).ready(function(){
+                    let row_number = {{ count(old('budget_id', [''])) }};
+                    $("#add_row").click(function(e){
+                      e.preventDefault();
+                      let new_row_number = row_number - 1;
+                      $('#product' + row_number).html($('#product' + new_row_number).html()).find('td:first-child');
+                      $('#products_table').append('<tr id="product' + (row_number + 1) + '"></tr>');
+                      row_number++;
+                    });
+                
+                    $("#delete_row").click(function(e){
+                      e.preventDefault();
+                      if(row_number > 1){
+                        $("#product" + (row_number - 1)).html('');
+                        row_number--;
+                      }
+                    });
+                  });
+                }
 
                 //calculation
                 function findTotal() {

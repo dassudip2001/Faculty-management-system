@@ -149,6 +149,11 @@ class ReleseFundController extends Controller
 
         $budget_heads =  DB::table('budget_heads')->get();
         $projectDetail=DB::table('projects')->get();
+
+        $amount=DB::table('fund_relese_budget_modules')
+        ->join('budget_heads','budget_heads.id','=','fund_relese_budget_modules.relese_fund_budget_id')
+        ->where('relese_fund_id',$id)->get();
+
         $fund_relese_budget_modules = DB::table('fund_relese_budget_modules')->get();
         $relese_funds = DB::table('relese_funds')
             ->where('id',$id)
@@ -158,6 +163,7 @@ class ReleseFundController extends Controller
             'fund_relese_budget_modules'=>$fund_relese_budget_modules,
             'budget_heads'=>$budget_heads,
             'projectDetail'=>$projectDetail,
+            'amount'=>$amount,
         ]);
 //        return DB::table('relese_funds')->get();
 //        // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
@@ -185,7 +191,7 @@ class ReleseFundController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
 
         try {
@@ -225,7 +231,7 @@ class ReleseFundController extends Controller
                     'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key],
                     'fund_relese_budget_amount'=>$request->fund_relese_budget_amount[$key],
                 );
-                FundReleseBudgetModule::where('relese_fund_budget_id',$request->relese_fund_budget_id[$key])->update($data);
+                FundReleseBudgetModule::where(['relese_fund_id'=>$fund->id,'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key]])->update($data);
                 // $saveRecord=[
                 //     'relese_fund_id'=>$fund->id,
                 //     'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key],

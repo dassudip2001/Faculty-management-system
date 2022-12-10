@@ -223,7 +223,9 @@ class ProjectDetailsController extends Controller
 
         $budget_heads= DB::table('budget_heads')
         ->join('project_details','project_details.budget_id','=','budget_heads.id')->where('project_id',$id)->get();
-
+        $amount =DB::table('project_details')
+        ->join('budget_heads','budget_heads.id','=','project_details.budget_id')
+        ->where('project_id',$id)->get();
         $budget =  DB::table('budget_heads')->get(); 
         $funding=DB::table('funding_agencies')->get(); 
         $createUser=DB::table('create_users')
@@ -242,6 +244,7 @@ class ProjectDetailsController extends Controller
             'budget_heads'=>$budget_heads,
             'createUser'=>$createUser,
             'budget'=>$budget,
+            'amount'=>$amount,
             
         ]);
 
@@ -453,16 +456,26 @@ class ProjectDetailsController extends Controller
 //     Result::where('student_id', $id)->update($data);
 //   }
 
+//  for ($i=0;$i<=$request->budget_id;$i++){
+//     $data=array(
+//         'project_id'=>$project->id,
+//         'budget_id'=>$request->budget_id[$i],
+//         'budget_details_amount'=>$request->budget_details_amount[$i],
+//      );
+//      dd($i);
+//      ProjectDetails::where('project_id',$project->id)->update($data);
 
+//  }
 
     foreach($request->budget_id as $key=>$insert){
          
             $data=array(
-            //    'project_id'=>$project->id,
+               'project_id'=>$project->id,
                'budget_id'=>$request->budget_id[$key],
                'budget_details_amount'=>$request->budget_details_amount[$key],
             );
-            ProjectDetails::where('project_id',$project->id)->update($data);
+            // dd($key);
+            ProjectDetails::where(['project_id'=> $project->id,'budget_id'=>$request->budget_id[$key]])->update($data);
         //    $saveRecord=[
         //        'project_id'=>$project->id,
         //        'budget_id'=>$request->budget_id[$key],

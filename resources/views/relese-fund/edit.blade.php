@@ -121,23 +121,25 @@
                             </thead>
                             <tbody>
                                 @foreach (old('relese_fund_budget_id', ['']) as $index => $oldProduct)
+                                @foreach ($amount as $budget )
                                     <tr id="product{{ $index }}">
                                         <td>
                                             <select name="relese_fund_budget_id[]" class="form-control">
                                                 <option value="">-- choose Budget Name --</option>
-                                                 @foreach ($budget_heads as $budget )
+                                                 
                                                      <option value=" {{$budget->id}} "  selected>
                                                       {{ $budget->budget_title }}
                                                     </option>
-                                                 @endforeach
+                                                 
                                                     
                                           
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control form-control" onblur="findTotal()" id="inst_amount" name="fund_relese_budget_amount[]" id="clear" placeholder="Enter Budget Amount" />
+                                            <input type="txt" class="form-control form-control" onblur="findTotal()" id="inst_amount" value=" {{$budget->fund_relese_budget_amount}} " name="fund_relese_budget_amount[]" id="clear" placeholder="Enter Budget Amount" />
                                         </td>
                                     </tr>
+                                    @endforeach
                                 @endforeach
                                 <tr id="product{{ count(old('relese_fund_budget_id', [''])) }}"></tr>
                             </tbody>

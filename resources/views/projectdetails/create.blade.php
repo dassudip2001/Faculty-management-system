@@ -123,7 +123,7 @@
                                             @foreach (old('budget_id', ['']) as $index => $oldProduct)
                                                 <tr id="product{{ $index }}">
                                                     <td>
-                                                        <select name="budget_id[]" class="form-control budget-names" id="cars" onchange="checkValue()">
+                                                        <select name="budget_id[]" class="form-control budget-names" id="cars" onclick="checkValue()">
                                                             {{-- Check whether option is already selected or not --}}                                                            
                                                             <option value="" >-- choose Budget Name --</option>
                                                             @foreach ($budget as $product)
@@ -266,40 +266,27 @@
     
         <script>
              
-            // function getSelectvalue(select1) {
-            //     if (select1!='') {
-            //         alert(select1);
-            //     }
-            // }
+            
 
             var arr = [];
-            var checkValue = function() {
-                const mySelect = document.getElementById("cars");
-                let currentValue = mySelect.options[mySelect.selectedIndex].value;
+            var checkValue = function(event) {
 
-                if ($.inArray(currentValue, arr) != "-1") {
-    // arr.remove(arr.currentValue);
+                // const mySelect = document.getElementById("cars");
+                // let currentValue = mySelect.options[mySelect.selectedIndex].value;
+
+                // if ($.inArray(currentValue, arr) != "-1") {
     
-                alert("already selected");
-                console.log("already selected");
-                } else {
-                arr.push(currentValue);
-                console.log(currentValue);
-                }
+                // alert("already selected");
+                // console.log("already selected");
+                // } else {
+                // arr.push(currentValue);
+                // console.log(currentValue);
+                // }
+                const data = $budget.filter((item) => item.id !== event.target.value);
+                $budget=data;
             }
 
-            // var selectedOptionsArray = [];
-            // var checkValue = function() {
-            //     var mySelectedOptions = document.querySelector('.budget-names');
-            //     for(mySelect in mySelectedOptions){
-            //         if(mySelect.options[mySelect.selectedIndex] != undefined){
-            //             let currentValue = mySelect.options[mySelect.selectedIndex].value;
-            //             selectedOptionsArray.push(currentValue); 
-            //         }
-            //     }
-            //     console.log(selectedOptionsArray); 
-            //     // return selectedOptionsArray;                 
-            // }
+          
 
             // 
                 $(document).ready(function(){
