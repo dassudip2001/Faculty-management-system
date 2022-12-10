@@ -194,7 +194,7 @@ class ReleseFundController extends Controller
         // dd($request->all());
         // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
 
-        try {
+        // try {
             $request->validate([
                 'date'=>'required',
                 'transaction_no'=>'required|unique:relese_funds',
@@ -202,13 +202,14 @@ class ReleseFundController extends Controller
                 'transtation_date'=>'required',
                 'relese_funds_amount'=>'required',
                 'payment_method_no'=>'required|unique:relese_funds',
+                
                 'projec_fund_relese_id'=>'required',
             ]);
 
             $fields=$request->only([
                 'date','transaction_no','payment_method','transtation_date',
                 'relese_funds_amount','payment_method_no','projec_fund_relese_id',
-                'projec_fund_relese_id','relese_fund_id','relese_fund_budget_id',
+                'relese_fund_id','relese_fund_budget_id',
                 'fund_relese_budget_amount'
             ]);
 
@@ -217,6 +218,7 @@ class ReleseFundController extends Controller
             $fund->transaction_no=$fields['transaction_no'];
             $fund->payment_method=$fields['payment_method'];
             $fund->transtation_date=$fields['transtation_date'];
+            $fund->payment_method_no=$fields['payment_method_no'];
             $fund->relese_funds_amount=$fields['relese_funds_amount'];
 
 
@@ -242,12 +244,13 @@ class ReleseFundController extends Controller
 
             return redirect(route('relesefund.index'))
             ->with('success','Update Successfully');
-        } catch (Exception $e){
+        // } 
+        // catch (Exception $e){
 
-            return ["message" => $e->getMessage(),
-                "status" => $e->getCode()
-            ];
-        }
+        //     return ["message" => $e->getMessage(),
+        //         "status" => $e->getCode()
+        //     ];
+        // }
 
 
 

@@ -153,7 +153,7 @@
                                     </div>
                             <hr>
                             <div class=" my-2 mx-2">
-                                <button id="submit" type="submit" disabled  class="btn btn-primary float-end" value="{{ trans('global.save') }}">Create Project</button>
+                                <button id="submit" type="submit" disabled  class="btn btn-primary float-end" value="{{ trans('global.save') }}">Update Project</button>
                             </div>
                          </form>
                          </div>

@@ -168,15 +168,16 @@
                 </div>
               </div>
               <div class="mt-2 my-2 mx-4">
-                <button type="submit" class="btn btn-primary float-end">Update changes</button>
+                {{-- <button type="submit" class="btn btn-primary float-end">Update changes</button> --}}
+                <button id="submit" type="submit" disabled  class="btn btn-primary float-end" value="{{ trans('global.save') }}">Update</button>
 
               </div>
 
-            </form>
+            
             </div>
             
         </div>
-    </div>
+    </div></form>
    </div>
    @section('script')
    <script>
