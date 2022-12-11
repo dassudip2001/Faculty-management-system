@@ -90,7 +90,7 @@
                       </div>
                    </div>
 
-                   <div id="neft" style="display: none;" class="mt-2">
+                   {{-- <div id="neft" style="display: none;" class="mt-2">
                        <div class="row">
                         <div class="col">
                             <label >Enter Transeation No.</label>
@@ -102,7 +102,7 @@
                             <label for="relese_amount">Enter  Amount</label>
                        </div>
                        </div>
-                   </div>
+                   </div> --}}
 
                 <br>
                 <hr>
@@ -175,9 +175,9 @@
 
             
             </div>
-            
+            </form>
         </div>
-    </div></form>
+    </div>
    </div>
    @section('script')
    <script>

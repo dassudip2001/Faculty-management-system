@@ -154,13 +154,13 @@ class ReleseFundController extends Controller
         ->join('budget_heads','budget_heads.id','=','fund_relese_budget_modules.relese_fund_budget_id')
         ->where('relese_fund_id',$id)->get();
 
-        $fund_relese_budget_modules = DB::table('fund_relese_budget_modules')->get();
+        // $fund_relese_budget_modules = DB::table('fund_relese_budget_modules')->get();
         $relese_funds = DB::table('relese_funds')
             ->where('id',$id)
             ->get()->first();
         return View('relese-fund.edit')->with([
             'relese_funds'=>$relese_funds,
-            'fund_relese_budget_modules'=>$fund_relese_budget_modules,
+            // 'fund_relese_budget_modules'=>$fund_relese_budget_modules,
             'budget_heads'=>$budget_heads,
             'projectDetail'=>$projectDetail,
             'amount'=>$amount,
@@ -194,14 +194,14 @@ class ReleseFundController extends Controller
         // dd($request->all());
         // abort_unless(auth()->user()->can('update_relese_fund'),403,'you dont have required authorization to this resource');
 
-        // try {
+        try {
             $request->validate([
                 'date'=>'required',
-                'transaction_no'=>'required|unique:relese_funds',
+                'transaction_no'=>'required',
                 'payment_method'=>'required',
                 'transtation_date'=>'required',
                 'relese_funds_amount'=>'required',
-                'payment_method_no'=>'required|unique:relese_funds',
+                'payment_method_no'=>'required',
                 
                 'projec_fund_relese_id'=>'required',
             ]);
@@ -233,24 +233,21 @@ class ReleseFundController extends Controller
                     'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key],
                     'fund_relese_budget_amount'=>$request->fund_relese_budget_amount[$key],
                 );
-                FundReleseBudgetModule::where(['relese_fund_id'=>$fund->id,'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key]])->update($data);
-                // $saveRecord=[
-                //     'relese_fund_id'=>$fund->id,
-                //     'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key],
-                //     'fund_relese_budget_amount'=>$request->fund_relese_budget_amount[$key],
-                // ];
-                // DB::table('fund_relese_budget_modules')->insert($saveRecord);
+                FundReleseBudgetModule::where(['relese_fund_id'=>$fund->id,
+                'relese_fund_budget_id'=>$request->relese_fund_budget_id[$key]])
+                ->update($data);
+                
             }
 
             return redirect(route('relesefund.index'))
             ->with('success','Update Successfully');
-        // } 
-        // catch (Exception $e){
+        } 
+        catch (Exception $e){
 
-        //     return ["message" => $e->getMessage(),
-        //         "status" => $e->getCode()
-        //     ];
-        // }
+            return ["message" => $e->getMessage(),
+                "status" => $e->getCode()
+            ];
+        }
 
 
 
