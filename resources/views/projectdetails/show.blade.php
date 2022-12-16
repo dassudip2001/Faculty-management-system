@@ -8,10 +8,10 @@
 
 
 
-    <div class="card mt-3 m-4">
+    <div class="card mt-3 m-4 table-responsive">
         <div class="card-body mt-2">
-            <table class="table">
-            <thead>
+            <table class="table table-striped table-hover">
+            <thead class="table-dark">
       <tr>
         <th scope="col">Project No</th>
         <th scope="col">Project Title</th>
