@@ -1,16 +1,16 @@
 <x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Relese Fund') }}
+            {{ __('Show Relese Fund') }}
         </h2>
     </x-slot>
 
 
-    <div class="card mt-1 m-4 table-responsive">
+    <div class="card mt-3 m-4 table-responsive">
       {{-- <div class="card-title">
         <h6>Show All</h6>
       </div> --}}
-        <div class="card-body mt-2">
+        <div class="card-body ">
             <table class="table table-striped table-hover">
             <thead class="table-dark">
       <tr>
@@ -22,13 +22,7 @@
         <th scope="col">Payament Method No</th>
         <th scope="col">Amout</th>
         <th scope="col">Budget Amount</th>
-        <th scope="col">Name</th>
-
-       
-
-
-
-        
+        <th scope="col">Name</th>       
       </tr>
     </thead>
     <tbody>

@@ -1,10 +1,10 @@
 <x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-       {{ __('Create Project') }}
+       {{ __(' Project Details') }}
         </h2>
     </x-slot>
-		
+
 
 
 
@@ -30,7 +30,7 @@
 
 
 
-        
+
       </tr>
     </thead>
     <tbody>
@@ -39,15 +39,15 @@
         <th scope="row"> {{$print->project_no}} </th>
         <td>{{$print->project_title}}</td>
         <td>{{$print->project_scheme}}</td>
-        <td> {{$print->project_duration}} </td>
+        <td> {{$print->project_duration}} years </td>
 
-        <td> {{$print->project_total_cost}} </td>
+        <td>Rs: {{$print->project_total_cost}} </td>
 
         <td> {{$print->agency_name}} </td>
 
         <td> {{$print->budget_title}} </td>
 
-        <td> {{$print->budget_details_amount}} </td>
+        <td>Rs: {{$print->budget_details_amount}} </td>
 
         <td> {{$print->name}} </td>
         <td> {{$print->email}} </td>
@@ -63,12 +63,12 @@
 
       </tr>
         @endforeach
-      
-      
+
+
     </tbody>
   </table>
         </div>
     </div>
-    
+
 
 </x-admin-layout>

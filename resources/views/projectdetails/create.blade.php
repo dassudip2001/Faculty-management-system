@@ -4,7 +4,8 @@
        {{ __('Create Project') }}
         </h2>
     </x-slot>
-     
+    <link rel="stylesheet" href="{{ asset('css/projectDetails.css') }}">
+
     <div class="container  mt-4 ">
         <div class="row">
             <div class="col">
@@ -108,9 +109,9 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    Budget Details 
+                                    Budget Details
                                 </div>
-                
+
                                 <div class="card-body">
                                     <table class="table" id="products_table">
                                         <thead>
@@ -124,11 +125,11 @@
                                                 <tr id="product{{ $index }}">
                                                     <td>
                                                         <select name="budget_id[]" class="form-control budget-names" id="cars" onclick="checkValue()">
-                                                            {{-- Check whether option is already selected or not --}}                                                            
+                                                            {{-- Check whether option is already selected or not --}}
                                                             <option value="" >-- choose Budget Name --</option>
                                                             @foreach ($budget as $product)
                                                                 <option value="{{ $product->id }}">
-                                                                    {{ $product->budget_title }} 
+                                                                    {{ $product->budget_title }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -141,15 +142,15 @@
                                             <tr id="product{{ count(old('budget_id', [''])) }}"></tr>
                                         </tbody>
                                     </table>
-                
+
                                     <div class="row">
                                         <div class="col-sm-10">
                                             <button  id="add_row" class="btn  btn-success pull-left" >+ Add Row</button>
                                             <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
                                         </div>
-                                        
+
                                          <div class="col-sm-2">
-                                        
+
                                     <label for="total_amount">Total Amount</label>
                                     <input type="number" class="form-control form-control" name="totalAmount"  id="grandTotal" aria-describedby="total_amount" placeholder="0" readonly>
                                 </div>
@@ -172,7 +173,7 @@
                     <div class="card-title mt-2 mx-2">
                         <!-- Button trigger modal -->
                          <!-- success massage -->
-                    
+
                     <a href=" {{ url('/projectdetail/download') }} ">
                         <i class="fa-solid fa-print"></i>Print All
                     </a>
@@ -210,7 +211,7 @@
                      </tr>
                      </thead>
                      <tbody>
-                     @foreach($project_details as $key=> $pro) 
+                     @foreach($project_details as $key=> $pro)
                          <tr>
                             <td>{{$pro->project_no}}</td>
                             {{-- <td>{{$pro->name}}</td> --}}
@@ -230,9 +231,9 @@
                                     <li>{{ $item->budget_title }} ({{ $item->budget_details_amount}} </li>
                                 @endforeach
                                 </ul> --}}
-                             
+
                              {{-- <td>{{$pro->budget_details_amount}}</td> --}}
-                             <td>{{$pro->project_total_cost}}</td>
+                             <td>Rs {{$pro->project_total_cost}}</td>
                              <th>
                                 <a href=" {{ url('/projectdetail/edit',$pro->id) }} ">
                                     <i class="fa-regular fa-pen-to-square"></i>
@@ -246,7 +247,7 @@
                                     <i class="fa-solid fa-print"></i>
                                 </a>
 
-                                
+
                              </th>
                              <th>
                                 <a href=" {{ url('projectdetails/showall',$pro->id) }} ">
@@ -263,10 +264,10 @@
             </div>
         </div>
         @section('script')
-    
+
         <script>
-             
-            
+
+
 
             var arr = [];
             var checkValue = function(event) {
@@ -275,7 +276,7 @@
                 // let currentValue = mySelect.options[mySelect.selectedIndex].value;
 
                 // if ($.inArray(currentValue, arr) != "-1") {
-    
+
                 // alert("already selected");
                 // console.log("already selected");
                 // } else {
@@ -286,9 +287,9 @@
                 $budget=data;
             }
 
-          
 
-            // 
+
+            //
                 $(document).ready(function(){
                     let row_number = {{ count(old('budget_id', [''])) }};
                     $("#add_row").click(function(e){
@@ -298,7 +299,7 @@
                       $('#products_table').append('<tr id="product' + (row_number + 1) + '"></tr>');
                       row_number++;
                     });
-                
+
                     $("#delete_row").click(function(e){
                       e.preventDefault();
                       if(row_number > 1){

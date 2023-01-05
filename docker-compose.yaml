@@ -1,4 +1,5 @@
-version: '3'
+
+version: '3.8'
 services:
   admin:
     build:
@@ -24,10 +25,44 @@ services:
     image: mysql
     environment:
       MYSQL_DATABASE: admin
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./storage/dbdata:/var/lib/mysql
     ports:
       - 33063:3306
+# version: '3'
+# services:
+#   admin:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     command: 'php artisan serve --host=0.0.0.0'
+#     volumes:
+#       - .:/app
+#     ports:
+#       - 8000:8000
+#     # depends_on:
+#     #   - admin_db
+
+#   # admin_queue:
+#   #   build:
+#   #     context: .
+#   #     dockerfile: Dockerfile
+#   #   command: 'php artisan queue:work'
+#   #   depends_on:
+#   #     - admin_db
+
+#   # admin_db:
+#   #   image: mysql
+#   #   restart: always
+#   #   environment:
+#   #     MYSQL_ROOT_PASSWORD: example
+#   #     MYSQL_DATABASE: laravel_vu
+#   #     MYSQL_USER: admin
+#   #     MYSQL_PASSWORD: password
+#   #   ports:
+#   #     - 33066:3306  
+#   #   volumes:
+#   #     - .db:/var/lib/mysql
