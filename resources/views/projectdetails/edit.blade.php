@@ -4,12 +4,12 @@
        {{ __('Edit Project') }}
         </h2>
     </x-slot>
-     
+
     <div class="container  mt-4 ">
         <div class="row">
             <div class="col">
                 <div class="card ">
-                    <div class="mt-2 mx-2">                        
+                    <div class="mt-2 mx-2">
                          <div class="modal-body">
                             <div class="card-title mt-2 mx-2">
                                 <h6>Edit Project Details </h6>
@@ -94,7 +94,7 @@
 
                                 <div class="card">
                                     <div class="card-header">
-                                        Budget Details 
+                                        Budget Details
                                     </div>
                       {{-- @php
                           echo"$budget_heads";
@@ -109,43 +109,43 @@
                                             </thead>
                                             <tbody>
 
-                                                
+
                                                 @foreach (old('budget_id', ['']) as $index => $oldProduct)
                                                 @foreach ($amount as $product)
                                                     <tr id="product{{ $index }}">
-                                                         
+
                                                         <td>
-                                                            
+
                                                             <select name="budget_id[]" class="form-control">
                                                                 <option value="">-- choose Budget Name --</option>
-                                                        
 
-                                                               <option value="{{ $product->budget_id }}" selected> 
-                                                                      {{ $product->budget_title }}  
+
+                                                               <option value="{{ $product->budget_id }}" selected>
+                                                                      {{ $product->budget_title }}
                                                                     </option>
-                                                              
+
                                                             </select>
-                                                            
+
                                                         </td>
                                                         <td>
                                                             <input type="txt" class="form-control form-control" onblur="findTotal()" id="inst_amount" value=" {{$product->budget_details_amount}} " name="budget_details_amount[]" id="clear" placeholder="Enter Budget Amount" selected/>
-                                                        </td> 
-                                                        
+                                                        </td>
+
                                                     </tr>
                                                     @endforeach
                                                 @endforeach
                                                 <tr id="product{{ count(old('budget_id', [''])) }}"></tr>
                                             </tbody>
                                         </table>
-                    
+
                                         <div class="row">
                                             <div class="col-sm-10">
                                                 <button  id="add_row" class="btn  btn-success pull-left" onclick="editOptions()" >+ Add Row</button>
                                                 <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
                                             </div>
-                                            
+
                                              <div class="col-sm-2">
-                                            
+
                                         <label for="total_amount">Total Amount</label>
                                         <input type="number" class="form-control form-control" name="totalAmount"  id="grandTotal" aria-describedby="total_amount" placeholder="0" readonly>
                                     </div>
@@ -157,7 +157,7 @@
                             </div>
                          </form>
                          </div>
-                    </div>              
+                    </div>
                 </div>
             </div>
         </div>
@@ -172,7 +172,7 @@
                       $('#products_table').append('<tr id="product' + (row_number + 1) + '"></tr>');
                       row_number++;
                     });
-                
+
                     $("#delete_row").click(function(e){
                       e.preventDefault();
                       if(row_number > 1){
@@ -185,7 +185,7 @@
                 //   edit options
 
                function editOptions(){
-                
+
                 $(document).ready(function(){
                     let row_number = {{ count(old('budget_id', [''])) }};
                     $("#add_row").click(function(e){
@@ -195,7 +195,7 @@
                       $('#products_table').append('<tr id="product' + (row_number + 1) + '"></tr>');
                       row_number++;
                     });
-                
+
                     $("#delete_row").click(function(e){
                       e.preventDefault();
                       if(row_number > 1){

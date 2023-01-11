@@ -58,9 +58,7 @@
                 <i class="fa-solid fa-print"></i>
             </a>
         </th> --}}
-
-
-
+                
       </tr>
         @endforeach
 

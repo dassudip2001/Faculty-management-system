@@ -59,10 +59,19 @@
                                         <select name="funding_agency_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option selected hidden>Select</option>
                                             @foreach ($data as $funding)
-                                                <option value="{{$funding->id}}">{{$funding->agency_name}}
+                                                <option value="{{$funding->id}}" selected>{{$funding->agency_name}}
                                                 </option>
                                             @endforeach
-                                        </select>
+                                            {{-- @foreach($data as $id => $agency_name )
+                                            <option value="{{ $id }}" {{ old('agency_name') == $id ? "selected" :""}}>{{ $agency_name }}</option>
+                                            @endforeach --}}
+                                            {{-- @foreach($data as $tag)
+                                                <option value="{{ $tag->id }}"
+                                                           @if($selectedTags->contains($tag->id)) selected
+    
+                                                           @endif >{{ $tag->agency_name }}</option>    
+                                               @endforeach  --}}
+                                          </select>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -334,7 +343,7 @@
                     }
                     else{
                         button.disabled = true;
-                        alert('Somethings Went Wrong ');
+                        // alert('Somethings Went Wrong ');
                     }
 
                 }
