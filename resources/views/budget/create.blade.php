@@ -68,7 +68,8 @@
       <div class="card max-h-96">
         <div class="card-title mx-2 mt-2">
           <a class="float-end" href=" {{ url('/budget/download') }} ">
-            <i class="fa-regular fa-solid fa-print"></i>Print All
+            <i class="fa-regular fa-solid fa-print"style="border: none;
+            text-decoration: none;"></i>Print All
            </a>
            <br>
            <form action=" {{route('budget.search')}} " method="GET" class="d-flex">

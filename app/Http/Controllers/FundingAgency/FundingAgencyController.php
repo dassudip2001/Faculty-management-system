@@ -155,7 +155,7 @@ class FundingAgencyController extends Controller
    }
     // generate pdf one row
     public function pdfForm(Request $request,$id){
-    $fundingAgency1 = FundingAgency::all()->where('id', $id);  
+    $fundingAgency1 = FundingAgency::all()->where('id', $id);
     $pdf=PDF::loadView('funding.pdf_download',compact('fundingAgency1'));
     return $pdf->download('funding.pdf');
     }
@@ -169,7 +169,7 @@ class FundingAgencyController extends Controller
        $posts = FundingAgency::query()
            ->where('agency_name', 'LIKE', "%{$search}%")
            ->get();
-        
+
 
         // Return the search view with the resluts compacted
         return view('funding.search', compact('posts'));

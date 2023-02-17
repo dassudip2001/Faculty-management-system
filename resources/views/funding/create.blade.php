@@ -50,7 +50,8 @@
     <div class="col">
       <div class="card">
         <div class="card-title mx-2 mt-2">
-          <a class="  float-end" href="{{ url('/funding/download') }}"><i class="fa-solid fa-print"></i>Print All</a>
+          <a class="  float-end" href="{{ url('/funding/download') }}"style="border: none;
+          text-decoration: none;"><i class="fa-solid fa-print"></i>Print All</a>
 
             <h6>Funding Agency Details</h6>
             <br>

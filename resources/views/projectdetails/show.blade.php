@@ -9,7 +9,11 @@
 
 
     <div class="card mt-3 m-4 table-responsive">
-        <div class="card-body mt-2">
+        <div class="card-title">
+            <h5 class="mt-2 mx-4">Show Projects</h5>
+            <hr>
+        </div>
+        <div class="card-body mt-0">
             <table class="table table-striped table-hover">
             <thead class="table-dark">
       <tr>

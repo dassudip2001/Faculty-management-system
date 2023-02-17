@@ -208,7 +208,8 @@
             </div>
             </div>
               @role('admin')
-            <a class=" " href="{{ url('/createuser/download') }}"><i class="fa-solid fa-print"></i>Print All</a>
+            <a class=" "style="border: none;
+            text-decoration: none;" href="{{ url('/createuser/download') }}"><i class="fa-solid fa-print"></i>Print All</a>
 
               <a class="btn btn-primary float-end" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><i class="fa-solid fa-user-plus"></i> Add New User</a>
               @endrole

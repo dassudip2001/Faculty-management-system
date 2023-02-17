@@ -73,7 +73,8 @@
     <div class="col">
       <div class="card max-h-96">
         <div class="card-title mx-2 mt-2">
-            <a class="  float-end" href="{{ url('/department/download') }}"><i class="fa-solid fa-print"></i>Print All</a>
+            <a class="  float-end" href="{{ url('/department/download') }} " style="border: none;
+            text-decoration: none;"><i class="fa-solid fa-print"></i>Print All</a>
             <br>
            <hr>
             <form action="{{ route('search') }}" method="GET" class="d-flex">
