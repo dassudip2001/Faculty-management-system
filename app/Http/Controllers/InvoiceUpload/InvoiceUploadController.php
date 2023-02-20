@@ -30,7 +30,7 @@ class InvoiceUploadController extends Controller
      */
     public function create(Request $request)
     {
-        abort_unless(auth()->user()->can('create_invoice'),403,'you dont have required authorization to this resource');
+        // abort_unless(auth()->user()->can('create_invoice'),403,'you dont have required authorization to this resource');
 
         $request->validate([
             'name'=>'required',
@@ -111,7 +111,16 @@ class InvoiceUploadController extends Controller
      */
     public function edit($id)
     {
-        //
+        // $data= InvoiceUpload::find($id);
+        try {
+            $agency=InvoiceUpload::find($id);
+            return view('upload.edit',compact('agency'));
+        }  catch (Exception $e){
+
+            return ["message" => $e->getMessage(),
+                "status" => $e->getCode()
+            ];
+        }
     }
 
     /**
@@ -123,7 +132,18 @@ class InvoiceUploadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $agency=InvoiceUpload::find($id);
+        $agency->status=$request->status;
+        $agency->save();
+        return redirect(route('invoiceuoload.index'))->with('success','Funding Agency Update Successfully');
+
+        } catch (Exception $e)
+        {
+            return ["message" => $e->getMessage(),
+                "status" => $e->getCode()
+            ];
+        }
     }
 
     /**
@@ -134,7 +154,7 @@ class InvoiceUploadController extends Controller
      */
     public function destroy( $id)
     {
-        abort_unless(auth()->user()->can('delete_invoice'),403,'you dont have required authorization to this resource');
+        // abort_unless(auth()->user()->can('delete_invoice'),403,'you dont have required authorization to this resource');
 
         $items = InvoiceUpload::find($id); //Reports is my model
 
@@ -247,6 +267,64 @@ class InvoiceUploadController extends Controller
 
     }
 
+    // public function approved(Request $request , $id) {
+    //     $request->validate([
+    //         DB::table('invoice_uploads')
+    //         ->where('id', $item->id)->update(['status' => "approved"])
+    //     ]);
+        
+    //     return redirect(route('invoiceuoload.index'))->with('success',' status update Successfully');
+
+    // }
+    // public function approved($id)
+    // {
+    //     return view('upload.edit');
+    //     // $application=InvoiceUpload::where('id','=',$id)->first();
+    //     // dd($application);
+     
+    //     // if($application){
+     
+    //     //   $application->status='approved';
+    //     //   return redirect()->back()->with('info','The application was approved successfully');
+    //     // }
+    //  }
+     
+    // public function cancle($id)
+    //  {
+    //    $application=InvoiceUpload::where('id','=',$id)->first();
+    //        if($application){
+     
+    //          $application->status='cancle';
+     
+    //        return redirect()->back()->with('error','The application was disapproved successfully');
+     
+    //    }
+    // }
+
+    // public function approved($id){
+    //     try {
+    //         InvoiceUpload::where('id',$id)->update(['status'=>'approved']);
+    //         return redirect()->back();
+    //         // $data= InvoiceUpload::find($id);
+    //         // $data->status='approved';
+            
+    //         // $data->save();
+    //         // return redirect(route('invoiceuoload.index'))->with('success',' update Successfully');
+    //         //code...
+    //     } catch (\Throwable $th) {
+    //         throw $th;
+    //     }
+
+        
+    // }
+    // public function cancle($id){
+    //     $data= InvoiceUpload::find($id);
+    //     $data->status='cancle';
+    //     $data->update();
+    //     return redirect(route('invoiceuoload.index'))->with('success',' delete Successfully');
+        
+    // }
+
     public function search(Request $request){
         // Get the search value from the request
        $search = $request->input('search');
@@ -261,4 +339,6 @@ class InvoiceUploadController extends Controller
         // Return the search view with the resluts compacted
         return view('upload.search', compact('invoiceupload'));
     }
+
+    
 }

@@ -55,6 +55,11 @@
 
         <th>Amount</th>
         <th>Describption</th>
+        <th>Status</th>
+        @role('admin')
+        <th>Approved</th>
+        @endrole
+
         <th>View</th>
         <th>Download</th>
         {{-- @role('admin') --}}
@@ -72,6 +77,13 @@
             <td> {{$inv->bill_no}} </td>
             <td> {{$inv->amount}} </td>
             <td> {{$inv->description}}</td>
+            <td> {{$inv->status}}</td>
+            @role('admin')
+            <td> <a class="btn-success" href="{{ url('/invoiceuoload/edit',$inv->id) }}">Approved</a></td>
+            @endrole
+            <!-- <td> <a class="btn-denger" href="{{url('/cancle',$inv->id)}}">Cancle</a></td> -->
+
+
 
             <td>
               <a href="{{ url('/view/'.$inv->id) }}   ">

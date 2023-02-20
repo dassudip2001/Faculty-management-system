@@ -172,6 +172,10 @@ require __DIR__.'/auth.php';
     Route::get('/download/{file}',[InvoiceUploadController::class,'download']);
     Route::get('/view/{id}',[InvoiceUploadController::class,'view']);
     Route::get('invoiceuoload/delete/{id}',[InvoiceUploadController::class,'destroy']);
+    
+    Route::get('/invoiceuoload/edit/{id}',[InvoiceUploadController::class,'edit'])->name('invoiceuoload.edit');
+    Route::put('/invoiceuoload/edit/{id}',[InvoiceUploadController::class,'update'])->name('invoiceuoload.update');
+
         //  search
 //    Route::get('/search', [InvoiceUploadController::class,'search'])->name('search');
 
