@@ -1,32 +1,48 @@
-FROM php:8.1
+# Use the official Ubuntu 18.04 LTS image as the base image
+FROM ubuntu:18.04
 
+# Install necessary packages
 RUN apt-get update && apt-get install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libmcrypt-dev \
-        libpng-dev \
-        zlib1g-dev \
-        libxml2-dev \
-        libzip-dev \
-        libonig-dev \
-        graphviz \
-        
-        && docker-php-ext-configure gd \
-        && docker-php-ext-install -j$(nproc) gd \
-        && docker-php-ext-install pdo_mysql \
-        && docker-php-ext-install mysqli \
-        && docker-php-ext-install zip \
-        && docker-php-ext-install sockets \
-        && docker-php-source delete \
-        && curl -sS https://getcomposer.org/installer | php -- \
-        --install-dir=/usr/local/bin --filename=composer
+    curl \
+    git \
+    unzip \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+# Install PHP and necessary extensions
+RUN apt-get update && apt-get install -y \
+    php8.1-cli \
+    php8.1-fpm \
+   
+    php8.1-pdo \
+    php8.1-mysql \
+    php8.1-zip \
+    php8.1-gd \
+    php8.1-mbstring \
+    php8.1-curl \
+    php8.1-xml \
+    php8.1-bcmath
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy project files
 COPY . .
-RUN composer install
 
-# run command to server
-CMD php artisan serve --host=0.0.0.0
+# Install dependencies
+RUN composer install --no-interaction --no-scripts --no-plugins
 
-# expose port
-EXPOSE 8000
+# Generate key
+RUN php artisan key:generate
+
+# Expose port 80
+EXPOSE 80
+
+# Start the PHP FPM server
+CMD ["php-fpm8.1"]
