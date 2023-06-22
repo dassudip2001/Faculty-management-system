@@ -1,33 +1,30 @@
-version: '3'
+version: "3.8"
 services:
-  admin:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
-    command: 'php artisan serve --host=0.0.0.0'
-    volumes:
-      - .:/app
     ports:
-      - 8000:8000
+      - "8000:8000"
     depends_on:
-      - admin_db
+      - db
+    networks:
+      - laravel
 
-  # admin_queue:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   command: 'php artisan queue:work'
-  #   depends_on:
-  #     - admin_db
-
-  admin_db:
-    image: mysql
+  db:
+    image: mysql:8.0
     environment:
-      MYSQL_DATABASE: admin
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+      MYSQL_ROOT_PASSWORD: laravel
     volumes:
-      - ./storage/dbdata:/var/lib/mysql
-    ports:
-      - 33063:3306
+      - db_data:/var/lib/mysql
+    networks:
+      - laravel
+
+networks:
+  laravel:
+
+volumes:
+  db_data:
